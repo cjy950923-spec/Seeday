@@ -1,0 +1,1076 @@
+/**
+ * Figma: Card section — 64:456 `Card/Record_Type`
+ */
+
+/* 좌측 정적 보드: 카드만 위→아래 (Figma 64:456 스펙 나열) */
+.sdCard64RecordStack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+  max-width: 343px;
+}
+
+/* Card/Record_Type: 좌측 보드가 데모만큼 최소 너비를 갖도록 (버튼 섹션 토큰과 함께 사용) */
+.sdCard64DemoRow .sdBtnDemo__col--board {
+  flex: 1 1 343px;
+  min-width: min(100%, 343px);
+}
+
+/* Card/Record_Type — Figma CardRecordType */
+.sdCardRecord {
+  width: 343px;
+  max-width: 100%;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 1px solid var(--color-gray-100);
+  padding: 16px;
+  background: var(--color-gray-white);
+}
+
+.sdCardRecord--default {
+  border-color: var(--color-gray-100);
+  box-shadow: none;
+}
+
+.sdCardRecord--selected {
+  border-color: var(--color-primary-default);
+  box-shadow: var(--shadow-01);
+}
+
+.sdCardRecord__row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.sdCardRecord__lead {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.sdCardRecord__avatar {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 100px;
+  background: #edf8ff;
+  overflow: hidden;
+}
+
+.sdCardRecord__avatarImg {
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  pointer-events: none;
+  display: block;
+}
+
+.sdCardRecord__desc {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 4px;
+  line-height: 0;
+}
+
+.sdCardRecord__desc--default {
+  width: 215px;
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.sdCardRecord__desc--selected {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.sdCardRecord__title {
+  margin: 0;
+  width: 100%;
+  font: var(--type-16-600);
+  line-height: 1.5;
+  color: var(--color-gray-900);
+  text-align: left;
+}
+
+.sdCardRecord__caption {
+  margin: 0;
+  width: 100%;
+  font: var(--type-12-400);
+  line-height: 1.5;
+  color: var(--color-gray-500);
+  text-align: left;
+}
+
+/* Ceck · 20×20 (Figma 64:312 / 64:448) */
+.sdCardRecord__ceck {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.sdCardRecord__ceckRing {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.sdCardRecord__ceckRingImg {
+  position: absolute;
+  inset: -2.5%;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  display: block;
+}
+
+.sdCardRecord__ceckMark {
+  position: absolute;
+  left: 50%;
+  top: calc(50% - 0.5px);
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 7px;
+}
+
+.sdCardRecord__ceckMarkImg {
+  position: absolute;
+  left: -9%;
+  top: -12.86%;
+  width: 118%;
+  height: 125.72%;
+  max-width: none;
+  display: block;
+}
+
+.sdCardRecordDemo__btn {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  border-radius: 10px;
+}
+
+.sdCardRecordDemo__btn:focus-visible {
+  outline: 2px solid var(--color-primary-default);
+  outline-offset: 2px;
+}
+
+/* Fitness 카드 등에서 재사용하는 캡션 한 줄 */
+.sdCardRecord__cap {
+  font: var(--type-12-400);
+  color: var(--color-gray-500);
+  margin-top: 4px;
+}
+
+/* 세로 정적 보드 (555 / 728 / 1327 공통) */
+.sdCardStaticStack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+  max-width: 343px;
+}
+
+/* 1329:139004 Habit Card — alarm × mainPin 정적 보드 2×2 */
+.sd1329HabitCardBoard {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 343px));
+  grid-template-rows: repeat(2, auto);
+  gap: 24px;
+  width: 100%;
+  max-width: calc(343px * 2 + 24px);
+  align-items: start;
+  justify-items: start;
+}
+
+@media (max-width: 760px) {
+  .sd1329HabitCardBoard {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    max-width: 343px;
+  }
+}
+
+.sdCardDemo__btn {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  border-radius: 10px;
+}
+
+.sdCardDemo__btn:focus-visible {
+  outline: 2px solid var(--color-primary-default);
+  outline-offset: 2px;
+}
+
+/* Card 섹션: Type·State 세그먼트 아래 라이브 미리보기 (버튼 섹션 토큰 재사용) */
+.sdCardLivePreview {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 343px;
+  align-self: flex-start;
+}
+
+.sdCardLivePreview--photoCycle {
+  cursor: pointer;
+  border-radius: 16px;
+}
+
+.sdCardLivePreview--photoCycle:focus-visible {
+  outline: 2px solid var(--color-primary-default);
+  outline-offset: 3px;
+}
+
+/* ----- 555:8776 Card/Onbording_Goal ----- */
+
+.sd555GoalCard {
+  box-sizing: border-box;
+  width: 104px;
+  min-height: 157px;
+  padding: 16px 24px;
+  border-radius: 8px;
+  border: 1px solid var(--color-gray-100);
+  background: var(--color-gray-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sd555GoalCard--default {
+  border-color: var(--color-gray-100);
+  box-shadow: none;
+}
+
+.sd555GoalCard--selected {
+  border-color: var(--color-primary-default);
+  box-shadow: var(--shadow-01);
+}
+
+.sd555GoalCard__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 56px;
+}
+
+.sd555GoalCard__avatar {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 100px;
+  background: #fdf7df;
+  overflow: hidden;
+}
+
+.sd555GoalCard__avatarClip {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  width: 28px;
+  height: 28px;
+  overflow: hidden;
+}
+
+.sd555GoalCard__avatarImg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.sd555GoalCard__stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.sd555GoalCard__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: #fff9e0;
+  flex-shrink: 0;
+}
+
+.sd555GoalCard__badgeText {
+  font: var(--type-12-500);
+  line-height: 1.5;
+  color: #ffa30f;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.sd555GoalCard__date {
+  margin: 0;
+  width: min-content;
+  min-width: 100%;
+  font: var(--type-18-600);
+  line-height: 1.5;
+  color: var(--color-gray-900);
+  text-align: center;
+}
+
+/* ----- 728:16548 Date Card ----- */
+
+.sd728DateCard {
+  box-sizing: border-box;
+  width: 343px;
+  max-width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+  background: var(--color-gray-50);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+
+.sd728DateCard--hasPhotos {
+  gap: 10px;
+}
+
+.sd728DateCard__contents {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.sd728DateCard__header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  gap: 12px;
+}
+
+.sd728DateCard__emotion {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.sd728DateCard__emotionInner {
+  position: absolute;
+  left: 50%;
+  top: -0.91px;
+  transform: translateX(-50%);
+  width: 44px;
+  height: 65px;
+}
+
+.sd728DateCard__emotionBase {
+  position: absolute;
+  left: 0.06px;
+  top: 0;
+  width: 43.89px;
+  height: 64.61px;
+  display: block;
+  max-width: none;
+}
+
+.sd728DateCard__emotionMouth {
+  position: absolute;
+  left: 6.4px;
+  top: 29.25px;
+  width: 31.09px;
+  height: 17.37px;
+  display: block;
+  max-width: none;
+}
+
+.sd728DateCard__time {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.sd728DateCard__timeLabel,
+.sd728DateCard__timeVal {
+  font: var(--type-12-400);
+  line-height: 1.5;
+  color: #4e4e4e;
+  white-space: nowrap;
+}
+
+.sd728DateCard__body {
+  width: 100%;
+}
+
+.sd728DateCard__preview {
+  margin: 0;
+  font: var(--type-14-400);
+  line-height: 1.5;
+  color: var(--color-gray-900);
+  height: 63px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+.sd728DateCard__preview p {
+  margin: 0;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.sd728DateCard__photoStrip {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  width: 311px;
+  max-width: 100%;
+  height: 100px;
+  flex-shrink: 0;
+}
+
+.sd728DateCard__photoCell {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: #eeeeee;
+  overflow: hidden;
+}
+
+.sd728DateCard__photoIcon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+}
+
+.sd728DateCard__photoIconImg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+/* ----- 1327:88765 Fitness Card ----- */
+
+.sd1327FitnessCard {
+  box-sizing: border-box;
+  width: 343px;
+  max-width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+  background: var(--color-gray-50);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+}
+
+.sd1327FitnessCard__head {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.sd1327FitnessCard__iconHost {
+  width: 66px;
+  height: 66px;
+  flex-shrink: 0;
+  border-radius: 100px;
+  background: var(--color-gray-white);
+  overflow: hidden;
+  position: relative;
+}
+
+.sd1327FitnessCard__iconInner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+}
+
+.sd1327FitnessCard__iconImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.sd1327FitnessCard__titleRow {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+  gap: 8px;
+}
+
+.sd1327FitnessCard__title {
+  margin: 0;
+  font: var(--type-18-600);
+  line-height: 1.5;
+  color: var(--color-gray-900);
+  white-space: nowrap;
+}
+
+.sd1327FitnessCard__cal {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.sd1327FitnessCard__calLabel {
+  font: var(--type-12-500);
+  line-height: 1.5;
+  color: var(--color-gray-800);
+}
+
+.sd1327FitnessCard__calVal {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2px;
+  font: var(--type-16-600);
+  line-height: 1.5;
+  color: var(--color-gray-900);
+}
+
+.sd1327FitnessCard__hr {
+  width: 100%;
+  height: 1px;
+  margin: 0;
+  border: none;
+  background: #eeeeee;
+  flex-shrink: 0;
+}
+
+.sd1327FitnessCard__detail {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.sd1327FitnessCard__detailTitle {
+  margin: 0;
+  font: var(--type-14-600);
+  line-height: 1.5;
+  color: var(--color-gray-800);
+}
+
+.sd1327FitnessCard__stats {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.sd1327FitnessCard__vdiv {
+  width: 0;
+  align-self: stretch;
+  min-height: 104px;
+  border-left: 1px solid #eeeeee;
+  flex-shrink: 0;
+}
+
+.sd1327Fitness__mark {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 100px;
+  background: var(--color-gray-white);
+  overflow: hidden;
+  position: relative;
+}
+
+.sd1327Fitness__markInner {
+  position: absolute;
+  inset: 0;
+}
+
+.sd1327Fitness__markImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.sd1327Fitness__statCol {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+}
+
+.sd1327Fitness__statText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+}
+
+.sd1327Fitness__statLabel {
+  margin: 0;
+  font: var(--type-12-500);
+  line-height: 1.5;
+  color: var(--color-gray-600);
+}
+
+.sd1327Fitness__statVal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2px;
+  font: var(--type-16-600);
+  line-height: 1.5;
+  color: var(--color-gray-900);
+  white-space: nowrap;
+}
+
+.sd1327FitnessCard__note {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.sd1327FitnessCard__noteTitle {
+  margin: 0;
+  font: var(--type-14-600);
+  line-height: 1.5;
+  color: var(--color-gray-800);
+}
+
+.sd1327FitnessCard__noteBody {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.sd1327FitnessCard__preview {
+  margin: 0;
+  font: var(--type-14-400);
+  line-height: 1.5;
+  color: var(--color-gray-900);
+  height: 63px;
+  overflow: hidden;
+  text-align: left;
+}
+
+.sd1327FitnessCard__preview p {
+  margin: 0;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.sd1327FitnessCard__time {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+}
+
+.sd1327FitnessCard__timeLabel,
+.sd1327FitnessCard__timeVal {
+  font: var(--type-12-400);
+  line-height: 1.5;
+  color: #4e4e4e;
+  white-space: nowrap;
+}
+
+/* 3장(Photo 3)은 카드 폭 안에서 3×1 한 줄 — wrap 금지 + 동일 폭 분할 */
+.sd1327Fitness__photoStrip {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 6px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sd1327Fitness__photoCell {
+  position: relative;
+  height: 100px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: #eeeeee;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.sd1327Fitness__photoStrip[data-photo-count="1"] .sd1327Fitness__photoCell,
+.sd1327Fitness__photoStrip[data-photo-count="2"] .sd1327Fitness__photoCell {
+  width: 100px;
+  flex: 0 0 100px;
+}
+
+.sd1327Fitness__photoStrip[data-photo-count="3"] .sd1327Fitness__photoCell {
+  flex: 0 0 calc((100% - 12px) / 3);
+  width: calc((100% - 12px) / 3);
+  min-width: 0;
+}
+
+.sd1327Fitness__photoIcon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+}
+
+.sd1327Fitness__photoIconImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* ----- 공통: Arrow_Right Medium (155:370) ----- */
+
+.sdListCardArrow {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.sdListCardArrow__inner {
+  position: absolute;
+  left: 50%;
+  top: calc(50% - 0.5px);
+  transform: translate(-50%, -50%) rotate(180deg);
+  width: 10px;
+  height: 10px;
+}
+
+.sdListCardArrow__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: contain;
+}
+
+/* ----- 1019:31361 Fitness List Card ----- */
+
+.sd1019FitnessListCard {
+  box-sizing: border-box;
+  width: 343px;
+  max-width: 100%;
+  min-height: 70px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: var(--color-gray-50);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.sd1019FitnessListCard__row {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 50px;
+}
+
+.sd1019FitnessList__glyph {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.sd1019FitnessList__glyphInner {
+  position: absolute;
+  inset: 19.53% 1.25% 19.64% 1.25%;
+}
+
+.sd1019FitnessList__glyphImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.sd1019FitnessListCard__titleWrap {
+  position: absolute;
+  left: calc(50% + 0.5px);
+  top: 25px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.sd1019FitnessListCard__title {
+  margin: 0;
+  font: var(--type-16-600);
+  line-height: 1.5;
+  color: var(--color-gray-900);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ----- 1268:80915 Habit List Card ----- */
+
+.sd1268HabitListCard {
+  box-sizing: border-box;
+  width: 343px;
+  max-width: 100%;
+  min-height: 70px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: var(--color-gray-50);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.sd1268HabitListCard__row {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 50px;
+}
+
+.sd1268HabitList__glyph {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.sd1268HabitList__glyphA {
+  position: absolute;
+  inset: 8% 0 8.66% 33.47%;
+}
+
+.sd1268HabitList__glyphB {
+  position: absolute;
+  inset: 24.16% 61.09% 10.22% 0;
+}
+
+.sd1268HabitList__glyphImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.sd1268HabitListCard__titleWrap {
+  position: absolute;
+  left: calc(50% + 0.5px);
+  top: 25px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.sd1268HabitListCard__title {
+  margin: 0;
+  font: var(--type-16-600);
+  line-height: 1.5;
+  color: var(--color-gray-900);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ----- 1329:139004 Habit Card ----- */
+
+.sd1329HabitCard {
+  position: relative;
+  box-sizing: border-box;
+  width: 343px;
+  max-width: 100%;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: var(--color-gray-50);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.sd1329HabitCard__row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 12px;
+}
+
+.sd1329HabitCard__lead {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.sd1329HabitCard__iconHost {
+  position: relative;
+  width: 66px;
+  height: 66px;
+  flex-shrink: 0;
+  border-radius: 100px;
+  background: var(--color-gray-white);
+  overflow: hidden;
+}
+
+.sd1329HabitCard__iconInner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+}
+
+.sd1329HabitCard__iconInner .sd1268HabitList__glyph {
+  width: 50px;
+  height: 50px;
+}
+
+.sd1329HabitCard__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.sd1329HabitCard__title {
+  margin: 0;
+  font: var(--type-16-600);
+  line-height: 1.5;
+  color: var(--color-gray-900);
+  white-space: nowrap;
+}
+
+.sd1329HabitCard__time {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  font: var(--type-14-400);
+  line-height: 1.5;
+  color: var(--color-gray-400);
+}
+
+.sd1329HabitCard__timePart {
+  white-space: nowrap;
+}
+
+.sd1329HabitCard__row .sdCardRecord__ceck {
+  flex-shrink: 0;
+}
+
+.sd1329HabitCard__mainPin {
+  position: absolute;
+  left: 66px;
+  top: 60px;
+  width: 16px;
+  height: 16px;
+  border-radius: 100px;
+  background: var(--color-primary-disabled);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.sd1329HabitCard__mainPinInner {
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: 12px;
+  height: 12px;
+  overflow: hidden;
+}
+
+.sd1329HabitCard__mainPinImg {
+  position: absolute;
+  inset: 7.66% 17.08% 7.09% 19.67%;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}

@@ -1,0 +1,23 @@
+/**
+ * Figma: Devinder section — node 728:12832 (layout hairlines).
+ */
+
+.sdDevinderW {
+  width: 343px;
+  max-width: 100%;
+  height: 1px;
+  background: var(--color-gray-300);
+}
+
+.sdDevinderH {
+  width: 1px;
+  height: 343px;
+  max-height: 70vh;
+  background: var(--color-gray-300);
+}
+
+.sdDevinderNote {
+  font: var(--type-12-400);
+  color: var(--color-gray-500);
+  max-width: 360px;
+}

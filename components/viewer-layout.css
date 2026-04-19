@@ -1,0 +1,137 @@
+/**
+ * Figma UI component viewer — layout only (tokens: ../tokens/tokens.css).
+ */
+
+body {
+  margin: 0;
+  padding: 24px;
+  font-family: var(--font-family-sans);
+  background: var(--color-gray-50);
+  color: var(--color-gray-900);
+}
+
+.figma-viewer__title {
+  font: var(--type-20-600);
+  margin: 0 0 8px;
+}
+
+.figma-viewer__intro {
+  font: var(--type-14-400);
+  color: var(--color-gray-600);
+  margin: 0 0 24px;
+  max-width: 720px;
+}
+
+.figma-viewer__intro a {
+  color: var(--color-primary-default);
+}
+
+.figma-section {
+  background: var(--color-gray-white);
+  border-radius: 12px;
+  padding: 20px 20px 24px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-01);
+}
+
+.figma-section__meta {
+  font: var(--type-12-400);
+  color: var(--color-gray-600);
+  margin: 0 0 12px;
+  word-break: break-all;
+}
+
+.figma-section__h2 {
+  font: var(--type-16-600);
+  margin: 0 0 16px;
+}
+
+.figma-subsection {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-gray-200);
+}
+
+.figma-subsection:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.figma-subsection__title {
+  font: 600 13px/1.5 var(--font-family-sans);
+  color: var(--color-gray-700);
+  margin: 0 0 12px;
+}
+
+.figma-matrix {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-end;
+}
+
+.figma-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.figma-cell > span {
+  font: var(--type-10-500);
+  color: var(--color-gray-500);
+  text-align: center;
+  max-width: 140px;
+}
+
+/* 클릭으로 variant 순환하는 데모 */
+.figma-interactive {
+  margin-bottom: 8px;
+}
+
+.figma-interactive__state {
+  font: 600 12px/1.4 var(--font-family-sans);
+  color: var(--color-gray-800);
+  margin: 0 0 8px;
+}
+
+.figma-interactive__stage {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: top;
+  outline: none;
+}
+
+.figma-interactive__stage:focus-visible {
+  box-shadow: 0 0 0 2px var(--color-primary-default);
+  border-radius: 12px;
+}
+
+.figma-interactive__viewport {
+  position: relative;
+  z-index: 0;
+}
+
+.figma-interactive__hit {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  cursor: pointer;
+  border-radius: 10px;
+  background: transparent;
+}
+
+.figma-interactive__hint {
+  font: var(--type-12-400);
+  color: var(--color-gray-500);
+  margin: 8px 0 0;
+  max-width: 420px;
+}
+
+.figma-interactive__dropdownHost {
+  display: inline-block;
+  max-width: 100%;
+  cursor: pointer;
+}

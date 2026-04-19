@@ -1,0 +1,289 @@
+/**
+ * Figma Modal — 879:5686 섹션 내 독립 컴포넌트
+ * · 879:5689 확인형
+ * · 879:5874 하루 유형 선택
+ */
+
+/* ----- 879:5689 Modal · 확인 / 취소 ----- */
+
+.sd879ModalConfirm {
+  box-sizing: border-box;
+  width: 311px;
+  max-width: 100%;
+  padding: 20px 16px;
+  border-radius: 10px;
+  background: var(--color-gray-white);
+  box-shadow: var(--shadow-01);
+}
+
+.sd879ModalConfirm__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 20px;
+  width: 100%;
+}
+
+.sd879ModalConfirm__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.sd879ModalConfirm__title {
+  margin: 0;
+  font: var(--type-16-600);
+  line-height: 1.5;
+  color: var(--color-gray-900);
+  text-align: center;
+}
+
+.sd879ModalConfirm__text {
+  margin: 0;
+  font: var(--type-14-400);
+  line-height: 1.5;
+  color: var(--color-gray-600);
+  text-align: center;
+}
+
+.sd879ModalConfirm__actions {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  width: 100%;
+}
+
+.sd879ModalConfirm__btn {
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 14px 12px;
+  border-radius: 8px;
+  border: none;
+  font: var(--type-16-500);
+  line-height: 1.5;
+  text-align: center;
+  cursor: default;
+}
+
+.sd879ModalConfirm__btn--secondary {
+  background: var(--color-gray-100);
+  color: var(--color-gray-400);
+}
+
+.sd879ModalConfirm__btn--primary {
+  background: var(--color-primary-default);
+  color: var(--color-gray-white);
+}
+
+/* ----- 879:5874 Modal · 하루 유형 선택 (Figma MCP 1:1) ----- */
+
+.sd879ModalDayType {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 310px;
+  max-width: 100%;
+  padding: 24px 16px;
+  border-radius: 16px;
+  background: var(--color-gray-white);
+  box-shadow: var(--shadow-01);
+}
+
+.sd879ModalDayType__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 278px;
+  max-width: 100%;
+  flex-shrink: 0;
+}
+
+.sd879ModalDayType__titleWrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.sd879ModalDayType__title {
+  margin: 0;
+  width: 100%;
+  font: var(--type-18-600);
+  line-height: 1.5;
+  color: var(--color-gray-900);
+  text-align: center;
+}
+
+.sd879ModalDayType__list {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  width: 100%;
+}
+
+.sd879ModalDayType__card {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 16px;
+  border: 1px solid var(--color-gray-100);
+  border-radius: 8px;
+  background: var(--color-gray-white);
+}
+
+.sd879ModalDayType__cardRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.sd879ModalDayType__cardLead {
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 0;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.sd879ModalDayType__avatar {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.sd879ModalDayType__avatar--exercise {
+  background: #eaf1f8;
+}
+
+.sd879ModalDayType__avatar--habit {
+  background: #eef8f0;
+}
+
+.sd879ModalDayType__avatar--schedule {
+  background: #fff5eb;
+}
+
+.sd879ModalDayType__avatarClip {
+  position: absolute;
+  inset: 0;
+}
+
+.sd879ModalDayType__avatarImg {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  object-fit: cover;
+}
+
+/* Figma Profile/Record 이미지 프레임 좌표 */
+.sd879ModalDayType__avatar--exercise .sd879ModalDayType__avatarImg {
+  width: 43px;
+  height: 24px;
+  left: 5px;
+  top: 12px;
+}
+
+.sd879ModalDayType__avatar--habit .sd879ModalDayType__avatarImg {
+  width: 23px;
+  height: 34px;
+  left: 13px;
+  top: 7px;
+}
+
+.sd879ModalDayType__avatar--schedule .sd879ModalDayType__avatarImg {
+  width: 28px;
+  height: 30px;
+  left: 10.5px;
+  top: 11px;
+}
+
+.sd879ModalDayType__desc {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.sd879ModalDayType__rowTitle {
+  margin: 0;
+  width: 100%;
+  font: var(--type-16-600);
+  line-height: 1.5;
+  color: var(--color-gray-900);
+  text-align: left;
+}
+
+/* Ceck · 20×20 (Figma 64:312, state off) */
+.sd879ModalDayType__ceck {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.sd879ModalDayType__ceckRing {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.sd879ModalDayType__ceckRingImg {
+  position: absolute;
+  inset: -2.5%;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  display: block;
+}
+
+.sd879ModalDayType__ceckMark {
+  position: absolute;
+  left: 50%;
+  top: calc(50% - 0.5px);
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 7px;
+}
+
+.sd879ModalDayType__ceckMarkImg {
+  position: absolute;
+  left: -9%;
+  top: -12.86%;
+  width: 118%;
+  height: 125.72%;
+  max-width: none;
+  display: block;
+}
+
+.sd879ModalDayType__btnPrimary {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 14px 91px;
+  border: none;
+  border-radius: 8px;
+  font: var(--type-16-500);
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+  cursor: default;
+  background: var(--color-primary-default);
+  color: var(--color-gray-white);
+}

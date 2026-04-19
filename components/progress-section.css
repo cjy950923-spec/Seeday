@@ -1,0 +1,84 @@
+/**
+ * Figma: Progress section — node 546:1766
+ */
+
+.sdProgress5 {
+  width: 375px;
+  max-width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--color-primary-disabled);
+  overflow: hidden;
+  position: relative;
+}
+
+.sdProgress5__fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: var(--color-primary-default);
+  border-radius: 2px;
+}
+
+.sdProgress2 {
+  width: 375px;
+  max-width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--color-primary-disabled);
+  overflow: hidden;
+  position: relative;
+}
+
+.sdProgress2__fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: var(--color-primary-default);
+  border-radius: 2px;
+}
+
+.sdProgressLabel {
+  width: 343px;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 16px;
+  border-radius: 8px;
+  background: var(--color-gray-100);
+  font: var(--type-14-500);
+  color: var(--color-gray-900);
+}
+
+.sdProgressLabel__check {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-primary-default);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.sdProgressLabel__check::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 3px;
+  width: 5px;
+  height: 9px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.sdProgressLabel--done .sdProgressLabel__check {
+  background: var(--color-gray-300);
+}
+
+.sdProgressLabel--done .sdProgressLabel__check::after {
+  opacity: 0.5;
+}

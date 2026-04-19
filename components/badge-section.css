@@ -1,0 +1,298 @@
+/**
+ * Figma: Bedge — frame 555:8668 (symbols 64:620 · 555:8667 · 555:8666)
+ * https://www.figma.com/design/j0r11Ts2NxR6wiuOQKR7Xz/Seeds-The-Day-Project---Seeday?node-id=555-8668&m=dev
+ *
+ * Font/12/Medium, px-[6] py-[2], rounded-[6px]
+ */
+
+/* --- Bedge (연속 일수 / streak) ---------------------------------------- */
+
+/* 심볼 외곽: Figma 48×22 (64:620, 555:8667, 555:8666) */
+.sdBedge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 22px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font: var(--type-12-500);
+  line-height: 1.5;
+  white-space: nowrap;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.sdBedge__text {
+  display: block;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  font: inherit;
+  line-height: inherit;
+  color: inherit;
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/* State=10일 — 64:620 */
+.sdBedge--10 {
+  background: #fff9e0;
+  color: #ffa30f;
+}
+
+/* State=20일 — 555:8667 */
+.sdBedge--20 {
+  background: #fff4e5;
+  color: #e65100;
+}
+
+/* State=30일 — 555:8666 */
+.sdBedge--30 {
+  background: #e8f5e9;
+  color: #1b5e20;
+}
+
+/* Figma frame 555:8668 — 88×133, dashed, 심볼 (20,20)(20,56)(20,91) */
+.sdBedgeBlock555 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 24px 32px;
+}
+
+.sdBedgeFrame555 {
+  width: 88px;
+  height: 133px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  border: 1px dashed #9747ff;
+  background: var(--color-gray-white);
+}
+
+.sdBedgeFrame555__inner {
+  box-sizing: border-box;
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sdBedgeFrame555__inner > .sdBedge:nth-child(2) {
+  margin-top: 14px; /* 56 - (20+22) */
+}
+
+.sdBedgeFrame555__inner > .sdBedge:nth-child(3) {
+  margin-top: 13px; /* 91 - (56+22) */
+}
+
+/* 적용 예시 (뷰어) — Figma 프레임과 좌우 배치, text 입력 아래에 벳지 미리보기 */
+.sdBedgeExample {
+  flex: 1 1 240px;
+  min-width: 220px;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sdBedgeExample__title {
+  font: var(--type-14-600);
+  color: var(--color-gray-900);
+  margin: 0;
+}
+
+.sdBedgeExample__row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.sdBedgeExample__field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  flex: 1 1 180px;
+  min-width: 160px;
+}
+
+.sdBedgeExample__label {
+  font: var(--type-12-500);
+  color: var(--color-gray-700);
+  margin: 0;
+}
+
+.sdBedgeExample__input {
+  width: 100%;
+  max-width: 280px;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--color-gray-300);
+  background: var(--color-gray-white);
+  font: var(--type-14-400);
+  color: var(--color-gray-900);
+  outline: none;
+}
+
+.sdBedgeExample__input:focus {
+  border-color: var(--color-primary-default);
+  box-shadow: 0 0 0 1px var(--color-primary-surface);
+}
+
+.sdBedgeExample__input::placeholder {
+  color: var(--color-gray-400);
+}
+
+/* 힌트 문단이 있던 자리(제목·입력 아래) */
+.sdBedgeExample__previewSlot {
+  margin-top: 8px;
+}
+
+.sdBedgeExample__previewHost {
+  min-height: 22px;
+}
+
+/* --- 기타 배지 (섹션 64:616) -------------------------------------------- */
+
+/* Figma: Schedule row chips (일정 표시) — Fill 721:4188, Blank 721:4187, Number 721:4196 */
+
+.sdSchedule {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  box-sizing: border-box;
+  overflow: hidden;
+  font: var(--type-10-500);
+  color: #212121;
+}
+
+.sdSchedule--fill {
+  width: 38px;
+  min-height: 14px;
+  padding: 1px 2px;
+  border-radius: 2px;
+  background: #f5f5f5;
+}
+
+.sdSchedule--blank {
+  width: 38px;
+  min-height: 14px;
+  padding: 1px 2px;
+  border-radius: 2px;
+  background: transparent;
+}
+
+.sdSchedule--number {
+  min-height: 14px;
+  padding: 1px 2px;
+  border-radius: 4px;
+  background: #eee;
+  width: max-content;
+}
+
+.sdSchedule__bar {
+  width: 2px;
+  height: 10px;
+  flex-shrink: 0;
+  border-radius: 1px;
+  background: #bdbdbd;
+}
+
+.sdSchedule__labelWrap {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.sdSchedule__label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+
+.sdSchedule__plus {
+  width: 5px;
+  height: 5px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.sdSchedule__plus::before,
+.sdSchedule__plus::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #212121;
+}
+
+.sdSchedule__plus::before {
+  width: 1px;
+  height: 5px;
+}
+
+.sdSchedule__plus::after {
+  width: 5px;
+  height: 1px;
+}
+
+.sdSchedule__digit {
+  flex-shrink: 0;
+  line-height: 1.2;
+}
+
+/* Figma Goal Day — 2281:141391 (Calendar_Mark type=일상 state=on + D-텍스트) */
+
+.sdGoalDay {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sdGoalDay__mark {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.sdGoalDay__markInner {
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 18px;
+  height: 19px;
+}
+
+.sdGoalDay__markInner img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+}
+
+.sdGoalDay__label {
+  display: inline-flex;
+  align-items: center;
+  font: 700 16px/1.5 var(--font-family-sans);
+  color: var(--color-gray-900);
+  white-space: nowrap;
+}
+
+.sdGoalDay__prefix,
+.sdGoalDay__days {
+  flex-shrink: 0;
+}

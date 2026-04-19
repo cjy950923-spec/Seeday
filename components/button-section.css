@@ -1,0 +1,711 @@
+/**
+ * Figma: Button — frame 64:881 (Type × State 심볼)
+ * https://www.figma.com/design/j0r11Ts2NxR6wiuOQKR7Xz/Seeds-The-Day-Project---Seeday?node-id=64-881&m=dev
+ */
+
+.sdBtn {
+  width: 343px;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 91px;
+  border-radius: 8px;
+  min-height: 52px;
+  font: var(--type-16-500);
+  text-align: center;
+  border: none;
+  cursor: pointer;
+}
+
+.sdBtn--primary.sdBtn--normal {
+  background: var(--color-primary-disabled);
+  color: var(--color-primary-surface);
+}
+
+.sdBtn--primary.sdBtn--success {
+  background: var(--color-primary-default);
+  color: var(--color-gray-white);
+}
+
+.sdBtn--secondary.sdBtn--normal {
+  background: var(--color-gray-100);
+  color: var(--color-gray-400);
+}
+
+.sdBtn--secondary.sdBtn--success {
+  background: var(--color-gray-100);
+  color: var(--color-gray-900);
+}
+
+/* 뷰어: Main Button — 정적 보드(좌) + 라이브 데모(우) */
+.sdBtnDemo {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  max-width: 100%;
+}
+
+.sdBtnDemoRow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 28px 48px;
+  width: 100%;
+}
+
+.sdBtnDemo__col {
+  flex: 1 1 300px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.sdBtnDemo__colTitle {
+  margin: 0;
+  font: var(--type-12-600);
+  color: var(--color-gray-700);
+}
+
+.sdBtnFrame881--static .sdBtn {
+  cursor: default;
+}
+
+.sdBtnDemo__typeRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+}
+
+.sdBtnDemo__typeLabel {
+  font: var(--type-12-600);
+  color: var(--color-gray-700);
+  margin: 0;
+}
+
+.sdBtnDemo__typeGroup {
+  display: inline-flex;
+  gap: 6px;
+  padding: 3px;
+  border-radius: 8px;
+  background: var(--color-gray-100);
+}
+
+.sdBtnDemo__typeBtn {
+  margin: 0;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  font: var(--type-14-500);
+  color: var(--color-gray-600);
+  cursor: pointer;
+}
+
+.sdBtnDemo__typeBtn:hover {
+  color: var(--color-gray-900);
+}
+
+.sdBtnDemo__typeBtn--active {
+  background: var(--color-gray-white);
+  color: var(--color-gray-900);
+  font: var(--type-14-600);
+  box-shadow: var(--shadow-01);
+}
+
+.sdBtnDemo__typeBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.sdBtnDemo__stateLine {
+  margin: 0;
+  font: 600 12px/1.4 var(--font-family-sans);
+  color: var(--color-gray-800);
+}
+
+.sdBtnDemo__hint {
+  margin: 0;
+  max-width: 420px;
+  font: var(--type-12-400);
+  color: var(--color-gray-600);
+}
+
+/* Figma frame 64:881 — 2×2 심볼 보드 (간격: 가로 59px, 세로 33px) */
+.sdBtnFrame881 {
+  box-sizing: border-box;
+  width: fit-content;
+  max-width: 100%;
+  padding: 20px;
+  border: 1px dashed #9747ff;
+  background: var(--color-gray-white);
+}
+
+.sdBtnFrame881__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 343px) minmax(0, 343px);
+  column-gap: 59px;
+  row-gap: 33px;
+  justify-content: start;
+}
+
+@media (max-width: 820px) {
+  .sdBtnFrame881__grid {
+    grid-template-columns: minmax(0, 1fr);
+    column-gap: 24px;
+    row-gap: 24px;
+  }
+}
+
+.sdBtnFrame881__cell {
+  box-sizing: border-box;
+  width: fit-content;
+  max-width: 100%;
+  padding: 4px;
+  margin: -4px;
+  border-radius: 12px;
+  transition: box-shadow 0.15s ease, outline-color 0.15s ease;
+}
+
+.sdToggle {
+  width: 44px;
+  height: 24px;
+  border-radius: 13px;
+  position: relative;
+  background: var(--color-gray-300);
+}
+
+.sdToggle--on {
+  background: #2dcb6f;
+}
+
+.sdToggle__thumb {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-gray-white);
+  top: 2px;
+  left: 2px;
+  box-shadow: var(--shadow-02);
+}
+
+.sdToggle--on .sdToggle__thumb {
+  left: 22px;
+}
+
+/* Figma 카카오 로그인 23:4070 · Apple 로그인 23:4069 */
+
+.sdSocialLoginBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.sdSocialLogin {
+  width: 343px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.sdSocialLogin--kakao {
+  height: 50px;
+  padding: 0 14px;
+  border-radius: 6px;
+  background: #fee500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.sdSocialLogin--kakao .sdSocialLogin__row {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 82px;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.sdSocialLogin__mark {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sdSocialLogin__mark--kakao {
+  width: 18px;
+  height: 18px;
+}
+
+.sdSocialLogin__mark--kakao img {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.sdSocialLogin__text {
+  font: 600 15px/1.5 "Apple SD Gothic Neo", Pretendard, var(--font-family-sans);
+  color: rgba(0, 0, 0, 0.85);
+  white-space: nowrap;
+}
+
+.sdSocialLogin--apple .sdSocialLogin__panel {
+  width: 100%;
+  height: 50px;
+  box-sizing: border-box;
+  padding: 12px 32px;
+  border-radius: 6px;
+  background: #050708;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+
+.sdSocialLogin__mark--apple {
+  width: 15px;
+  height: 18px;
+}
+
+.sdSocialLogin__mark--apple img {
+  width: 15px;
+  height: 18px;
+  display: block;
+}
+
+.sdSocialLogin__text--onDark {
+  color: #ffffff;
+}
+
+/* --- Figma 심볼 (별도 소절) ---------------------------------------------- */
+
+/* 725:3144 Button/Callendar Filter (심볼 64×38) */
+.sd725CalFilter {
+  box-sizing: border-box;
+  width: 64px;
+  height: 38px;
+  max-width: 100%;
+  padding: 4px 6px;
+  border-radius: 100px;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+}
+
+.sd725CalFilter__row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.sd725CalFilter__iconHost {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border-radius: 100px;
+  background: #fff;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.sd725CalFilter__glyph {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+}
+
+.sd725CalFilter__allWrap {
+  position: absolute;
+  left: 4px;
+  top: 7px;
+  width: 15.436px;
+  height: 9.898px;
+}
+
+.sd725CalFilter__allImg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+}
+
+/* Arrow — direction Medium (155:346) */
+.sd725CalFilter__arrow {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.sd725CalFilter__arrowCenter {
+  position: absolute;
+  left: 50%;
+  top: calc(50% - 0.5px);
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sd725CalFilter__arrowRot {
+  flex: none;
+  transform: rotate(-90deg);
+  transform-origin: center center;
+}
+
+.sd725CalFilter__arrowBox {
+  position: relative;
+  width: 5px;
+  height: 10px;
+}
+
+.sd725CalFilter__arrowPad {
+  position: absolute;
+  top: -7%;
+  right: -14%;
+  bottom: -7%;
+  left: -14%;
+}
+
+.sd725CalFilter__arrowImg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+}
+
+/* 792:3478 Photo Floating */
+.sd792PhotoFloat {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.sd792PhotoFloat__ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+}
+
+.sd792PhotoFloat__ringImg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 25px;
+  height: 25px;
+  transform: translate(-50%, -50%);
+  display: block;
+}
+
+.sd792PhotoFloat__cross {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+}
+
+.sd792PhotoFloat__crossImg {
+  position: absolute;
+  inset: -11.67%;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 940:14719 Floating Button */
+.sd940Fab {
+  width: 52px;
+  height: 52px;
+  border-radius: 100px;
+  background: #ff9528;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-02);
+}
+
+.sd940Fab__icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+}
+
+.sd940Fab__iconImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 1715:113034 Check Button */
+.sd1715CheckBtn {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.sd1715CheckBtn__imgWrap {
+  position: absolute;
+  left: calc(50% + 0.75px);
+  top: calc(50% + 0.5px);
+  transform: translate(-50%, -50%);
+  width: 15.5px;
+  height: 11px;
+}
+
+.sd1715CheckBtn__img {
+  position: absolute;
+  inset: -9.09% -6.45%;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 1541:92933 완료 (State On / Off) */
+.sd1541CompleteRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 28px 48px;
+}
+
+.sd1541Complete {
+  box-sizing: border-box;
+  min-width: 28px;
+  min-height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sd1541Complete--on {
+  padding: 0 6px;
+}
+
+.sd1541Complete--off {
+  width: 28px;
+}
+
+.sd1541Complete__label {
+  margin: 0;
+  font: var(--type-16-600);
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.sd1541Complete--on .sd1541Complete__label {
+  color: var(--color-gray-900);
+}
+
+.sd1541Complete--off .sd1541Complete__label {
+  color: #bdbdbd;
+}
+
+.sd1541CompleteDemo__btn,
+.sd2577CheckBoxDemo__btn {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.sd1541CompleteDemo__btn:focus-visible,
+.sd2577CheckBoxDemo__btn:focus-visible {
+  outline: 2px solid var(--color-primary-default);
+  outline-offset: 2px;
+}
+
+/* 1033:21703 기록 변경 */
+.sd1033RecordLink {
+  position: relative;
+  width: 116px;
+  max-width: 100%;
+  min-height: 21px;
+}
+
+.sd1033RecordLink__inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.sd1033RecordLink__text {
+  margin: 0;
+  font: var(--type-14-500);
+  line-height: 1.5;
+  color: #757575;
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+
+/* 1943:129034 New Record */
+.sd1943NewRecord {
+  box-sizing: border-box;
+  width: 323px;
+  max-width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+  background: #ff9528;
+}
+
+.sd1943NewRecord__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 291px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.sd1943NewRecord__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  font: var(--type-14-500);
+  line-height: 1.5;
+  color: #fff;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.sd1943NewRecord__copy p {
+  margin: 0;
+}
+
+.sd1943NewRecord__pill {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+  padding: 10px 10px 10px 16px;
+  border-radius: 100px;
+  background: #fff;
+}
+
+.sd1943NewRecord__pillText {
+  font: var(--type-14-600);
+  line-height: 1.5;
+  color: var(--color-primary-default);
+  white-space: nowrap;
+}
+
+/* Arrow_Right Medium — stroke = currentColor → --icon-color-primary (tokens.css) */
+.sd1943NewRecord__arrow.sdIconArrow {
+  color: var(--icon-color-primary);
+  flex-shrink: 0;
+}
+
+/* 2577:145629 Check Box — Off / On */
+.sd2577CheckBoxRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 28px 48px;
+}
+
+.sd2577CheckBox {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.sd2577CheckBox--on {
+  background: #fff;
+}
+
+.sd2577CheckBox__base {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.sd2577CheckBox__baseImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.sd2577CheckBox__mark {
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: 16px;
+  height: 16px;
+  overflow: hidden;
+}
+
+.sd2577CheckBox__markImg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 11.2px;
+  height: 9.2px;
+  display: block;
+}
+
+.sd2577CheckBox--off .sd2577CheckBox__markImg {
+  opacity: 0.45;
+}
+
+/* 다른 섹션(card/modal)에서 재사용 — 플레이스홀더 원형 */
+.sdCheckRound {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--color-gray-300);
+}

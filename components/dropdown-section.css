@@ -1,0 +1,92 @@
+/**
+ * Figma: Dropdown section — node 884:8077
+ */
+
+.sdDropBar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  padding: 8px;
+  border-radius: 100px;
+  background: var(--color-gray-100);
+  box-shadow: var(--shadow-01);
+}
+
+.sdDropBar__caret {
+  position: absolute;
+  top: -10px;
+  right: 40px;
+  width: 0;
+  height: 0;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-bottom: 10px solid var(--color-gray-100);
+  filter: drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.04));
+}
+
+.sdDropPill {
+  width: 30px;
+  height: 30px;
+  border-radius: 100px;
+  background: var(--color-gray-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.sdDropPill--active {
+  border: 1px solid var(--color-primary-default);
+  box-sizing: border-box;
+}
+
+.sdDropGlyph {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--color-gray-200);
+}
+
+.sdDropGlyph--all {
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--color-primary-default),
+    var(--color-gray-400),
+    var(--color-primary-surface),
+    var(--color-primary-default)
+  );
+}
+
+.sdDropGlyph--daily {
+  background: #c8e6c9;
+}
+
+.sdDropGlyph--fitness {
+  background: #b3e5fc;
+}
+
+.sdDropGlyph--habit {
+  background: #e1bee7;
+}
+
+.sdLongPress {
+  width: 310px;
+  max-width: 100%;
+  box-sizing: border-box;
+  border-radius: 12px;
+  background: var(--color-gray-white);
+  border: 1px solid var(--color-gray-200);
+  box-shadow: var(--shadow-01);
+  overflow: hidden;
+}
+
+.sdLongPress__row {
+  padding: 14px 16px;
+  font: var(--type-14-500);
+  color: var(--color-gray-900);
+}
+
+.sdLongPress__row + .sdLongPress__row {
+  border-top: 1px solid var(--color-gray-100);
+}
