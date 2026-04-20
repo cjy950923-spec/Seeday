@@ -71,6 +71,34 @@ body {
   align-items: flex-end;
 }
 
+.figma-matrix--grid5 {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+  align-items: end;
+}
+
+.figma-matrix--grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  align-items: end;
+}
+
+.figma-matrix--grid4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  align-items: end;
+}
+
+.figma-matrix--col2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: end;
+}
+
 .figma-cell {
   display: flex;
   flex-direction: column;
@@ -134,4 +162,99 @@ body {
   display: inline-block;
   max-width: 100%;
   cursor: pointer;
+}
+
+/* 섹션별 구현 소스 (viewer-source-panels.js) */
+.figma-source-panel {
+  margin: 0 0 16px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--color-gray-50);
+  border: 1px solid var(--color-gray-200);
+}
+
+.figma-source-panel__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  font: var(--type-12-400);
+  color: var(--color-gray-700);
+}
+
+.figma-source-panel__label {
+  font-weight: 600;
+  color: var(--color-gray-600);
+  margin-right: 4px;
+}
+
+.figma-source-panel__sep {
+  color: var(--color-gray-400);
+}
+
+.figma-source-panel__row a {
+  color: var(--color-primary-default);
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.figma-source-panel__row a:hover {
+  text-decoration: underline;
+}
+
+.figma-source-panel__details {
+  margin-top: 8px;
+}
+
+.figma-source-panel__summary {
+  font: var(--type-12-500);
+  color: var(--color-gray-700);
+  cursor: pointer;
+  user-select: none;
+}
+
+.figma-source-panel__summary:hover {
+  color: var(--color-primary-default);
+}
+
+.figma-source-panel__body {
+  margin-top: 10px;
+}
+
+.figma-source-panel__status {
+  font: var(--type-12-400);
+  color: var(--color-gray-600);
+  margin: 0 0 8px;
+}
+
+.figma-source-panel__status--err {
+  color: var(--color-semantic-error);
+}
+
+.figma-source-panel__filetitle {
+  font: 600 11px/1.4 var(--font-family-sans);
+  color: var(--color-gray-500);
+  margin: 12px 0 6px;
+}
+
+.figma-source-panel__filetitle:first-of-type {
+  margin-top: 0;
+}
+
+.figma-source-panel__pre {
+  margin: 0 0 4px;
+  padding: 12px 14px;
+  max-height: 320px;
+  overflow: auto;
+  border-radius: 8px;
+  background: var(--color-gray-900);
+  color: var(--color-gray-50);
+  font: 11px/1.45 ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  border: 1px solid var(--color-gray-800);
+}
+
+.figma-source-panel__pre code {
+  white-space: pre;
+  word-break: normal;
+  overflow-wrap: normal;
 }

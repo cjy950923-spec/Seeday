@@ -7,7 +7,21 @@
  * Result Score (3 types), misc single icons.
  */
 
-import { appendInteractiveSubsection } from "./interactive-demo.js";
+import { iconAssets } from "../tokens/icon.js";
+
+function iconAssetUrl(assetPath) {
+  return new URL(`../${assetPath}`, import.meta.url).href;
+}
+
+function iconImg(assetPath, className) {
+  const img = document.createElement("img");
+  img.alt = "";
+  img.decoding = "async";
+  img.loading = "lazy";
+  img.src = iconAssetUrl(assetPath);
+  img.className = className || "sdIconAsset__img";
+  return img;
+}
 
 export const FIGMA_ICON = {
   nodeId: "46:322",
@@ -60,71 +74,53 @@ function h(tag, className, attrs, children) {
   return el;
 }
 
-function svgArrow(direction) {
-  const rot = { Left: 0, Right: 180, Up: 90, Down: -90 }[direction] || 0;
-  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.setAttribute("viewBox", "0 0 24 24");
-  svg.setAttribute("fill", "none");
-  svg.style.transform = `rotate(${rot}deg)`;
-  const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
-  p.setAttribute(
-    "d",
-    "M14.5 6.5L8.5 12.5L14.5 18.5",
-  );
-  p.setAttribute("stroke", "currentColor");
-  p.setAttribute("stroke-width", "2");
-  p.setAttribute("stroke-linecap", "round");
-  p.setAttribute("stroke-linejoin", "round");
-  svg.appendChild(p);
-  return svg;
-}
-
 function iconArrow(direction, size) {
   const lg = size === "Large";
-  const wrap = h("span", `sdIconArrow sdIconArrow--${lg ? "lg" : "md"}`, null, [
-    svgArrow(direction),
+  const key =
+    direction === "Left" && lg
+      ? iconAssets.arrowLeftLarge
+      : direction === "Left"
+        ? iconAssets.arrowLeftMedium
+        : direction === "Right" && lg
+          ? iconAssets.arrowRightLarge
+          : direction === "Right"
+            ? iconAssets.arrowRightMedium
+            : direction === "Up" && lg
+              ? iconAssets.arrowUpLarge
+              : direction === "Up"
+                ? iconAssets.arrowUpMedium
+                : direction === "Down" && lg
+                  ? iconAssets.arrowDownLarge
+                  : iconAssets.arrowDownMedium;
+
+  return h("span", `sdIconFrame ${lg ? "" : "sdIconFrame--md"} sdIconArrow`.trim(), null, [
+    iconImg(key),
   ]);
-  return wrap;
 }
 
 function iconCheck(state) {
-  const root = h("div", `sdIconCheck ${state ? "sdIconCheck--true" : ""}`, null, []);
-  root.appendChild(h("div", "sdIconCheck__ring", null, []));
-  const mark = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  mark.setAttribute("class", "sdIconCheck__mark");
-  mark.setAttribute("viewBox", "0 0 10 7");
-  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-  path.setAttribute("d", "M1 3.5L3.8 6L9 1");
-  path.setAttribute("stroke", "#fff");
-  path.setAttribute("stroke-width", "1.5");
-  path.setAttribute("fill", "none");
-  path.setAttribute("stroke-linecap", "round");
-  path.setAttribute("stroke-linejoin", "round");
-  mark.appendChild(path);
-  root.appendChild(mark);
+  const root = h(
+    "span",
+    `sdIconFrame sdIconFrame--md sdIconCheck ${state ? "sdIconCheck--true" : "sdIconCheck--false"}`,
+    null,
+    [iconImg(state ? iconAssets.checkTrueExport : iconAssets.checkFalseExport)],
+  );
   return root;
 }
 
 function iconOnboarding(state) {
-  const wrap = h("div", "sdIconOnboarding", { "data-state": state }, []);
-  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.setAttribute("viewBox", "0 0 24 24");
-  svg.setAttribute("fill", "none");
-  svg.setAttribute("stroke", "currentColor");
-  svg.setAttribute("stroke-width", "1.6");
-  svg.setAttribute("stroke-linecap", "round");
-  const paths = {
-    기록: "M6 4h12v16H6z M9 8h6 M9 12h4",
-    닉네임: "M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 0v2m-6 6h12",
-    생일: "M7 5h10v14H7z M9 3v4 M15 3v4 M7 10h10",
-    목표: "M12 4l8 6-8 6-8-6 8-6z M12 10v6",
-    알림: "M12 22a2 2 0 0 0 2-2H10a2 2 0 0 0 2 2zm6-6V11a6 6 0 1 0-12 0v5l-2 2h16l-2-2z",
-  }[state];
-  const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
-  p.setAttribute("d", paths);
-  svg.appendChild(p);
-  wrap.appendChild(svg);
-  return wrap;
+  const asset =
+    state === "기록"
+      ? iconAssets.onboardingRecord
+      : state === "닉네임"
+        ? iconAssets.onboardingNickname
+        : state === "생일"
+          ? iconAssets.onboardingBirthday
+          : state === "목표"
+            ? iconAssets.onboardingGoal
+            : iconAssets.onboardingNotification;
+
+  return h("span", "sdIconFrame sdIconFrame--camera sdIconOnboarding", { "data-state": state }, [iconImg(asset)]);
 }
 
 function iconCalendarMark(type, on) {
@@ -141,43 +137,6 @@ function iconFilterGlyph(type, on) {
     null,
     [h("span", "sdIconFilterPill__glyph", null, [])],
   );
-  return wrap;
-}
-
-function iconMisc(name) {
-  const wrap = h("span", "sdIconMisc", { "data-icon": name }, []);
-  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.setAttribute("viewBox", "0 0 24 24");
-  svg.setAttribute("fill", "none");
-  svg.setAttribute("stroke", "currentColor");
-  svg.setAttribute("stroke-width", "1.7");
-  svg.setAttribute("stroke-linecap", "round");
-  const d = {
-    Notification: "M12 22a2 2 0 0 0 2-2H10a2 2 0 0 0 2 2zm6-6V11a6 6 0 1 0-12 0v5l-2 2h16l-2-2z",
-    Setting: "M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm8.4-1a7.9 7.9 0 0 0 .1-1l2-1.5-2-3.4-2.5.7a8 8 0 0 0-1.7-1l-.4-2.6H9.1l-.4 2.6a8 8 0 0 0-1.7 1l-2.5-.7-2 3.4L3.5 13a7.9 7.9 0 0 0 .1 1l-2 1.5 2 3.4 2.5-.7a8 8 0 0 0 1.7 1l.4 2.6h5.8l.4-2.6a8 8 0 0 0 1.7-1l2.5.7 2-3.4-2-1.5z",
-    Close: "M6 6l12 12M18 6L6 18",
-    CheckSmall: "M6 12l4 4 8-8",
-    Camera: "M4 8h3l2-2h6l2 2h3v10H4V8zm8 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6z",
-    More: "M6 12h.01M12 12h.01M18 12h.01",
-    Image: "M5 5h14v14H5z M8 15l3-3 3 3 4-5",
-    Null: "M12 8v8M8 12h8",
-  }[name];
-  const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
-  if (name === "More") {
-    ["6", "12", "18"].forEach((cx) => {
-      const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-      c.setAttribute("cx", cx);
-      c.setAttribute("cy", "12");
-      c.setAttribute("r", "1.5");
-      c.setAttribute("fill", "currentColor");
-      c.setAttribute("stroke", "none");
-      svg.appendChild(c);
-    });
-  } else {
-    p.setAttribute("d", d);
-    svg.appendChild(p);
-  }
-  wrap.appendChild(svg);
   return wrap;
 }
 
@@ -211,70 +170,187 @@ export function mountIconSection(container) {
   );
   container.appendChild(h("h2", "figma-section__h2", null, ["Icon"]));
 
-  const arrowStates = crossProduct(ICON_VARIANTS.arrow.direction, ICON_VARIANTS.arrow.size).map(
-    ([dir, size]) => ({ dir, size }),
+  function appendSubsection(title, matrixEl) {
+    const sub = h("div", "figma-subsection", null, []);
+    sub.appendChild(h("h3", "figma-subsection__title", null, [title]));
+    sub.appendChild(matrixEl);
+    container.appendChild(sub);
+  }
+
+  /**
+   * @param {{label: string, node: HTMLElement}[]} items
+   * @param {{grid5?: boolean, grid4?: boolean, grid3?: boolean, col2?: boolean}} [opts]
+   */
+  function makeMatrix(items, opts) {
+    const matrix = h(
+      "div",
+      `figma-matrix ${opts?.grid5 ? "figma-matrix--grid5" : ""} ${opts?.grid4 ? "figma-matrix--grid4" : ""} ${opts?.grid3 ? "figma-matrix--grid3" : ""} ${opts?.col2 ? "figma-matrix--col2" : ""}`.trim(),
+      null,
+      [],
+    );
+    items.forEach(({ label, node }) => {
+      const cell = h("div", "figma-cell", null, []);
+      cell.appendChild(node);
+      cell.appendChild(h("span", null, null, [label]));
+      matrix.appendChild(cell);
+    });
+    return matrix;
+  }
+
+  // 5×5 라인업 (요청: onboarding/calendar_mark/notics/filter/null/resultScore 제외)
+  const lineIconItems = [
+    { label: "Setting", node: h("span", "sdIconFrame", { "data-icon": "Setting" }, [iconImg(iconAssets.setting)]) },
+    {
+      label: "Notification",
+      node: h("span", "sdIconFrame", { "data-icon": "Notification" }, [iconImg(iconAssets.notification)]),
+    },
+    { label: "Close", node: h("span", "sdIconFrame", { "data-icon": "Close" }, [iconImg(iconAssets.close)]) },
+    {
+      label: "CheckSmall (20)",
+      node: h("span", "sdIconFrame sdIconFrame--md", { "data-icon": "CheckSmall" }, [
+        iconImg(iconAssets.checkSmall),
+      ]),
+    },
+    { label: "Plus (5×5)", node: h("span", "sdIconPlus", null, []) },
+
+    {
+      label: "Fill Arrow_Down",
+      node: h("span", "sdIconFrame", { "data-icon": "FillArrowDown" }, [iconImg(iconAssets.fillArrowDown)]),
+    },
+    { label: "Palette", node: h("span", "sdIconFrame", { "data-icon": "Palette" }, [iconImg(iconAssets.palette)]) },
+    { label: "Article", node: h("span", "sdIconFrame", { "data-icon": "Article" }, [iconImg(iconAssets.article)]) },
+    { label: "Calendar", node: h("span", "sdIconFrame", { "data-icon": "Calendar" }, [iconImg(iconAssets.calendar)]) },
+    { label: "Repeat", node: h("span", "sdIconFrame", { "data-icon": "Repeat" }, [iconImg(iconAssets.repeat)]) },
+
+    { label: "Compass", node: h("span", "sdIconFrame", { "data-icon": "Compass" }, [iconImg(iconAssets.compass)]) },
+    { label: "Pin", node: h("span", "sdIconFrame", { "data-icon": "Pin" }, [iconImg(iconAssets.pin)]) },
+    { label: "Trash", node: h("span", "sdIconFrame", { "data-icon": "Trash" }, [iconImg(iconAssets.trash)]) },
+    {
+      label: "History",
+      node: h("span", "sdIconFrame", { "data-icon": "History" }, [
+        iconImg(iconAssets.historyExport),
+      ]),
+    },
+    {
+      label: "More (20)",
+      node: h("span", "sdIconFrame sdIconFrame--md", { "data-icon": "More" }, [iconImg(iconAssets.moreExport)]),
+    },
+
+    {
+      label: "Camera (30)",
+      node: h("span", "sdIconFrame sdIconFrame--camera", { "data-icon": "Camera" }, [iconImg(iconAssets.camera)]),
+    },
+    {
+      label: "Image (30)",
+      node: h("span", "sdIconFrame sdIconFrame--camera", { "data-icon": "Image" }, [iconImg(iconAssets.image)]),
+    },
+    {
+      label: "CoachMark Close (36)",
+      node: h("span", "sdIconFrame sdIconFrame--coach", { "data-icon": "CoachMarkClose" }, [
+        iconImg(iconAssets.coachMarkClose),
+      ]),
+    },
+  ];
+  appendSubsection("Line icons — 5×5 static list", makeMatrix(lineIconItems, { grid5: true }));
+
+  // Variable icons — 정적으로 모든 상태 표시
+  // 요청 순서:
+  // 1) 같은 방향 기준으로 위=Large, 아래=Medium
+  // 2) 방향 순서: Left, Right, Up, Down
+  // => 그리드에서 1행 Large(Left→Right→Up→Down), 2행 Medium(Left→Right→Up→Down)
+  const arrowItems = crossProduct(ICON_VARIANTS.arrow.size, ICON_VARIANTS.arrow.direction).map(([size, dir]) => {
+    const key =
+      dir === "Left"
+        ? size === "Large"
+          ? "arrowLeftLarge"
+          : "arrowLeftMedium"
+        : dir === "Right"
+          ? size === "Large"
+            ? "arrowRightLarge"
+            : "arrowRightMedium"
+          : dir === "Up"
+            ? size === "Large"
+              ? "arrowUpLarge"
+              : "arrowUpMedium"
+            : size === "Large"
+              ? "arrowDownLarge"
+              : "arrowDownMedium";
+    return {
+      label: `${dir} · ${size}`,
+      node: h("span", `sdIconArrow sdIconArrow--${size === "Large" ? "lg" : "md"}`, null, [iconImg(iconAssets[key])]),
+    };
+  });
+  appendSubsection("Arrow — direction × size (static)", makeMatrix(arrowItems, { grid4: true }));
+
+  const checkItems = ICON_VARIANTS.check.state.map((st) => ({ label: `State=${st}`, node: iconCheck(st) }));
+  appendSubsection("Check — State=False | True (static)", makeMatrix(checkItems));
+
+  const snsItems = ICON_VARIANTS.sns.type.map((t) => ({
+    label: `Type=${t}`,
+    node: h("span", "sdIconFrame sdIconFrame--md", null, [
+      iconImg(t === "카카오" ? iconAssets.snsKakao : iconAssets.snsApple),
+    ]),
+  }));
+  appendSubsection("SNS Icon — Type (static)", makeMatrix(snsItems));
+
+  // Excluded from 5×5, but still shown as static “all states”
+  const onboardingItems = ICON_VARIANTS.onboarding.state.map((st) => ({
+    label: `State=${st}`,
+    node: iconOnboarding(st),
+  }));
+  appendSubsection("Onboarding — all states (static)", makeMatrix(onboardingItems));
+
+  // 요청: 위 1줄=On, 아래 1줄=Off
+  const calItemsOn = [
+    { label: "습관 · On", node: h("span", "sdIconMisc", null, [iconImg(iconAssets.calendarMarkHabitOn)]) },
+    { label: "운동 · On", node: h("span", "sdIconMisc", null, [iconImg(iconAssets.calendarMarkFitnessOn)]) },
+    { label: "일상 · On", node: h("span", "sdIconMisc", null, [iconImg(iconAssets.calendarMarkDailyOn)]) },
+  ];
+  const calItemsOff = [
+    { label: "습관 · Off", node: h("span", "sdIconMisc", null, [iconImg(iconAssets.calendarMarkHabitOff)]) },
+    { label: "운동 · Off", node: h("span", "sdIconMisc", null, [iconImg(iconAssets.calendarMarkFitnessOff)]) },
+    { label: "일상 · Off", node: h("span", "sdIconMisc", null, [iconImg(iconAssets.calendarMarkDailyOff)]) },
+  ];
+  appendSubsection("Calendar_Mark — type × on/off (static)", makeMatrix([...calItemsOn, ...calItemsOff], { grid3: true }));
+
+  const noticsItems = [
+    { label: "Daily", node: h("span", "sdIconMisc", null, [iconImg(iconAssets.noticsDaily)]) },
+    { label: "Fitness", node: h("span", "sdIconMisc", null, [iconImg(iconAssets.noticsFitness)]) },
+    { label: "Habit", node: h("span", "sdIconMisc", null, [iconImg(iconAssets.noticsHabit)]) },
+    { label: "Project", node: h("span", "sdIconMisc", null, [iconImg(iconAssets.noticsProject)]) },
+  ];
+  appendSubsection("Notics Icon — all types (static)", makeMatrix(noticsItems));
+
+  // 요청: 위 1줄=On, 아래 1줄=Off
+  const filterItemsOn = [
+    { label: "습관 · On", node: h("span", "sdIconFrame", null, [iconImg(iconAssets.filterHabitOn)]) },
+    { label: "운동 · On", node: h("span", "sdIconFrame", null, [iconImg(iconAssets.filterFitnessOn)]) },
+    { label: "일상 · On", node: h("span", "sdIconFrame", null, [iconImg(iconAssets.filterDailyOn)]) },
+    { label: "일정 · On", node: h("span", "sdIconFrame", null, [iconImg(iconAssets.filterScheduleOn)]) },
+    { label: "All · On", node: h("span", "sdIconFrame", null, [iconImg(iconAssets.filterAllOn)]) },
+  ];
+  const filterItemsOff = [
+    { label: "습관 · Off", node: h("span", "sdIconFrame", null, [iconImg(iconAssets.filterHabitOff)]) },
+    { label: "운동 · Off", node: h("span", "sdIconFrame", null, [iconImg(iconAssets.filterFitnessOff)]) },
+    { label: "일상 · Off", node: h("span", "sdIconFrame", null, [iconImg(iconAssets.filterDailyOff)]) },
+    { label: "일정 · Off", node: h("span", "sdIconFrame", null, [iconImg(iconAssets.filterScheduleOff)]) },
+    { label: "All · Off", node: h("span", "sdIconFrame", null, [iconImg(iconAssets.filterAllOff)]) },
+  ];
+  appendSubsection(
+    "Fillter Button Icon — type × on/off (static, exported SVG)",
+    makeMatrix([...filterItemsOn, ...filterItemsOff], { grid5: true }),
   );
 
-  appendInteractiveSubsection(container, "Arrow — direction × size", {
-    states: arrowStates,
-    formatLabel: (s) => `${s.dir} · ${s.size}`,
-    render: (s) => iconArrow(s.dir, s.size),
-  });
+  const nullItems = [{ label: "Null (40×40)", node: h("span", "sdIconMisc", null, [iconImg(iconAssets.nullIcon)]) }];
+  appendSubsection("Null Icon (static)", makeMatrix(nullItems));
 
-  appendInteractiveSubsection(container, "Check — State=False | True", {
-    states: ICON_VARIANTS.check.state,
-    formatLabel: (st) => `State=${st}`,
-    render: (st) => iconCheck(st),
-  });
-
-  appendInteractiveSubsection(container, "Onboarding — State", {
-    states: ICON_VARIANTS.onboarding.state,
-    formatLabel: (st) => `State=${st}`,
-    render: (st) => iconOnboarding(st),
-  });
-
-  const calStates = crossProduct(ICON_VARIANTS.calendarMark.type, ICON_VARIANTS.calendarMark.on).map(
-    ([type, on]) => ({ type, on }),
-  );
-
-  appendInteractiveSubsection(container, "Calendar_Mark — type × on/off", {
-    states: calStates,
-    formatLabel: (s) => `${s.type} · ${s.on ? "On" : "Off"}`,
-    render: (s) => iconCalendarMark(s.type, s.on),
-  });
-
-  const filterStates = crossProduct(ICON_VARIANTS.filterIcon.type, ICON_VARIANTS.filterIcon.on).map(
-    ([type, on]) => ({ type, on }),
-  );
-
-  appendInteractiveSubsection(container, "Fillter Button Icon — type × on/off", {
-    states: filterStates,
-    formatLabel: (s) => `${s.type} · ${s.on ? "On" : "Off"}`,
-    render: (s) => iconFilterGlyph(s.type, s.on),
-  });
-
-  appendInteractiveSubsection(container, "SNS Icon — Type", {
-    states: ICON_VARIANTS.sns.type,
-    formatLabel: (t) => `Type=${t}`,
-    render: (t) =>
-      t === "카카오"
-        ? h("span", "sdIconSns sdIconSns--kakao", null, ["K"])
-        : h("span", "sdIconSns sdIconSns--apple", null, [""]),
-  });
-
-  appendInteractiveSubsection(container, "Result Score — Type", {
-    states: ICON_VARIANTS.resultScore.type,
-    formatLabel: (t) => `Type=${t}`,
-    render: (t) => h("span", "sdIconScore", { title: t }, [t.slice(0, 2)]),
-  });
-
-  const miscStates = ICON_VARIANTS.misc.map((name) => ({ kind: "misc", name })).concat([
-    { kind: "plus" },
-  ]);
-
-  appendInteractiveSubsection(container, "Misc + Plus", {
-    states: miscStates,
-    formatLabel: (s) => (s.kind === "plus" ? "Plus (5×5)" : s.name),
-    render: (s) => (s.kind === "plus" ? h("span", "sdIconPlus", null, []) : iconMisc(s.name)),
-  });
+  const scoreItems = [
+    {
+      label: "Achievement rate",
+      node: h("span", "sdIconScore", null, [iconImg(iconAssets.resultScoreAchievementRate)]),
+    },
+    { label: "Success", node: h("span", "sdIconScore", null, [iconImg(iconAssets.resultScoreSuccess)]) },
+    { label: "Total", node: h("span", "sdIconScore", null, [iconImg(iconAssets.resultScoreTotal)]) },
+  ];
+  appendSubsection("Result Score — all types (static)", makeMatrix(scoreItems));
 }

@@ -143,7 +143,7 @@
   width: fit-content;
   max-width: 100%;
   padding: 20px;
-  border: 1px dashed #9747ff;
+  border: 1px dashed var(--color-figma-guide);
   background: var(--color-gray-white);
 }
 
@@ -182,7 +182,7 @@
 }
 
 .sdToggle--on {
-  background: #2dcb6f;
+  background: var(--color-semantic-success);
 }
 
 .sdToggle__thumb {
@@ -219,7 +219,7 @@
   height: 50px;
   padding: 0 14px;
   border-radius: 6px;
-  background: #fee500;
+  background: var(--color-brand-kakao);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -266,7 +266,7 @@
   box-sizing: border-box;
   padding: 12px 32px;
   border-radius: 6px;
-  background: #050708;
+  background: var(--color-gray-950);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -285,7 +285,7 @@
 }
 
 .sdSocialLogin__text--onDark {
-  color: #ffffff;
+  color: var(--color-gray-white);
 }
 
 /* --- Figma 심볼 (별도 소절) ---------------------------------------------- */
@@ -298,7 +298,7 @@
   max-width: 100%;
   padding: 4px 6px;
   border-radius: 100px;
-  background: #f5f5f5;
+  background: var(--color-gray-100);
   display: flex;
   align-items: center;
 }
@@ -315,7 +315,7 @@
   width: 30px;
   height: 30px;
   border-radius: 100px;
-  background: #fff;
+  background: var(--color-gray-white);
   flex-shrink: 0;
   overflow: hidden;
 }
@@ -447,7 +447,7 @@
   width: 52px;
   height: 52px;
   border-radius: 100px;
-  background: #ff9528;
+  background: var(--color-primary-default);
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
@@ -534,7 +534,7 @@
 }
 
 .sd1541Complete--off .sd1541Complete__label {
-  color: #bdbdbd;
+  color: var(--color-gray-400);
 }
 
 .sd1541CompleteDemo__btn,
@@ -577,7 +577,7 @@
   margin: 0;
   font: var(--type-14-500);
   line-height: 1.5;
-  color: #757575;
+  color: var(--color-gray-600);
   text-decoration: underline;
   text-decoration-style: solid;
   text-underline-offset: 3px;
@@ -591,7 +591,7 @@
   max-width: 100%;
   padding: 16px;
   border-radius: 16px;
-  background: #ff9528;
+  background: var(--color-primary-default);
 }
 
 .sd1943NewRecord__row {
@@ -611,7 +611,7 @@
   gap: 0;
   font: var(--type-14-500);
   line-height: 1.5;
-  color: #fff;
+  color: var(--color-gray-white);
   flex-shrink: 1;
   min-width: 0;
 }
@@ -627,7 +627,7 @@
   flex-shrink: 0;
   padding: 10px 10px 10px 16px;
   border-radius: 100px;
-  background: #fff;
+  background: var(--color-gray-white);
 }
 
 .sd1943NewRecord__pillText {
@@ -660,7 +660,7 @@
 }
 
 .sd2577CheckBox--on {
-  background: #fff;
+  background: var(--color-gray-white);
 }
 
 .sd2577CheckBox__base {

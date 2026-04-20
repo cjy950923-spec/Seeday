@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="components/viewer-layout.css" />
     <link rel="stylesheet" href="components/icon-section.css" />
     <link rel="stylesheet" href="components/field-section.css" />
-    <link rel="stylesheet" href="components/graphic-section.css" />
     <link rel="stylesheet" href="components/badge-section.css" />
     <link rel="stylesheet" href="components/progress-section.css" />
     <link rel="stylesheet" href="components/button-section.css" />
@@ -19,7 +18,7 @@
     <link rel="stylesheet" href="components/dropdown-section.css" />
   </head>
   <body>
-    <h1 class="figma-viewer__title">Figma UI components (11 sections)</h1>
+    <h1 class="figma-viewer__title">Figma UI components (10 sections)</h1>
     <p class="figma-viewer__intro">
       아래는 Figma 파일
       <a
@@ -28,18 +27,20 @@
         rel="noopener noreferrer"
         >Seeds-The-Day-Project---Seeday</a
       >
-      의 11개 섹션 노드에 맞춘 HTML/CSS 구현입니다. 각 섹션은 <code>components/*-section.js</code>의
+      의 10개 섹션 노드에 맞춘 HTML/CSS 구현입니다. 각 섹션은 <code>components/*-section.js</code>의
       <code>mount*Section</code>으로 마운트되며, variant 키는 <code>*_VARIANTS</code>에 정리되어 있습니다.
+      각 섹션 제목 바로 아래 <strong>구현 소스</strong>에서 <code>.js</code>·<code>.css</code> 파일을 새 탭으로 열거나,
+      <strong>이 페이지에서 보기</strong>를 펼치면 같은 화면에서 코드를 불러옵니다(file:// 로 열면 fetch가 막힐 수 있어 HTTP 서버 사용을 권장).
       대부분의 미리보기는 <strong>클릭</strong>하면 다음 상태로 순환합니다(포커스 후 Enter·Space 동일).
       드롭다운 필터는 <strong>칩을 직접 눌러</strong> 활성 탭을 바꿀 수 있습니다. 터미널에서는 프로젝트 루트에서
-      <code>./scripts/open-viewer.sh</code> 를 실행하면 서버가 뜨고 브라우저가 열립니다. (포트 변경:
-      <code>PORT=9000 ./scripts/open-viewer.sh</code>) 수동으로 띄우려면
+      <code>./scripts/open.sh</code> 또는 <code>./scripts/open-viewer.sh</code> 를 실행하면 서버가 뜨고 이 페이지가 열립니다.
+      토큰 미리보기는 <code>./scripts/open.sh tokens</code> 또는 <code>./scripts/open-tokens-preview.sh</code>.
+      포트 변경: <code>PORT=9000 ./scripts/open.sh</code>. 수동으로 띄우려면
       <code>python3 -m http.server 8877</code> 후 <code>/viewer.html</code> 로 접속하면 됩니다.
     </p>
 
     <section class="figma-section" id="section-icon"></section>
     <section class="figma-section" id="section-field"></section>
-    <section class="figma-section" id="section-graphic"></section>
     <section class="figma-section" id="section-badge"></section>
     <section class="figma-section" id="section-progress"></section>
     <section class="figma-section" id="section-button"></section>
@@ -52,7 +53,6 @@
     <script type="module">
       import { mountIconSection } from "./components/icon-section.js";
       import { mountFieldSection } from "./components/field-section.js";
-      import { mountGraphicSection } from "./components/graphic-section.js";
       import { mountBadgeSection } from "./components/badge-section.js";
       import { mountProgressSection } from "./components/progress-section.js";
       import { mountButtonSection } from "./components/button-section.js";
@@ -61,10 +61,10 @@
       import { mountModalSection } from "./components/modal-section.js";
       import { mountCardSection } from "./components/card-section.js";
       import { mountDropdownSection } from "./components/dropdown-section.js";
+      import { attachAllSourcePanels } from "./components/viewer-source-panels.js";
 
       mountIconSection(document.getElementById("section-icon"));
       mountFieldSection(document.getElementById("section-field"));
-      mountGraphicSection(document.getElementById("section-graphic"));
       mountBadgeSection(document.getElementById("section-badge"));
       mountProgressSection(document.getElementById("section-progress"));
       mountButtonSection(document.getElementById("section-button"));
@@ -73,6 +73,8 @@
       mountModalSection(document.getElementById("section-modal"));
       mountCardSection(document.getElementById("section-card"));
       mountDropdownSection(document.getElementById("section-dropdown"));
+
+      attachAllSourcePanels();
     </script>
   </body>
 </html>

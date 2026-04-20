@@ -2,59 +2,172 @@
  * Figma: Field section — node 64:405
  */
 
-.sdFieldInput {
+/* Text Input Field (node 64:261) */
+.sdTextInputField {
   width: 343px;
   max-width: 100%;
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
   padding: 14px;
   border-radius: 8px;
   background: var(--color-gray-100);
   border: 1px solid transparent;
-  font: var(--type-16-400);
-  color: var(--color-gray-400);
 }
 
-.sdFieldInput--pressed,
-.sdFieldInput--completed,
-.sdFieldInput--failed {
-  color: var(--color-gray-900);
-  font-weight: 500;
-}
-
-.sdFieldInput--failed {
+.sdTextInputField--failed {
   border-color: var(--color-semantic-error);
 }
 
-.sdFieldInput__clear {
+.sdTextInputField__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font: var(--type-16-400);
+  color: var(--color-gray-900);
+  /* CloseCircle(16px) + gap(10px)로 남은 영역까지만 표시하고 넘치면 ... */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sdTextInputField--default .sdTextInputField__input {
+  color: var(--color-gray-900);
+  font-weight: 400;
+}
+
+.sdTextInputField__input::placeholder {
+  color: var(--color-gray-400);
+  font-weight: 400;
+}
+
+.sdTextInputField--pressed .sdTextInputField__input,
+.sdTextInputField--completed .sdTextInputField__input,
+.sdTextInputField--failed .sdTextInputField__input {
+  font-weight: 500;
+}
+
+.sdTextInputField__clear {
   width: 16px;
   height: 16px;
-  flex-shrink: 0;
+  flex: 0 0 auto;
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
   border-radius: 50%;
-  background: var(--color-gray-300);
-  position: relative;
+  cursor: pointer;
 }
 
-.sdFieldInput__clear::before,
-.sdFieldInput__clear::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 8px;
-  height: 1px;
-  background: var(--color-gray-white);
-  transform-origin: center;
+.sdTextInputField__clearImg {
+  display: block;
+  width: 16px;
+  height: 16px;
 }
 
-.sdFieldInput__clear::before {
-  transform: translate(-50%, -50%) rotate(45deg);
+.sdTextInputField__input:disabled {
+  cursor: default;
 }
 
-.sdFieldInput__clear::after {
-  transform: translate(-50%, -50%) rotate(-45deg);
+/* viewer-only layout (Text Input variants + demo) */
+.sdFieldTextInputLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.sdFieldTextInputGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.sdFieldTextInputCell {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sdFieldTextInputLabel {
+  font: var(--type-12-400);
+  color: var(--color-gray-600);
+}
+
+/* Contents Text Input Field (node 345:984) */
+.sdContentsField {
+  width: 343px;
+  max-width: 100%;
+  height: 251px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 14px;
+  border-radius: 8px;
+  background: var(--color-gray-100);
+}
+
+.sdContentsField__textarea {
+  width: 100%;
+  height: 192px;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  background: transparent;
+  resize: none;
+  font: var(--type-16-400);
+  line-height: 1.5;
+  color: var(--color-gray-900);
+}
+
+.sdContentsField--default .sdContentsField__textarea {
+  color: var(--color-gray-400);
+}
+
+.sdContentsField__textarea::placeholder {
+  color: var(--color-gray-400);
+}
+
+.sdContentsField__counter {
+  display: inline-flex;
+  gap: 2px;
+  align-items: center;
+  font: var(--type-14-400);
+  color: var(--color-gray-500);
+}
+
+.sdContentsField--pressed .sdContentsField__textarea {
+  color: var(--color-gray-900);
+}
+
+.sdContentsField--pressed .sdContentsField__counter {
+  font: var(--type-14-500);
+  color: var(--color-gray-800);
+}
+
+.sdContentsField__textarea:disabled {
+  cursor: default;
+}
+
+/* viewer-only layout for contents: left(Default) + right(Demo) */
+.sdFieldContentsLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.sdFieldContentsCell {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .sdFieldTextarea {
@@ -94,28 +207,209 @@
   background: var(--color-primary-ghost);
 }
 
-.sdDayCell {
-  width: 38px;
-  height: 80px;
-  border-radius: 8px;
+/* Photo Add (792:3564) — tokenized */
+.sdPhotoAdd {
+  width: var(--field-photo-add-size, 100px);
+  height: var(--field-photo-add-size, 100px);
+  flex: 0 0 var(--field-photo-add-size, 100px);
+  box-sizing: border-box;
+  padding: var(--field-photo-add-padding-y, 23px) var(--field-photo-add-padding-x, 17px);
+  border-radius: var(--field-photo-add-radius, 8px);
+  background: var(--color-gray-100);
+  overflow: clip;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.sdPhotoAdd__content {
+  width: var(--field-photo-add-content-width, 66px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
-  padding-bottom: 8px;
-  font: var(--type-10-500);
-  color: var(--color-gray-500);
+  gap: var(--field-photo-add-gap, 6px);
+}
+
+.sdPhotoAdd__icon {
+  width: var(--icon-size-camera);
+  height: var(--icon-size-camera);
+  display: block;
+}
+
+.sdPhotoAdd__label {
+  font: var(--type-12-500);
+  color: var(--color-gray-400);
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
+
+/* Day Cell (728:5029) — tokenized, 1:1 structure */
+.sdDayCell2 {
+  width: var(--field-daycell-width);
+  height: var(--field-daycell-height);
+  border-radius: var(--field-daycell-radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--field-daycell-gap);
+}
+
+.sdDayCell2__no {
+  margin: 0;
+  font: var(--type-12-500);
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.sdDayCell2__noPill {
+  background: var(--color-primary-default);
+  border-radius: var(--field-daycell-radius);
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sdDayCell2--default .sdDayCell2__no {
+  color: var(--color-gray-900);
+}
+
+.sdDayCell2--disable .sdDayCell2__no {
+  color: var(--color-gray-300);
+}
+
+.sdDayCell2--highlight .sdDayCell2__no {
+  color: var(--color-gray-white);
+}
+
+.sdDayCell2__markWrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--field-daycell-mark-gap);
+  align-items: center;
+}
+
+.sdDayCell2__dailyMark {
+  height: var(--field-daycell-mark-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--field-daycell-mark-inner-gap);
+  padding: 0 var(--field-daycell-mark-padding-x);
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.sdDayCell2__mark {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.sdDayCell2__dot {
+  position: absolute;
+  width: var(--field-daycell-dot-size);
+  height: var(--field-daycell-dot-size);
+  right: var(--field-daycell-dot-right);
+  top: var(--field-daycell-dot-top);
+}
+
+.sdDayCell2__schedule {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--field-daycell-schedule-gap);
+  align-items: flex-start;
+  padding-right: var(--field-daycell-schedule-pr);
+  box-sizing: border-box;
+}
+
+.sdDayCell2__badge {
+  width: 100%;
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  overflow: clip;
+  padding: var(--field-daycell-badge-padding-y) var(--field-daycell-badge-padding-x);
+  border-radius: var(--field-daycell-badge-radius);
+  box-sizing: border-box;
+}
+
+.sdDayCell2__badge--fill {
   background: var(--color-gray-100);
 }
 
-.sdDayCell--highlight {
-  background: var(--color-primary-ghost);
-  color: var(--color-primary-default);
-  box-shadow: var(--shadow-01);
+.sdDayCell2__badge--blank {
+  background: transparent;
 }
 
-.sdDayCell--disable {
-  opacity: 0.35;
+.sdDayCell2__badgeBar {
+  width: var(--field-daycell-badge-bar-width);
+  height: var(--field-daycell-badge-bar-height);
+  background: var(--color-gray-400);
+  flex: 0 0 auto;
+}
+
+.sdDayCell2__badgeText {
+  flex: 1 1 auto;
+  min-width: 0;
+  font: var(--type-10-500);
+  line-height: 1.2;
+  color: var(--color-gray-900);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sdDayCell2__count {
+  background: var(--color-gray-200);
+  border-radius: var(--field-daycell-count-radius);
+  display: inline-flex;
+  gap: var(--field-daycell-count-gap);
+  align-items: center;
+  overflow: clip;
+  padding: var(--field-daycell-count-padding-y) var(--field-daycell-count-padding-x);
+}
+
+.sdDayCell2__plus {
+  width: var(--icon-size-plus);
+  height: var(--icon-size-plus);
+  position: relative;
+  overflow: clip;
+  flex: 0 0 auto;
+}
+
+.sdDayCell2__plus::before,
+.sdDayCell2__plus::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1px;
+  height: var(--icon-size-plus);
+  background: var(--color-gray-900);
+  transform: translate(-50%, -50%);
+}
+
+.sdDayCell2__plus::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.sdDayCell2__countNum {
+  font: var(--type-10-500);
+  line-height: 1.2;
+  color: var(--color-gray-900);
+  white-space: nowrap;
+}
+
+.sdDayCell2__scheduleBlank {
+  height: 30px;
+  width: 100%;
 }
 
 .sdAccessory {
@@ -175,9 +469,116 @@
 }
 
 .sdNoti--on .sdNoti__toggle {
-  background: #2dcb6f;
+  background: var(--color-semantic-success);
 }
 
 .sdNoti--on .sdNoti__toggle::after {
   left: 22px;
+}
+
+/* Notification (1884:123886) — tokenized, 1:1 card */
+.sdFieldNotiLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.sdFieldNotiStack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sdNotiCard {
+  width: var(--field-noti-width);
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: var(--field-noti-padding-y) var(--field-noti-padding-x);
+}
+
+.sdNotiCard--off {
+  background: var(--color-gray-white);
+}
+
+.sdNotiCard--on {
+  background: var(--field-noti-on-bg);
+}
+
+.sdNotiCard__row {
+  display: flex;
+  gap: var(--field-noti-gap);
+  align-items: flex-start;
+  width: 100%;
+}
+
+.sdNoticsIcon {
+  width: var(--field-noti-icon-size);
+  height: var(--field-noti-icon-size);
+  border-radius: 120px;
+  border: var(--field-noti-icon-border) solid var(--color-gray-200);
+  box-sizing: border-box;
+  overflow: clip;
+  flex: 0 0 auto;
+  position: relative;
+}
+
+.sdNoticsIcon__img {
+  width: var(--field-noti-icon-inner-size);
+  height: var(--field-noti-icon-inner-size);
+  position: absolute;
+  left: var(--field-noti-icon-inset);
+  top: var(--field-noti-icon-inset);
+  display: block;
+}
+
+.sdNotiCard__content {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--field-noti-content-gap);
+}
+
+.sdNotiCard__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.sdNotiCard__type {
+  font: var(--type-14-500);
+  color: var(--color-gray-600);
+}
+
+.sdNotiCard__date {
+  font: var(--type-12-400);
+  color: var(--color-gray-500);
+}
+
+.sdNotiCard__body {
+  width: 100%;
+}
+
+.sdNotiCard__text {
+  margin: 0;
+  font: var(--type-14-500);
+  color: var(--color-gray-900);
+}
+
+.sdNotiCard__input {
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  background: transparent;
+  font: var(--type-14-500);
+  color: var(--color-gray-900);
+  padding: 0;
+}
+
+.sdNotiCard__input::placeholder {
+  color: var(--color-gray-500);
+  font: var(--type-14-500);
 }

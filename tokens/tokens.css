@@ -26,10 +26,61 @@
   --color-semantic-error: #ff3b30;
   --color-semantic-accent: #fe6449;
 
+  /* Extra palette (used in demo components) */
+  --color-gray-950: #050708;
+  --color-gray-750: #4e4e4e;
+
+  --color-semantic-success: #2dcb6f;
+  --color-semantic-success-200: #6fcf97;
+  --color-semantic-success-50: #e8f8ee;
+
+  --color-semantic-info-200: #56ccf2;
+  --color-semantic-info-50: #e8f6fc;
+
+  --color-surface-daily: #edf8ff;
+  --color-surface-fitness: #eaf8f0;
+  --color-surface-schedule: #fff5eb;
+  --color-surface-habit: #f3edff;
+  --color-surface-mark: #e3f2fd;
+
+  --color-goal-1: #8fd14a;
+  --color-goal-2: #4caf50;
+  --color-goal-3: #2e7d32;
+
+  /* Badge palette */
+  --color-badge-10-bg: #fff9e0;
+  --color-badge-10-fg: #ffa30f;
+  --color-badge-20-bg: #fff4e5;
+  --color-badge-20-fg: #e65100;
+  --color-badge-30-bg: #e8f5e9;
+  --color-badge-30-fg: #1b5e20;
+
+  /* Brand */
+  --color-brand-kakao: #fee500;
+  --color-brand-kakao-fg: #191600;
+  --color-brand-apple: #000000;
+
+  /* Figma guide (dashed outline) */
+  --color-figma-guide: #9747ff;
+
   /* Icon stroke/fill — Figma Icon(46:322) · Arrow 등에서 currentColor 로 소비 */
   --icon-color-ink: var(--color-gray-900);
   --icon-color-muted: var(--color-gray-500);
   --icon-color-primary: var(--color-primary-default);
+
+  /* Icon size slots — Figma Icon(46:322) */
+  --icon-size-plus: 5px;
+  --icon-size-medium: 20px;
+  --icon-size-large: 24px;
+  --icon-size-camera: 30px;
+  --icon-size-coach-mark: 36px;
+  --icon-size-null: 40px;
+  --icon-size-score: 50px;
+
+  /* Icon strokes — from Figma vectors */
+  --icon-stroke-arrow: 1.8px;
+  --icon-stroke-check: 1.8px;
+  --icon-stroke-plus: 1px;
 
   /* Shadow — 컬러와 별개 (Shadow_Selected 23:4015, Shadow_Floating 792:3469) */
   --shadow-01: 0 2px 6px 0 #0000001a;
@@ -54,5 +105,50 @@
   --type-12-400: 400 12px/1.5 var(--font-family-sans);
   --type-10-500: 500 10px/1.2 var(--font-family-sans);
 
+  /* Field: Photo Add (792:3564) */
+  --field-photo-add-size: 100px;
+  --field-photo-add-radius: 8px;
+  --field-photo-add-padding-x: 17px;
+  --field-photo-add-padding-y: 23px;
+  --field-photo-add-content-width: 66px;
+  --field-photo-add-gap: 6px;
+
+  /* Field: Day Cell (728:5029) */
+  --field-daycell-width: 38px;
+  --field-daycell-height: 80px;
+  --field-daycell-radius: 100px;
+  --field-daycell-gap: 2px;
+  --field-daycell-mark-gap: 6px;
+  --field-daycell-mark-height: 24px;
+  --field-daycell-mark-padding-x: 7px;
+  --field-daycell-mark-inner-gap: 10px;
+  --field-daycell-dot-size: 6px;
+  --field-daycell-dot-right: 2.5px;
+  --field-daycell-dot-top: -1px;
+  --field-daycell-schedule-gap: 2px;
+  --field-daycell-schedule-pr: 4px;
+
+  --field-daycell-badge-radius: 2px;
+  --field-daycell-badge-padding-x: 2px;
+  --field-daycell-badge-padding-y: 1px;
+  --field-daycell-badge-bar-width: 2px;
+  --field-daycell-badge-bar-height: 10px;
+
+  --field-daycell-count-radius: 4px;
+  --field-daycell-count-gap: 1px;
+  --field-daycell-count-padding-x: 2px;
+  --field-daycell-count-padding-y: 1px;
+
+  /* Field: Notification (1884:123886) */
+  --field-noti-width: 375px;
+  --field-noti-padding-x: 16px;
+  --field-noti-padding-y: 12px;
+  --field-noti-gap: 10px;
+  --field-noti-content-gap: 8px;
+  --field-noti-icon-size: 24px;
+  --field-noti-icon-inset: 3.75px;
+  --field-noti-icon-inner-size: 16px;
+  --field-noti-icon-border: 0.5px;
+  --field-noti-on-bg: #fff5ec; /* Notification */
 
 }

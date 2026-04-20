@@ -10,13 +10,13 @@
 }
 
 .sdIconArrow--lg {
-  width: 24px;
-  height: 24px;
+  width: var(--icon-size-large);
+  height: var(--icon-size-large);
 }
 
 .sdIconArrow--md {
-  width: 20px;
-  height: 20px;
+  width: var(--icon-size-medium);
+  height: var(--icon-size-medium);
 }
 
 .sdIconArrow svg {
@@ -26,37 +26,32 @@
 
 .sdIconCheck {
   position: relative;
-  width: 20px;
-  height: 20px;
+  width: var(--icon-size-medium);
+  height: var(--icon-size-medium);
   flex-shrink: 0;
 }
 
-.sdIconCheck__ring {
+.sdIconCheck__ellipse {
   position: absolute;
   inset: 0;
-  border-radius: 50%;
-  border: 1.5px solid var(--color-gray-300);
-  background: var(--color-gray-white);
-  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-.sdIconCheck--true .sdIconCheck__ring {
-  border-color: var(--color-primary-default);
-  background: var(--color-primary-default);
-}
-
-.sdIconCheck__mark {
+.sdIconCheck__vectorWrap {
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: calc(50% - 0.5px);
   width: 10px;
   height: 7px;
-  transform: translate(-50%, -58%);
-  opacity: 0;
+  transform: translate(-50%, -50%);
 }
 
-.sdIconCheck--true .sdIconCheck__mark {
-  opacity: 1;
+.sdIconCheck__vector {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .sdIconOnboarding {
@@ -87,18 +82,18 @@
 }
 
 .sdIconCal--habit.sdIconCal--on {
-  background: #6fcf97;
+  background: var(--color-semantic-success-200);
 }
 .sdIconCal--habit.sdIconCal--off {
-  background: #e8f8ee;
+  background: var(--color-semantic-success-50);
   color: var(--color-gray-500);
 }
 
 .sdIconCal--fitness.sdIconCal--on {
-  background: #56ccf2;
+  background: var(--color-semantic-info-200);
 }
 .sdIconCal--fitness.sdIconCal--off {
-  background: #e8f6fc;
+  background: var(--color-semantic-info-50);
   color: var(--color-gray-500);
 }
 
@@ -159,9 +154,69 @@
   height: 22px;
 }
 
+.sdIconMisc__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.sdIconAsset__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.sdIconFrame {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--icon-size-large);
+  height: var(--icon-size-large);
+  flex: 0 0 auto;
+}
+
+.sdIconFrame--md {
+  width: var(--icon-size-medium);
+  height: var(--icon-size-medium);
+}
+
+.sdIconFrame--camera {
+  width: var(--icon-size-camera);
+  height: var(--icon-size-camera);
+}
+
+.sdIconFrame--coach {
+  width: var(--icon-size-coach-mark);
+  height: var(--icon-size-coach-mark);
+}
+
+.sdIconFrame--null {
+  width: var(--icon-size-null);
+  height: var(--icon-size-null);
+}
+
+.sdIconFrame--score {
+  width: var(--icon-size-score);
+  height: var(--icon-size-score);
+}
+
+.sdIconStack {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.sdIconStack > img {
+  position: absolute;
+  inset: 0;
+  object-fit: contain;
+}
+
 .sdIconPlus {
-  width: 5px;
-  height: 5px;
+  width: var(--icon-size-plus);
+  height: var(--icon-size-plus);
   position: relative;
   color: var(--icon-color-muted);
 }
@@ -178,13 +233,13 @@
 }
 
 .sdIconPlus::before {
-  width: 5px;
-  height: 1px;
+  width: var(--icon-size-plus);
+  height: var(--icon-stroke-plus);
 }
 
 .sdIconPlus::after {
-  width: 1px;
-  height: 5px;
+  width: var(--icon-stroke-plus);
+  height: var(--icon-size-plus);
 }
 
 .sdIconSns {
@@ -199,12 +254,12 @@
 }
 
 .sdIconSns--kakao {
-  background: #fee500;
-  color: #191600;
+  background: var(--color-brand-kakao);
+  color: var(--color-brand-kakao-fg);
 }
 
 .sdIconSns--apple {
-  background: #000;
+  background: var(--color-brand-apple);
 }
 
 .sdIconScore {

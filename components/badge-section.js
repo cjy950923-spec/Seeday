@@ -6,6 +6,8 @@
  * https://www.figma.com/design/j0r11Ts2NxR6wiuOQKR7Xz/Seeds-The-Day-Project---Seeday?node-id=64-616&m=dev
  */
 
+import { iconAssets } from "../tokens/icon.js";
+
 export const FIGMA_BADGE = {
   nodeId: "Figma link",
   url: "https://www.figma.com/design/j0r11Ts2NxR6wiuOQKR7Xz/Seeds-The-Day-Project---Seeday?node-id=64-616&m=dev",
@@ -37,10 +39,7 @@ export const FIGMA_GOAL_DAY = {
   url: "https://www.figma.com/design/j0r11Ts2NxR6wiuOQKR7Xz/Seeds-The-Day-Project---Seeday?node-id=2281-141391&m=dev",
 };
 
-const GOAL_DAY_MARK_SRC = new URL(
-  "../assets/goal-day-calendar-mark-daily-on.svg",
-  import.meta.url,
-).href;
+const GOAL_DAY_MARK_SRC = new URL(`../${iconAssets.calendarMarkDailyOn}`, import.meta.url).href;
 
 export const BADGE_VARIANTS = {
   bedge: { state: ["10일", "20일", "30일"] },

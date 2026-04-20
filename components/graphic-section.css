@@ -15,16 +15,16 @@
 }
 
 .sdGfxProfile--daily {
-  background: #edf8ff;
+  background: var(--color-surface-daily);
 }
 .sdGfxProfile--fitness {
-  background: #eaf8f0;
+  background: var(--color-surface-fitness);
 }
 .sdGfxProfile--schedule {
-  background: #fff5eb;
+  background: var(--color-surface-schedule);
 }
 .sdGfxProfile--habit {
-  background: #f3edff;
+  background: var(--color-surface-habit);
 }
 
 .sdGfxGoal {
@@ -39,13 +39,13 @@
 }
 
 .sdGfxGoal--1 {
-  background: #8fd14a;
+  background: var(--color-goal-1);
 }
 .sdGfxGoal--2 {
-  background: #4caf50;
+  background: var(--color-goal-2);
 }
 .sdGfxGoal--3 {
-  background: #2e7d32;
+  background: var(--color-goal-3);
 }
 
 .sdGfxEmotion {
@@ -96,7 +96,7 @@
   width: 50px;
   height: 50px;
   border-radius: 10px;
-  background: #e3f2fd;
+  background: var(--color-surface-mark);
   display: inline-flex;
   align-items: center;
   justify-content: center;

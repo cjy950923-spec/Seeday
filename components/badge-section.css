@@ -39,20 +39,20 @@
 
 /* State=10일 — 64:620 */
 .sdBedge--10 {
-  background: #fff9e0;
-  color: #ffa30f;
+  background: var(--color-badge-10-bg);
+  color: var(--color-badge-10-fg);
 }
 
 /* State=20일 — 555:8667 */
 .sdBedge--20 {
-  background: #fff4e5;
-  color: #e65100;
+  background: var(--color-badge-20-bg);
+  color: var(--color-badge-20-fg);
 }
 
 /* State=30일 — 555:8666 */
 .sdBedge--30 {
-  background: #e8f5e9;
-  color: #1b5e20;
+  background: var(--color-badge-30-bg);
+  color: var(--color-badge-30-fg);
 }
 
 /* Figma frame 555:8668 — 88×133, dashed, 심볼 (20,20)(20,56)(20,91) */
@@ -69,7 +69,7 @@
   height: 133px;
   box-sizing: border-box;
   flex-shrink: 0;
-  border: 1px dashed #9747ff;
+  border: 1px dashed var(--color-figma-guide);
   background: var(--color-gray-white);
 }
 
@@ -170,7 +170,7 @@
   box-sizing: border-box;
   overflow: hidden;
   font: var(--type-10-500);
-  color: #212121;
+  color: var(--color-gray-900);
 }
 
 .sdSchedule--fill {
@@ -178,7 +178,7 @@
   min-height: 14px;
   padding: 1px 2px;
   border-radius: 2px;
-  background: #f5f5f5;
+  background: var(--color-gray-100);
 }
 
 .sdSchedule--blank {
@@ -193,7 +193,7 @@
   min-height: 14px;
   padding: 1px 2px;
   border-radius: 4px;
-  background: #eee;
+  background: var(--color-gray-200);
   width: max-content;
 }
 
@@ -202,7 +202,7 @@
   height: 10px;
   flex-shrink: 0;
   border-radius: 1px;
-  background: #bdbdbd;
+  background: var(--color-gray-400);
 }
 
 .sdSchedule__labelWrap {
@@ -235,7 +235,7 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  background: #212121;
+  background: var(--color-gray-900);
 }
 
 .sdSchedule__plus::before {

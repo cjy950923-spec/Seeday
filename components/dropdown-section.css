@@ -59,15 +59,15 @@
 }
 
 .sdDropGlyph--daily {
-  background: #c8e6c9;
+  background: var(--color-badge-30-bg);
 }
 
 .sdDropGlyph--fitness {
-  background: #b3e5fc;
+  background: var(--color-surface-mark);
 }
 
 .sdDropGlyph--habit {
-  background: #e1bee7;
+  background: var(--color-surface-habit);
 }
 
 .sdLongPress {

@@ -164,15 +164,15 @@
 }
 
 .sd879ModalDayType__avatar--exercise {
-  background: #eaf1f8;
+  background: var(--color-surface-daily);
 }
 
 .sd879ModalDayType__avatar--habit {
-  background: #eef8f0;
+  background: var(--color-surface-fitness);
 }
 
 .sd879ModalDayType__avatar--schedule {
-  background: #fff5eb;
+  background: var(--color-surface-schedule);
 }
 
 .sd879ModalDayType__avatarClip {
