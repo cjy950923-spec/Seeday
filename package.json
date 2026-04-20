@@ -1,0 +1,14 @@
+{
+  "name": "seeday-design-system",
+  "version": "1.0.0",
+  "description": "Seedday Design System Project",
+  "main": "viewer.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve ."
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}
