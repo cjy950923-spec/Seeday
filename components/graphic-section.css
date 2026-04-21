@@ -2,51 +2,7 @@
  * Figma: Graphic section — node 552:1979 (illustration-heavy; structural previews).
  */
 
-.sdGfxProfile {
-  width: 50px;
-  height: 50px;
-  border-radius: 100px;
-  overflow: hidden;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font: var(--type-10-500);
-  color: var(--color-gray-600);
-}
-
-.sdGfxProfile--daily {
-  background: var(--color-surface-daily);
-}
-.sdGfxProfile--fitness {
-  background: var(--color-surface-fitness);
-}
-.sdGfxProfile--schedule {
-  background: var(--color-surface-schedule);
-}
-.sdGfxProfile--habit {
-  background: var(--color-surface-habit);
-}
-
-.sdGfxGoal {
-  width: 56px;
-  height: 56px;
-  border-radius: 16px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font: var(--type-12-500);
-  color: var(--color-gray-white);
-}
-
-.sdGfxGoal--1 {
-  background: var(--color-goal-1);
-}
-.sdGfxGoal--2 {
-  background: var(--color-goal-2);
-}
-.sdGfxGoal--3 {
-  background: var(--color-goal-3);
-}
+/* NOTE: Profile/Record, Profile/Goal, Fitness Mark are tokenized PNGs now. */
 
 .sdGfxEmotion {
   border-radius: 50%;
@@ -92,17 +48,7 @@
   white-space: pre-line;
 }
 
-.sdGfxMark {
-  width: 50px;
-  height: 50px;
-  border-radius: 10px;
-  background: var(--color-surface-mark);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font: var(--type-10-500);
-  color: var(--color-gray-700);
-}
+/* NOTE: Fitness Record Mark is tokenized PNG now. */
 
 .sdGfxIllu {
   width: 120px;
@@ -130,4 +76,26 @@
   justify-content: center;
   font: var(--type-12-500);
   color: var(--color-primary-default);
+}
+
+/* Tokenized graphics (whole-node exports) */
+.sdGfxToken__img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.sdGfxToken__fallback {
+  border-radius: 12px;
+  background: var(--color-gray-100);
+  border: 1px dashed var(--color-gray-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: var(--type-10-500);
+  color: var(--color-gray-500);
+  box-sizing: border-box;
+  text-align: center;
+  padding: 8px;
 }

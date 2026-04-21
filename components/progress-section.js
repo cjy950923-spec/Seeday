@@ -63,17 +63,17 @@ export function mountProgressSection(container) {
   a.target = "_blank";
   a.rel = "noopener noreferrer";
   a.textContent = "Open in Figma";
-  meta.append(`${FIGMA_PROGRESS.nodeId} · `, a);
+  meta.append(`Figma Link · `, a);
   container.appendChild(meta);
   container.appendChild(h("h2", "figma-section__h2", "Progress"));
 
-  appendInteractiveSubsection(container, "Progress Bar_5 Step — State", {
+  appendInteractiveSubsection(container, "Progress Bar_5 Step", {
     states: PROGRESS_VARIANTS.bar5.state,
     formatLabel: (s) => `State=${s}`,
     render: (s) => bar5(s),
   });
 
-  appendInteractiveSubsection(container, "Progress Bar_2 Step — State", {
+  appendInteractiveSubsection(container, "Progress Bar_2 Step", {
     states: PROGRESS_VARIANTS.bar2.state,
     formatLabel: (s) => `State=${s}`,
     render: (s) => bar2(s),

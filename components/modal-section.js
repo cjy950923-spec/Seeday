@@ -184,18 +184,18 @@ export function mountModalSection(container) {
   a.target = "_blank";
   a.rel = "noopener noreferrer";
   a.textContent = "Open in Figma";
-  meta.append(`${FIGMA_MODAL_SECTION.nodeId} · `, a);
+  meta.append(`Figma Link · `, a);
   container.appendChild(meta);
   container.appendChild(h("h2", "figma-section__h2", "Modal"));
 
   mountModalSubsection(
     container,
-    `Modal · 확인 / 취소 (${FIGMA_MODAL_CONFIRM.nodeId})`,
+    "확인 / 취소",
     createModal879Confirm(),
   );
   mountModalSubsection(
     container,
-    `Modal · 하루 유형 선택 (${FIGMA_MODAL_DAY_TYPE.nodeId})`,
+    "하루 유형 선택",
     createModal879DayType(),
   );
 }

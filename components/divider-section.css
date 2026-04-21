@@ -16,6 +16,23 @@
   background: var(--color-gray-300);
 }
 
+.sdDevinderRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center; /* 가로 Divider가 세로 Divider의 중앙에 오도록 */
+  justify-content: space-between;
+  gap: 28px 48px;
+  width: 100%;
+}
+
+.sdDevinderCol {
+  flex: 1 1 260px;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .sdDevinderNote {
   font: var(--type-12-400);
   color: var(--color-gray-500);

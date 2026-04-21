@@ -14,6 +14,26 @@
   box-shadow: var(--shadow-01);
 }
 
+.sdToast--editable {
+  justify-content: flex-start;
+}
+
+.sdToast__input {
+  width: auto;
+  min-width: 1px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  padding: 0;
+  margin: 0;
+}
+
+.sdToast__input::placeholder {
+  color: rgba(255, 255, 255, 0.85);
+}
+
 .sdTalk {
   display: inline-flex;
   flex-direction: column;
@@ -29,6 +49,22 @@
   color: var(--color-gray-900);
 }
 
+.sdTalk__input {
+  width: auto;
+  min-width: 1px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  padding: 0;
+  margin: 0;
+}
+
+.sdTalk__input::placeholder {
+  color: var(--color-gray-400);
+}
+
 .sdTalk__tail {
   margin-left: 20px;
   width: 0;
@@ -36,4 +72,66 @@
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
   border-top: 9px solid var(--color-gray-white);
+}
+
+/* Alert section — board + demo layout helpers */
+.sdAlertBoard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.sdAlertBoard__item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.sdAlertDemoHint {
+  margin: 0;
+  max-width: 420px;
+  font: var(--type-12-400);
+  color: var(--color-gray-600);
+}
+
+/* Alert section demo alignment (center with left board) */
+.sdAlertSubsection .sdAlertDemoRow {
+  align-items: center;
+  gap: 18px 32px;
+}
+
+.sdAlertSubsection .sdAlertDemoCol {
+  align-items: center;
+  text-align: center;
+}
+
+.sdAlertSubsection .sdBtnDemo__col--board.sdAlertDemoCol {
+  flex: 0 0 auto;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.sdAlertSubsection .sdBtnDemo__colTitle {
+  width: 100%;
+  text-align: center;
+}
+
+/* Hidden measurer for editable inputs (keeps paddings constant, grows with text) */
+.sdAlertSizer {
+  position: absolute;
+  visibility: hidden;
+  white-space: pre;
+  pointer-events: none;
+  left: -9999px;
+  top: -9999px;
+}
+
+.sdAlertSizer--toast {
+  font: var(--type-14-500);
+}
+
+.sdAlertSizer--talk {
+  font: var(--type-14-600);
 }

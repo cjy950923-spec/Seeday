@@ -264,7 +264,7 @@ export function mountBadgeSection(container) {
   a.target = "_blank";
   a.rel = "noopener noreferrer";
   a.textContent = "Open in Figma";
-  meta.append(`${FIGMA_BADGE.nodeId} · `, a);
+  meta.append(`Figma Link · `, a);
   container.appendChild(meta);
   container.appendChild(h("h2", "figma-section__h2", "Badge"));
 

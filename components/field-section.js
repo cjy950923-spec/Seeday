@@ -225,7 +225,7 @@ export function mountFieldSection(container) {
   a.target = "_blank";
   a.rel = "noopener noreferrer";
   a.textContent = "Open in Figma";
-  meta.append(`${FIGMA_FIELD.nodeId} · `, a);
+  meta.append(`Figma Link · `, a);
   container.appendChild(meta);
   container.appendChild(h("h2", "figma-section__h2", "Field"));
 
@@ -233,7 +233,7 @@ export function mountFieldSection(container) {
   // - 좌측: 2×2 grid로 4개 상태 고정 표시
   // - 우측: 클릭으로 상태 순환 + 실제 타이핑 가능한 데모
   const textInputSub = h("div", "figma-subsection");
-  textInputSub.appendChild(h("h3", "figma-subsection__title", "Text Input Field — Variants + Demo"));
+  textInputSub.appendChild(h("h3", "figma-subsection__title", "Text Input Field"));
 
   const layout = h("div", "sdFieldTextInputLayout");
   const left = h("div", "sdFieldTextInputLeft");
@@ -370,7 +370,7 @@ export function mountFieldSection(container) {
   // - 좌측: Default만 고정
   // - 우측: 실제 입력 가능한 데모 (입력 시작 => Pressed) + 글자수 카운터(0/1000)
   const contentsSub = h("div", "figma-subsection");
-  contentsSub.appendChild(h("h3", "figma-subsection__title", "Contents Text Input Field — Default + Demo"));
+  contentsSub.appendChild(h("h3", "figma-subsection__title", "Contents Text Input Field"));
 
   const contentsLayout = h("div", "sdFieldContentsLayout");
   const contentsLeft = h("div", "sdFieldContentsLeft");
@@ -475,7 +475,7 @@ export function mountFieldSection(container) {
 
   // Day Cell (728:5029) — 요청: 데모 없이 3개 variant 정적 나열
   const daySub = h("div", "figma-subsection");
-  daySub.appendChild(h("h3", "figma-subsection__title", "Day Cell — variants (static)"));
+  daySub.appendChild(h("h3", "figma-subsection__title", "Day Cell"));
   const dayRow = h("div", "figma-matrix");
   ["Default", "Highlight", "Disable"].forEach((st) => {
     const cell = h("div", "figma-cell");
@@ -491,7 +491,7 @@ export function mountFieldSection(container) {
   // - 좌측: Off/On 2개 variant를 위/아래 정적 배치
   // - 우측: State=On 에서 Notification Text를 실제 입력 가능한 데모
   const notiSub = h("div", "figma-subsection");
-  notiSub.appendChild(h("h3", "figma-subsection__title", "Notification — variants + demo"));
+  notiSub.appendChild(h("h3", "figma-subsection__title", "Notification"));
 
   const notiLayout = h("div", "sdFieldNotiLayout");
   const notiLeft = h("div", "sdFieldNotiLeft");

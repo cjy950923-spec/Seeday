@@ -18,6 +18,11 @@
   min-width: min(100%, 343px);
 }
 
+/* Card 섹션: 컴포넌트 ↔ 데모 간격은 조금 더 타이트하게 */
+.sdCard64DemoRow {
+  gap: 20px 32px;
+}
+
 /* Card/Record_Type — Figma CardRecordType */
 .sdCardRecord {
   width: 343px;

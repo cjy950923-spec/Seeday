@@ -157,7 +157,7 @@ export function mountIconSection(container) {
   container.innerHTML = "";
   container.appendChild(
     h("p", "figma-section__meta", null, [
-      `${FIGMA_ICON.nodeId} · `,
+      "Figma Link · ",
       (() => {
         const a = document.createElement("a");
         a.href = FIGMA_ICON.url;
@@ -251,7 +251,7 @@ export function mountIconSection(container) {
       ]),
     },
   ];
-  appendSubsection("Line icons — 5×5 static list", makeMatrix(lineIconItems, { grid5: true }));
+  appendSubsection("Line icons", makeMatrix(lineIconItems, { grid5: true }));
 
   // Variable icons — 정적으로 모든 상태 표시
   // 요청 순서:
@@ -280,10 +280,10 @@ export function mountIconSection(container) {
       node: h("span", `sdIconArrow sdIconArrow--${size === "Large" ? "lg" : "md"}`, null, [iconImg(iconAssets[key])]),
     };
   });
-  appendSubsection("Arrow — direction × size (static)", makeMatrix(arrowItems, { grid4: true }));
+  appendSubsection("Arrow", makeMatrix(arrowItems, { grid4: true }));
 
   const checkItems = ICON_VARIANTS.check.state.map((st) => ({ label: `State=${st}`, node: iconCheck(st) }));
-  appendSubsection("Check — State=False | True (static)", makeMatrix(checkItems));
+  appendSubsection("Check", makeMatrix(checkItems));
 
   const snsItems = ICON_VARIANTS.sns.type.map((t) => ({
     label: `Type=${t}`,
@@ -291,14 +291,14 @@ export function mountIconSection(container) {
       iconImg(t === "카카오" ? iconAssets.snsKakao : iconAssets.snsApple),
     ]),
   }));
-  appendSubsection("SNS Icon — Type (static)", makeMatrix(snsItems));
+  appendSubsection("SNS Icon", makeMatrix(snsItems));
 
   // Excluded from 5×5, but still shown as static “all states”
   const onboardingItems = ICON_VARIANTS.onboarding.state.map((st) => ({
     label: `State=${st}`,
     node: iconOnboarding(st),
   }));
-  appendSubsection("Onboarding — all states (static)", makeMatrix(onboardingItems));
+  appendSubsection("Onboarding", makeMatrix(onboardingItems));
 
   // 요청: 위 1줄=On, 아래 1줄=Off
   const calItemsOn = [
@@ -311,7 +311,7 @@ export function mountIconSection(container) {
     { label: "운동 · Off", node: h("span", "sdIconMisc", null, [iconImg(iconAssets.calendarMarkFitnessOff)]) },
     { label: "일상 · Off", node: h("span", "sdIconMisc", null, [iconImg(iconAssets.calendarMarkDailyOff)]) },
   ];
-  appendSubsection("Calendar_Mark — type × on/off (static)", makeMatrix([...calItemsOn, ...calItemsOff], { grid3: true }));
+  appendSubsection("Calendar_Mark", makeMatrix([...calItemsOn, ...calItemsOff], { grid3: true }));
 
   const noticsItems = [
     { label: "Daily", node: h("span", "sdIconMisc", null, [iconImg(iconAssets.noticsDaily)]) },
@@ -319,7 +319,7 @@ export function mountIconSection(container) {
     { label: "Habit", node: h("span", "sdIconMisc", null, [iconImg(iconAssets.noticsHabit)]) },
     { label: "Project", node: h("span", "sdIconMisc", null, [iconImg(iconAssets.noticsProject)]) },
   ];
-  appendSubsection("Notics Icon — all types (static)", makeMatrix(noticsItems));
+  appendSubsection("Notics Icon", makeMatrix(noticsItems));
 
   // 요청: 위 1줄=On, 아래 1줄=Off
   const filterItemsOn = [
@@ -342,7 +342,7 @@ export function mountIconSection(container) {
   );
 
   const nullItems = [{ label: "Null (40×40)", node: h("span", "sdIconMisc", null, [iconImg(iconAssets.nullIcon)]) }];
-  appendSubsection("Null Icon (static)", makeMatrix(nullItems));
+  appendSubsection("Null Icon", makeMatrix(nullItems));
 
   const scoreItems = [
     {
@@ -352,5 +352,5 @@ export function mountIconSection(container) {
     { label: "Success", node: h("span", "sdIconScore", null, [iconImg(iconAssets.resultScoreSuccess)]) },
     { label: "Total", node: h("span", "sdIconScore", null, [iconImg(iconAssets.resultScoreTotal)]) },
   ];
-  appendSubsection("Result Score — all types (static)", makeMatrix(scoreItems));
+  appendSubsection("Result Score", makeMatrix(scoreItems));
 }

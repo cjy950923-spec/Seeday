@@ -83,12 +83,12 @@ export const iconAssets = {
   snsKakao: "assets/figma-icons/sns-kakao-export.svg",
   snsApple: "assets/figma-icons/sns-apple-export.svg",
 
-  // Onboarding (30×30) — raster assets from full-node export
-  onboardingRecord: "assets/figma-icons/onboarding-record.png",
-  onboardingNickname: "assets/figma-icons/onboarding-nickname.png",
-  onboardingBirthday: "assets/figma-icons/onboarding-birthday.png",
-  onboardingGoal: "assets/figma-icons/onboarding-goal.png",
-  onboardingNotification: "assets/figma-icons/onboarding-notification.png",
+  // Onboarding (30×30) — full-node SVG exports (1:1)
+  onboardingRecord: "assets/figma-icons/onboarding-record.svg",
+  onboardingNickname: "assets/figma-icons/onboarding-nickname.svg",
+  onboardingBirthday: "assets/figma-icons/onboarding-birthday.svg",
+  onboardingGoal: "assets/figma-icons/onboarding-goal.svg",
+  onboardingNotification: "assets/figma-icons/onboarding-notification.svg",
 
   // Null Icon (40×40)
   nullIcon: "assets/figma-icons/null-icon-export.svg",

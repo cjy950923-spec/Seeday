@@ -2,6 +2,8 @@
  * Figma Card 뷰어 — Record_Type, Onboarding_Goal, Date/Fitness Card, List Cards, Habit Card
  */
 
+import { graphicAssets } from "../tokens/graphic.js";
+
 export const FIGMA_CARD = {
   nodeId: "64:456",
   url: "https://www.figma.com/design/j0r11Ts2NxR6wiuOQKR7Xz/Seeds-The-Day-Project---Seeday?node-id=64-456&m=dev",
@@ -71,6 +73,10 @@ function assetCardRecord(file) {
 
 function assetFigmaCard(file) {
   return new URL(`../assets/card-figma/${file}`, import.meta.url).href;
+}
+
+function graphicAssetUrl(assetPath) {
+  return new URL(`../${assetPath}`, import.meta.url).href;
 }
 
 function imgAsset(src, className) {
@@ -163,11 +169,10 @@ export function createCardRecordTypeFrame64() {
 function mountCardRecordType64Block(container) {
   const sub = h("div", "figma-subsection");
   const h3 = h("h3", "figma-subsection__title", "");
-  h3.append("Card/Record_Type · ", figmaLink(FIGMA_CARD_RECORD_TYPE.url, FIGMA_CARD_RECORD_TYPE.nodeId));
+  h3.append("Card/Record_Type");
   sub.appendChild(h3);
   const row = h("div", "sdBtnDemoRow sdCard64DemoRow");
   const colLeft = h("div", "sdBtnDemo__col sdBtnDemo__col--board");
-  colLeft.appendChild(h("p", "sdBtnDemo__colTitle", "정적"));
   colLeft.appendChild(createCardRecordTypeFrame64());
   const colRight = h("div", "sdBtnDemo__col sdBtnDemo__col--live");
   colRight.appendChild(h("p", "sdBtnDemo__colTitle", "예시"));
@@ -277,11 +282,10 @@ function createOnboardingGoalBoard555() {
 function mountOnboardingGoal555Block(container) {
   const sub = h("div", "figma-subsection");
   const h3 = h("h3", "figma-subsection__title", "");
-  h3.append("Card/Onbording_Goal · ", figmaLink(FIGMA_CARD_ONBOARDING_GOAL.url, FIGMA_CARD_ONBOARDING_GOAL.nodeId));
+  h3.append("Card/Onbording_Goal");
   sub.appendChild(h3);
   const row = h("div", "sdBtnDemoRow sdCard64DemoRow");
   const colLeft = h("div", "sdBtnDemo__col sdBtnDemo__col--board");
-  colLeft.appendChild(h("p", "sdBtnDemo__colTitle", "정적"));
   colLeft.appendChild(createOnboardingGoalBoard555());
   const colRight = h("div", "sdBtnDemo__col sdBtnDemo__col--live");
   colRight.appendChild(h("p", "sdBtnDemo__colTitle", "예시"));
@@ -509,11 +513,10 @@ function appendCardLiveTypePhotoDemo(colRight, cfg) {
 function mountDateCard728Block(container) {
   const sub = h("div", "figma-subsection");
   const h3 = h("h3", "figma-subsection__title", "");
-  h3.append("Date Card · ", figmaLink(FIGMA_CARD_DATE.url, FIGMA_CARD_DATE.nodeId));
+  h3.append("Date Card");
   sub.appendChild(h3);
   const row = h("div", "sdBtnDemoRow sdCard64DemoRow");
   const colLeft = h("div", "sdBtnDemo__col sdBtnDemo__col--board");
-  colLeft.appendChild(h("p", "sdBtnDemo__colTitle", "정적"));
   colLeft.appendChild(createDateCardBoard728());
   const colRight = h("div", "sdBtnDemo__col sdBtnDemo__col--live");
   colRight.appendChild(h("p", "sdBtnDemo__colTitle", "예시"));
@@ -535,10 +538,13 @@ function mountDateCard728Block(container) {
 function fitnessMark1327(kind) {
   const wrap = h("div", "sd1327Fitness__mark");
   const inner = h("div", "sd1327Fitness__markInner");
-  let file = "fitness-mark-time.svg";
-  if (kind === "몸무게") file = "fitness-mark-weight.svg";
-  if (kind === "걸음 수") file = "fitness-mark-steps.svg";
-  inner.appendChild(imgAsset(assetFigmaCard(file), "sd1327Fitness__markImg"));
+  const asset =
+    kind === "몸무게"
+      ? graphicAssets.fitnessMarkWeight
+      : kind === "걸음 수"
+        ? graphicAssets.fitnessMarkSteps
+        : graphicAssets.fitnessMarkTime;
+  inner.appendChild(imgAsset(graphicAssetUrl(asset), "sd1327Fitness__markImg"));
   wrap.appendChild(inner);
   return wrap;
 }
@@ -601,7 +607,9 @@ export function createFitnessCard1327(props = {}) {
   head.setAttribute("data-name", "Fitness");
   const iconHost = h("div", "sd1327FitnessCard__iconHost");
   const iconInner = h("div", "sd1327FitnessCard__iconInner");
-  iconInner.appendChild(imgAsset(assetFigmaCard("fitness-icon-run.svg"), "sd1327FitnessCard__iconImg"));
+  iconInner.appendChild(
+    imgAsset(graphicAssetUrl(graphicAssets.fitnessSmallRunning), "sd1327FitnessCard__iconImg"),
+  );
   iconHost.appendChild(iconInner);
   const titleRow = h("div", "sd1327FitnessCard__titleRow");
   titleRow.setAttribute("data-name", "Title");
@@ -668,11 +676,10 @@ function createFitnessCardBoard1327() {
 function mountFitnessCard1327Block(container) {
   const sub = h("div", "figma-subsection");
   const h3 = h("h3", "figma-subsection__title", "");
-  h3.append("Fitness Card · ", figmaLink(FIGMA_CARD_FITNESS.url, FIGMA_CARD_FITNESS.nodeId));
+  h3.append("Fitness Card");
   sub.appendChild(h3);
   const row = h("div", "sdBtnDemoRow sdCard64DemoRow");
   const colLeft = h("div", "sdBtnDemo__col sdBtnDemo__col--board");
-  colLeft.appendChild(h("p", "sdBtnDemo__colTitle", "정적"));
   colLeft.appendChild(createFitnessCardBoard1327());
   const colRight = h("div", "sdBtnDemo__col sdBtnDemo__col--live");
   colRight.appendChild(h("p", "sdBtnDemo__colTitle", "예시"));
@@ -695,7 +702,7 @@ function createFitnessSmall1019() {
   const wrap = h("div", "sd1019FitnessList__glyph");
   wrap.setAttribute("data-node-id", "1019:24417");
   const inner = h("div", "sd1019FitnessList__glyphInner");
-  inner.appendChild(imgAsset(assetFigmaCard("fitness-icon-run.svg"), "sd1019FitnessList__glyphImg"));
+  inner.appendChild(imgAsset(graphicAssetUrl(graphicAssets.fitnessSmallRunning), "sd1019FitnessList__glyphImg"));
   wrap.appendChild(inner);
   return wrap;
 }
@@ -735,10 +742,9 @@ export function createFitnessListCard1019(props = {}) {
 function mountFitnessListCard1019Block(container) {
   const sub = h("div", "figma-subsection");
   const h3 = h("h3", "figma-subsection__title", "");
-  h3.append("Fitness List Card · ", figmaLink(FIGMA_CARD_FITNESS_LIST.url, FIGMA_CARD_FITNESS_LIST.nodeId));
+  h3.append("Fitness List Card");
   sub.appendChild(h3);
   const col = h("div", "sdBtnDemo__col sdBtnDemo__col--board");
-  col.appendChild(h("p", "sdBtnDemo__colTitle", "정적"));
   const stack = h("div", "sdCardStaticStack");
   stack.setAttribute("data-figma-node", FIGMA_CARD_FITNESS_LIST.nodeId);
   stack.appendChild(createFitnessListCard1019({ title: "운동명" }));
@@ -787,10 +793,9 @@ export function createHabitListCard1268(props = {}) {
 function mountHabitListCard1268Block(container) {
   const sub = h("div", "figma-subsection");
   const h3 = h("h3", "figma-subsection__title", "");
-  h3.append("Habit List Card · ", figmaLink(FIGMA_CARD_HABIT_LIST.url, FIGMA_CARD_HABIT_LIST.nodeId));
+  h3.append("Habit List Card");
   sub.appendChild(h3);
   const col = h("div", "sdBtnDemo__col sdBtnDemo__col--board");
-  col.appendChild(h("p", "sdBtnDemo__colTitle", "정적"));
   const stack = h("div", "sdCardStaticStack");
   stack.setAttribute("data-figma-node", FIGMA_CARD_HABIT_LIST.nodeId);
   stack.appendChild(createHabitListCard1268({ title: "습관명" }));
@@ -876,10 +881,9 @@ function createHabitCardBoard1329() {
 function mountHabitCard1329Block(container) {
   const sub = h("div", "figma-subsection");
   const h3 = h("h3", "figma-subsection__title", "");
-  h3.append("Habit Card · ", figmaLink(FIGMA_CARD_HABIT.url, FIGMA_CARD_HABIT.nodeId));
+  h3.append("Habit Card");
   sub.appendChild(h3);
   const col = h("div", "sdBtnDemo__col sdBtnDemo__col--board");
-  col.appendChild(h("p", "sdBtnDemo__colTitle", "정적"));
   col.appendChild(createHabitCardBoard1329());
   sub.appendChild(col);
   container.appendChild(sub);
@@ -890,20 +894,8 @@ function mountHabitCard1329Block(container) {
 export function mountCardSection(container) {
   container.innerHTML = "";
   const meta = h("p", "figma-section__meta");
-  meta.append("Card · ");
-  meta.appendChild(figmaLink(FIGMA_CARD_RECORD_TYPE.url, `Record ${FIGMA_CARD_RECORD_TYPE.nodeId}`));
-  meta.append(" · ");
-  meta.appendChild(figmaLink(FIGMA_CARD_ONBOARDING_GOAL.url, FIGMA_CARD_ONBOARDING_GOAL.nodeId));
-  meta.append(" · ");
-  meta.appendChild(figmaLink(FIGMA_CARD_DATE.url, FIGMA_CARD_DATE.nodeId));
-  meta.append(" · ");
-  meta.appendChild(figmaLink(FIGMA_CARD_FITNESS.url, FIGMA_CARD_FITNESS.nodeId));
-  meta.append(" · ");
-  meta.appendChild(figmaLink(FIGMA_CARD_FITNESS_LIST.url, FIGMA_CARD_FITNESS_LIST.nodeId));
-  meta.append(" · ");
-  meta.appendChild(figmaLink(FIGMA_CARD_HABIT_LIST.url, FIGMA_CARD_HABIT_LIST.nodeId));
-  meta.append(" · ");
-  meta.appendChild(figmaLink(FIGMA_CARD_HABIT.url, FIGMA_CARD_HABIT.nodeId));
+  meta.append("Figma Link · ");
+  meta.appendChild(figmaLink(FIGMA_CARD.url, "Open in Figma"));
   container.appendChild(meta);
   container.appendChild(h("h2", "figma-section__h2", "Card"));
 

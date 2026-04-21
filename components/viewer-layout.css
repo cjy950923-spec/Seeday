@@ -3,11 +3,12 @@
  */
 
 body {
-  margin: 0;
+  margin: 0 auto;
   padding: 24px;
   font-family: var(--font-family-sans);
   background: var(--color-gray-50);
   color: var(--color-gray-900);
+  max-width: 1200px;
 }
 
 .figma-viewer__title {
@@ -69,27 +70,31 @@ body {
   flex-wrap: wrap;
   gap: 16px;
   align-items: flex-end;
+  justify-content: flex-start;
 }
 
 .figma-matrix--grid5 {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(5, minmax(0, max-content));
+  gap: 14px;
   align-items: end;
+  justify-content: start;
 }
 
 .figma-matrix--grid3 {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(3, minmax(0, max-content));
+  gap: 14px;
   align-items: end;
+  justify-content: start;
 }
 
 .figma-matrix--grid4 {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(4, minmax(0, max-content));
+  gap: 14px;
   align-items: end;
+  justify-content: start;
 }
 
 .figma-matrix--col2 {
@@ -258,3 +263,35 @@ body {
   word-break: normal;
   overflow-wrap: normal;
 }
+
+/* -------------------------------------------------------------------------- */
+/* Viewer content cleanup (design-system gallery mode)                        */
+/* -------------------------------------------------------------------------- */
+
+/* 상단 설명 문단 숨김 */
+.figma-viewer__intro {
+  display: none !important;
+}
+
+/* 4) 구현 소스 패널 숨김 */
+.figma-source-panel {
+  display: none !important;
+}
+
+/* 3) 캡션/힌트 문구 전부 숨김 */
+.figma-interactive__hint,
+.sdAlertDemoHint,
+.sdDevinderNote {
+  display: none !important;
+}
+
+/* 2) 상태/타입 표시 텍스트 숨김 */
+.figma-interactive__state,
+.sdBtnDemo__stateLine,
+.sdDropDemo__state,
+.sdDropBoard__label,
+.figma-cell > span:not([class]) {
+  display: none !important;
+}
+
+/* Card 내부 Caption은 컴포넌트 일부이므로 숨기지 않음 */

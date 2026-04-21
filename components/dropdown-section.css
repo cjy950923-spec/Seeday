@@ -34,6 +34,9 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  padding: 0;
+  border: none;
+  cursor: pointer;
 }
 
 .sdDropPill--active {
@@ -41,33 +44,71 @@
   box-sizing: border-box;
 }
 
-.sdDropGlyph {
-  width: 22px;
-  height: 22px;
-  border-radius: 6px;
-  background: var(--color-gray-200);
+.sdDropPill:focus-visible {
+  outline: 2px solid var(--color-primary-default);
+  outline-offset: 2px;
 }
 
-.sdDropGlyph--all {
-  border-radius: 50%;
-  background: conic-gradient(
-    var(--color-primary-default),
-    var(--color-gray-400),
-    var(--color-primary-surface),
-    var(--color-primary-default)
-  );
+.sdDropIcon {
+  width: 24px;
+  height: 24px;
+  display: block;
 }
 
-.sdDropGlyph--daily {
-  background: var(--color-badge-30-bg);
+/* Dropdown section demo layout */
+.sdDropDemoRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 20px 36px;
+  width: 100%;
 }
 
-.sdDropGlyph--fitness {
-  background: var(--color-surface-mark);
+.sdDropDemoCol {
+  flex: 1 1 320px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
 }
 
-.sdDropGlyph--habit {
-  background: var(--color-surface-habit);
+.sdDropDemo__colTitle {
+  margin: 0;
+  font: var(--type-12-600);
+  color: var(--color-gray-700);
+}
+
+.sdDropDemo__state {
+  margin: 0;
+  font: 600 12px/1.4 var(--font-family-sans);
+  color: var(--color-gray-800);
+}
+
+.sdDropDemo__hint {
+  margin: 0;
+  max-width: 420px;
+  font: var(--type-12-400);
+  color: var(--color-gray-600);
+}
+
+.sdDropBoard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.sdDropBoard__item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sdDropBoard__label {
+  margin: 0;
+  font: var(--type-12-600);
+  color: var(--color-gray-700);
 }
 
 .sdLongPress {
@@ -85,8 +126,18 @@
   padding: 14px 16px;
   font: var(--type-14-500);
   color: var(--color-gray-900);
+  text-align: left;
+  width: 100%;
+  background: transparent;
+  border: none;
+  margin: 0;
 }
 
 .sdLongPress__row + .sdLongPress__row {
   border-top: 1px solid var(--color-gray-100);
+}
+
+.sdLongPress__row:focus-visible {
+  outline: 2px solid var(--color-primary-default);
+  outline-offset: -2px;
 }
