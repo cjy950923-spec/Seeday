@@ -8,6 +8,7 @@
  */
 
 import { iconAssets } from "../tokens/icon.js";
+import { SdIconCheck } from "./icons/index.js";
 
 function iconAssetUrl(assetPath) {
   return new URL(`../${assetPath}`, import.meta.url).href;
@@ -99,13 +100,7 @@ function iconArrow(direction, size) {
 }
 
 function iconCheck(state) {
-  const root = h(
-    "span",
-    `sdIconFrame sdIconFrame--md sdIconCheck ${state ? "sdIconCheck--true" : "sdIconCheck--false"}`,
-    null,
-    [iconImg(state ? iconAssets.checkTrueExport : iconAssets.checkFalseExport)],
-  );
-  return root;
+  return SdIconCheck({ state, className: "sdIconFrame sdIconFrame--md" });
 }
 
 function iconOnboarding(state) {

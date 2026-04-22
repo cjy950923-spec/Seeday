@@ -1,0 +1,71 @@
+---
+description: 씨드데이 디자인 시스템 — Figma/MCP 화면 구현 시 토큰·컴포넌트·에셋 규칙
+alwaysApply: true
+---
+
+# 씨드데이 디자인 시스템 (공식 기준)
+
+`tokens/`, `assets/`, `components/`에 있는 내용이 **씨드데이 디자인 시스템의 공식 기준**이다. Figma 시안, Figma MCP, 또는 피그마 링크로 **화면 구현**을 요청받을 때 아래를 **필수**로 따른다.
+
+## 1. 재사용 최우선
+
+- 새로운 CSS를 “처음부터” 짜지 않는다. 먼저 `tokens/tokens.css`의 변수와 기존 `components/*` 섹션·패턴을 조합해 레이아웃을 맞춘다.
+- 동일한 역할이 이미 있으면 새 클래스/새 스타일 블록을 최소화하고, `viewer.html`에 연결된 섹션·토큰 사용 방식을 따른다.
+
+## 2. 에셋·아이콘
+
+- 아이콘 경로는 `tokens/icon.js` / `tokens/icon.ts`의 `iconAssets`를 기준으로 하고, 가능하면 `components/icons/index.js`에서 export하는 아이콘 컴포넌트(`SdIconCheck`, `SdIconArrow` 등)를 연결한다.
+- 그래픽/일러스트는 `tokens/graphic.js` / `tokens/graphic.ts`의 `graphicAssets`를 사용한다.
+- `assets/` 이하 경로는 토큰에 정의된 문자열만 사용한다(임의의 새 파일명 가정 금지).
+
+## 3. 가이드·프로토타입 성격
+
+- 이 코드는 **개발자와 소통용 프로토타입**이다. 인터랙션·화면 전환·세부 인터랙션 스펙은 사용자가 별도로 전달할 수 있으므로, **요청된 범위 밖**의 동작을 임의로 대량 추가하지 않는다.
+- Figma에서 화면/컴포넌트를 구현할 때 **레이어 명칭을 그대로** HTML 구조, 클래스 프리픽스, 주석, 또는 `data-figma` 등 식별 가능한 형태로 반영해, 디자인 파일과 1:1로 추적할 수 있게 한다.
+
+## 4. Figma 컴포넌트 → 디자인 시스템 매핑 (필수 절차)
+
+**코딩에 들어가기 전**에 Figma 프레임 트리를 보며, 쓰인 UI가 레포 `components/*-section`에 이미 있으면 **같은 `sd*` 클래스 + 해당 `components/*-section.css`를 쓴다.** 단독 `*.html`을 새로 만들면 [`viewer.html`](viewer.html)에 링크된 **CSS 로드 순서**를 그대로 참고한다 (`tokens/tokens.css` 먼저, 다음 섹션 CSS, 마지막에 화면 전용 `screens/*.css`).
+
+- **Button / CTA** → [`components/button-section.css`](components/button-section.css) — `.sdBtn`, `sdBtn--primary|secondary` × `sdBtn--normal|success`, iOS 토글은 `.sdToggle` / `sdToggle--on`
+- **Text Input, Contents(메모) 필드, Day Cell, Notification 행** 등 **Field** → [`components/field-section.css`](components/field-section.css) — 예: `.sdTextInputField` + `sdTextInputField__input`, `.sdContentsField` + `sdContentsField__textarea` + `sdContentsField__counter`
+- **Bottom Sheet (딤 + 하단 시트, 콘텐츠)** → [`components/bottom-sheet-section.css`](components/bottom-sheet-section.css) — 루트 `.sdBottomSheet`(`[hidden]`으로 닫힘), `sdBottomSheet__dim`, `sdBottomSheet__panel`(상·하 inset 비율은 `--sd-bottom-*` / 기본 812pt), 선택 **`sdBottomSheet__handle` + `sdBottomSheet__handleBar`**, `sdBottomSheet__nav` + `sdBottomSheet__navBack` + `sdBottomSheet__navTitle` + `sdBottomSheet__navAction`, `sdBottomSheet__body`
+- **Icon (정적/프레임)** → [`components/icon-section.css`](components/icon-section.css) + `tokens/icon.js` 경로(이미지 `data-icon` 등)
+- **드롭다운·필터 칩** → [`components/dropdown-section.css`](components/dropdown-section.css) 등, 해당 Figma 섹션과 맞는 파일을 연결
+- 화면만의 **레이아웃(375 고정, 스크롤/드래그, 헤더/상태바)** 는 **프리픽스가 붙은 얇은 래퍼**(`sd6_1` 등)에만 두고, **색·타이포·컴포넌트의 겉모양**은 토큰 + 위 `sd*`에 맡긴다.
+- Figma에만 있고 DS에 없는 모듈이면, **토큰만** 쓰고 부족한 것만 최소 클래스로 덧댄다(필요 시 이후 Field/Button 섹션에 심볼로 편입).
+
+## 5. Bottom Sheet (`sdBottomSheet`) — HTML·JS
+
+1. `tokens/tokens.css` 직후에 [`components/bottom-sheet-section.css`](components/bottom-sheet-section.css)를 링크한다(화면별 `screens/*.css`보다 **앞**).
+2. **마크업**: 화면 루트(예: `position: relative`인 폰 375 프레임) **맨 위 레이어**에 두고, 아래 **표준 골격**을 따른다. **Figma에 핸들 레이어가 없으면** `sdBottomSheet__handle`을 넣지 않는다(예: `3453:156837` — 상단 56px 헤더 직하에 본문 `padding` 16으로 리스트 `top=72` 맞춤). 핸들이 있으면 `handle` + `nav` + `body` 순으로 쌓는다.
+
+```html
+<div class="sdBottomSheet" id="..." hidden aria-hidden="true">
+  <div class="sdBottomSheet__dim"></div>
+  <div class="sdBottomSheet__panel" role="dialog" aria-modal="true" aria-labelledby="...">
+    <!-- 선택: Figma에 Handle이 있을 때만 -->
+    <!-- <div class="sdBottomSheet__handle" aria-hidden="true"><span class="sdBottomSheet__handleBar"></span></div> -->
+    <div class="sdBottomSheet__nav">...</div>
+    <div class="sdBottomSheet__body">...</div>
+  </div>
+</div>
+```
+
+3. **닫힘/열기**: 루트에 HTML `hidden`을 쓴다. `initBottomSheet(루트, { closeOnDim?, closeOnEscape? })`는 **딤 클릭**·(옵션) **Esc**로 `close()`를 호출한다. **애니메이션**: 열 때 `hidden` 제거 후 `requestAnimationFrame`으로 **`sdBottomSheet--open`** 을 붙이고, 딤은 `opacity`, 패널은 `transform: translateY`로 전환; 닫을 때 `--open` 을 먼저 제거한 뒤 패널 `transitionend` 후 `hidden`을 다시 건다. `{ open, close, isOpen, destroy }` 반환. **화면별로** “딤 + 완료만 닫기” 등이 있으면 그 화면 모듈에서 `closeOnEscape: false`·뒤로 버튼은 `close()` 미호출로 맞춘다(예: 6-1 알림 시트).
+4. **Home Indicator(하단 34pt)**: 오버레이가 떠 있는 동안(`:has(.sdBottomSheet:not([hidden]))`) `homeInd`에 **`z-index: 41`**, **`pointer-events: auto`** — 홈 인디케이터 탭이 딤으로 **스며들지 않아** 딤 탭으로 닫히지 않는다. **막대**는 `--color-gray-900`, **34pt fill** 은 패널과 같이 `--color-gray-100`. 다른 프리픽스면 동일 규칙을 복제한다.
+5. **비율**: 기본 iPhone 세로 812pt 기준 상단 48·하단 34(홈 인디케이터)를 뺀 패널 높이(730/812)를 `sdBottomSheet`에 내장했다. 다른 기기 프레임이면 루트에 `--sd-bottom-frame-h` 등을 덮어쓴다.
+
+## 참고 경로
+
+| 영역 | 위치 |
+|------|------|
+| CSS 토큰 | `tokens/tokens.css` |
+| 색/타이포/섀도우 등 TS | `tokens/*.ts` |
+| 뷰어 엔트리 | `viewer.html` |
+| 아이콘 컴포넌트 | `components/icons/index.js` |
+| Button·Toggle | `components/button-section.css` |
+| Field | `components/field-section.css` |
+| Bottom Sheet (CSS) | `components/bottom-sheet-section.css` |
+| Bottom Sheet (JS) | `components/bottom-sheet-section.mjs` |
+| Icon 프레임 | `components/icon-section.css` |

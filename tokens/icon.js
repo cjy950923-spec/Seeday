@@ -14,9 +14,14 @@ export const iconAssets = {
   arrowDownLarge: "assets/figma-icons/arrow-down-large-export.svg",
   arrowDownMedium: "assets/figma-icons/arrow-down-medium-export.svg",
 
-  // Check — full-node SVG exports (1:1)
+  // Check — full-node SVG exports (1:1) — optional preview / export-only
   checkFalseExport: "assets/figma-icons/check-false-export.svg",
   checkTrueExport: "assets/figma-icons/check-true-export.svg",
+  // Check — layered parts (Figma 64:312/64:448) — `components/icons` SdIconCheck
+  checkFalseEllipse: "assets/figma-icons/check-false-ellipse.svg",
+  checkFalseVector: "assets/figma-icons/check-false-vector.svg",
+  checkTrueEllipse: "assets/figma-icons/check-true-ellipse.svg",
+  checkTrueVector: "assets/figma-icons/check-true-vector.svg",
 
   // Calendar mark — full-node SVG exports (1:1)
   calendarMarkHabitOn: "assets/figma-icons/calendar-mark-habit-on-export.svg",

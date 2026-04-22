@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=375, initial-scale=1, viewport-fit=cover" />
+    <title>6-1. 일정 등록 기본 화면 — Seeday</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+    <link rel="stylesheet" href="tokens/tokens.css" />
+    <link rel="stylesheet" href="components/button-section.css" />
+    <link rel="stylesheet" href="components/field-section.css" />
+    <link rel="stylesheet" href="components/bottom-sheet-section.css" />
+    <link rel="stylesheet" href="screens/schedule-record-6-1.css" />
+  </head>
+  <body class="sd6_1Page">
+    <!-- Figma 3453:155338 data-node-id="3453:155338" -->
+    <div class="sd6_1" id="sd6RecordRoot" data-figma-name="6-1. 일정 등록 기본 화면" data-node-id="3453:155338">
+      <div class="sd6_1__status" data-figma-name="Native / Status Bar" data-node-id="3453:155339">
+        <span class="sd6_1__statusTime">9:41</span>
+        <div class="sd6_1__statusIcons" aria-hidden="true">100%</div>
+      </div>
+
+      <header class="sd6_1__header" data-figma-name="Header" data-node-id="3453:155340">
+        <h1 class="sd6_1__headerTitle">일정 기록</h1>
+        <button type="button" class="sd6_1__headerClose" aria-label="닫기" data-figma-name="Close" id="sd6Close">
+          <img alt="" width="24" height="24" data-icon="close" />
+        </button>
+      </header>
+
+      <div class="sd6_1__scroll">
+        <div class="sd6_1__nameRow" data-figma-name="6-1 row — 일정명">
+          <div class="sd6_1__colroBar" data-figma-name="Colro bar" data-node-id="3453:155344" aria-hidden="true"></div>
+          <div
+            class="sdTextInputField sdTextInputField--default"
+            data-figma-name="Text Input Feild"
+            data-node-id="3453:155343"
+          >
+            <input
+              class="sdTextInputField__input"
+              id="sd6TitleInput"
+              type="text"
+              placeholder="일정명"
+              aria-label="일정명"
+            />
+          </div>
+        </div>
+
+        <div class="sd6_1__section">
+          <div class="sd6_1__allDay" data-figma-name="All day" data-node-id="3453:155345">
+            <div class="sd6_1__rowLabel" data-figma-name="Title" data-node-id="3453:155346">
+              <img class="sd6_1__icon24" alt="" data-icon="calendar" width="24" height="24" />
+              <p class="sd6_1__rowLabelText" data-node-id="3453:155348">하루 종일</p>
+            </div>
+            <button
+              type="button"
+              class="sdToggle"
+              id="sd6AllDayToggle"
+              aria-pressed="false"
+              aria-label="하루 종일 끔"
+              data-figma-name="Toggle"
+              data-node-id="546:1764"
+            >
+              <span class="sdToggle__thumb" data-node-id="202:593"></span>
+            </button>
+          </div>
+
+          <!-- Figma 3453:158324(6-2. 하루종일_On): on 시 Start/End+휠 없음. off 시에만 이 블록 표시 -->
+          <div
+            class="sd6_1__dateTimeBlock"
+            id="sd6DateTimeBlock"
+            data-figma-name="날짜·시간 (하루 종일 off 시만)"
+            data-figma-all-day-on-ref="3453:158324"
+          >
+          <div
+            class="sd6_1__timeRow"
+            id="sd6TimeRow"
+            data-figma-name="Start Point — Arrow — End Point"
+          >
+            <button
+              type="button"
+              class="sd6_1__timeCard"
+              data-figma-name="Start Point"
+              data-node-id="3453:155350"
+              id="sd6StartPoint"
+            >
+              <div class="sd6_1__timeCardLine" data-node-id="3453:155352">
+                <p data-node-id="3453:155353" id="sd6StartDate">2026. 4. 22</p>
+                <p data-node-id="3453:155354" id="sd6StartDow">(수)</p>
+              </div>
+              <div class="sd6_1__timeCardLine" data-node-id="3453:155355">
+                <span data-node-id="3453:155356" id="sd6StartAmpm">오전</span>
+                <span data-node-id="3453:155357" id="sd6StartClock">10:00</span>
+              </div>
+            </button>
+            <div class="sd6_1__arrowBetween" data-figma-name="ArrowRight" data-node-id="3453:155358">
+              <img alt="" data-icon="arrowRightLarge" width="24" height="24" />
+            </div>
+            <button
+              type="button"
+              class="sd6_1__timeCard"
+              data-figma-name="End Point"
+              data-node-id="3453:155359"
+              id="sd6EndPoint"
+            >
+              <div class="sd6_1__timeCardLine" data-node-id="3453:155361">
+                <p data-node-id="3453:155362" id="sd6EndDate">2026. 4. 22</p>
+                <p data-node-id="3453:155363" id="sd6EndDow">(수)</p>
+              </div>
+              <div class="sd6_1__timeCardLine" data-node-id="3453:155364">
+                <span data-node-id="3453:155365" id="sd6EndAmpm">오후</span>
+                <span data-node-id="3453:155366" id="sd6EndClock">22:00</span>
+              </div>
+            </button>
+          </div>
+
+          <div
+            class="sd6_1__pickerBlock"
+            id="sd6PickerBlock"
+            hidden
+            data-figma-name="Time Wheels Area"
+            data-node-id="3453:155598"
+          >
+            <!-- Figma: 휠(315~475) → 아래 완료(top 485). 동일 PNG 정적 표시 -->
+            <div class="sd6_1__timeWheelsOuter">
+              <div class="sd6_1__timeWheelsFrame" data-node-id="3453:155599">
+                <div class="sd6_1__timeWheelsClip">
+                  <img
+                    class="sd6_1__timeWheelsImg"
+                    src="assets/figma-screens/schedule-6-2-time-wheels.png"
+                    alt=""
+                    width="1179"
+                    height="2556"
+                    decoding="async"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="sd6_1__pickerCompleteRow">
+              <button type="button" class="sd6_1__pickerComplete" data-node-id="1033:21505" id="sd6PickerComplete">
+                완료
+              </button>
+            </div>
+          </div>
+          </div>
+
+          <button
+            type="button"
+            class="sd6_1__listRow sd6_1__listRow--hit"
+            data-figma-name="Alam"
+            data-node-id="3453:155367"
+            id="sd6AlarmOpenBtn"
+            aria-label="알림 설정 열기"
+            aria-haspopup="dialog"
+            aria-controls="sd6AlarmSheet"
+          >
+            <span class="sd6_1__rowLabel" data-figma-name="Title" data-node-id="3453:155368">
+              <img class="sd6_1__icon24" alt="" data-icon="notification" width="24" height="24" />
+              <span class="sd6_1__rowLabelText" data-node-id="3453:155370">알림</span>
+            </span>
+            <span class="sd6_1__rowChevron" data-node-id="3453:155371" data-figma-name="Alam — chevron">
+              <span class="sd6_1__rowValue" data-node-id="3453:155372" id="sd6AlarmValue">알림 없음</span>
+              <img class="sd6_1__iconChevron" alt="" data-icon="arrowRightMedium" width="20" height="20" />
+            </span>
+          </button>
+
+          <button
+            type="button"
+            class="sd6_1__listRow sd6_1__listRow--hit"
+            data-figma-name="Repeat"
+            data-node-id="3453:155374"
+            id="sd6RepeatOpenBtn"
+            aria-label="반복 설정 열기"
+            aria-haspopup="dialog"
+            aria-controls="sd6RepeatSheet"
+            data-figma-screens="3453:156479,3453:156549,3453:156625"
+          >
+            <span class="sd6_1__rowLabel" data-figma-name="Title" data-node-id="3453:155375">
+              <img class="sd6_1__icon24" alt="" data-icon="repeat" width="24" height="24" />
+              <span class="sd6_1__rowLabelText" data-node-id="3453:155377">반복</span>
+            </span>
+            <span class="sd6_1__rowChevron" data-node-id="3453:155378" data-figma-name="Repeat — chevron">
+              <span class="sd6_1__rowValue" data-node-id="3453:155379" id="sd6RepeatValue">반복 없음</span>
+              <img class="sd6_1__iconChevron" alt="" data-icon="arrowRightMedium" width="20" height="20" />
+            </span>
+          </button>
+
+          <hr class="sd6_1__divider" data-figma-name="Devinder_Width" data-node-id="3453:155383" />
+
+          <div class="sd6_1__rowsAfterDivider">
+            <button
+              type="button"
+              class="sd6_1__listRow sd6_1__listRow--hit"
+              data-figma-name="Color"
+              data-node-id="3453:155388"
+              id="sd6ColorOpenBtn"
+              aria-label="색상 설정 열기"
+              aria-haspopup="dialog"
+              aria-controls="sd6ColorSheet"
+              data-figma-screens="3453:156225,3453:156176"
+            >
+              <span class="sd6_1__rowLabel" data-figma-name="Title" data-node-id="3453:155389">
+                <img class="sd6_1__icon24" alt="" data-icon="palette" width="24" height="24" />
+                <span class="sd6_1__rowLabelText" data-figma-name="Color Label" data-node-id="3453:155391">색상</span>
+              </span>
+              <span class="sd6_1__rowChevron" data-node-id="3453:155392" data-figma-name="Color — value">
+                <span
+                  class="sd6_1__colorSwatch"
+                  id="sd6ColorMainSwatch"
+                  data-figma-name="Color swatch"
+                  data-node-id="3453:155393"
+                  aria-hidden="true"
+                ></span>
+                <img class="sd6_1__iconChevron" alt="" data-icon="arrowRightMedium" width="20" height="20" />
+              </span>
+            </button>
+          </div>
+
+          <div class="sd6_1__momo" data-figma-name="Momo" data-node-id="3453:155395">
+            <div class="sd6_1__momoTitle" data-figma-name="Title" data-node-id="3453:155396">
+              <img class="sd6_1__icon24" alt="" data-icon="article" width="24" height="24" />
+              <p class="sd6_1__rowLabelText" data-figma-name="Memo label" data-node-id="3453:155398">메모</p>
+            </div>
+            <div
+              class="sdContentsField sdContentsField--default"
+              id="sd6MemoField"
+              data-figma-name="Contents Text Input Field"
+              data-node-id="3453:155399"
+            >
+              <textarea
+                class="sdContentsField__textarea"
+                id="sd6Memo"
+                maxlength="1000"
+                placeholder="메모"
+                data-figma-name="Field"
+                data-node-id="I3453:155399;279:548"
+                aria-label="메모"
+              ></textarea>
+              <div
+                class="sdContentsField__counter"
+                data-figma-name="char count"
+                data-node-id="3453:155399;279:549"
+                id="sd6MemoCount"
+              >
+                <span data-node-id="I3453:155399;279:550" id="sd6MemoN">0</span>
+                <span data-node-id="I3453:155399;279:551">/</span>
+                <span data-node-id="I3453:155399;279:552">1000</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sd6_1__buttonCenter" data-figma-name="Button Center" data-node-id="3453:155401">
+        <button
+          type="button"
+          class="sdBtn sdBtn--primary sdBtn--normal"
+          id="sd6SubmitBtn"
+          disabled
+          data-figma-name="Button"
+          data-node-id="3453:155402"
+        >
+          작성하기
+        </button>
+      </div>
+
+      <div class="sd6_1__homeInd" data-figma-name="Home Indicator" data-node-id="3453:155400" aria-hidden="true">
+        <div class="sd6_1__homeIndBar" data-figma-name="Home Indicator" data-node-id="I3453:155400;106:60028"></div>
+      </div>
+
+      <!-- Figma 3453:156778 / Bottom Seat 3453:156837 (핸들 없음, 상단 48·패널 730) -->
+      <div
+        class="sdBottomSheet"
+        id="sd6AlarmOverlay"
+        hidden
+        aria-hidden="true"
+        data-node-id="3453:156778"
+        data-figma-name="6-3. 알림 설정_설정 바텀 시트(최초 기본 설정된 화면)"
+      >
+        <div class="sdBottomSheet__dim" id="sd6AlarmDim" data-node-id="3453:156836" data-figma-name="Dim Bg" role="presentation"></div>
+        <div
+          class="sdBottomSheet__panel"
+          id="sd6AlarmSheet"
+          data-node-id="3453:156837"
+          data-figma-name="Bottom Seat"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="sd6AlarmSheetTitle"
+        >
+          <!-- Figma 156837: 핸들 레이어 없음 — 상단 56(Header) + 16 → 리스트 top 72 -->
+          <div class="sdBottomSheet__nav" data-node-id="3453:156850">
+            <button type="button" class="sdBottomSheet__navBack" id="sd6AlarmBackBtn" aria-label="뒤로">
+              <img alt="" width="24" height="24" data-icon="arrowLeftLarge" />
+            </button>
+            <h2 class="sdBottomSheet__navTitle" id="sd6AlarmSheetTitle" data-node-id="3453:156853">알림 설정</h2>
+            <button type="button" class="sdBottomSheet__navAction" id="sd6AlarmDoneBtn" data-node-id="1033:21505">완료</button>
+          </div>
+          <div class="sdBottomSheet__body">
+            <div
+              class="sd6_1__alarmCard"
+              id="sd6AlarmCard"
+              data-node-id="3453:156838"
+              data-figma-name="List card"
+              role="radiogroup"
+              aria-label="알림 시각"
+            >
+              <button
+                type="button"
+                class="sd6_1__alarmOption sd6_1__alarmOption--selected"
+                data-alarm-value="none"
+                data-node-id="3453:156839"
+                role="radio"
+                aria-checked="true"
+              >
+                <span class="sd6_1__alarmOptionText">알림 없음</span>
+                <img class="sd6_1__alarmCheck" alt="" width="20" height="20" data-icon="checkSmall" data-figma-name="Check" />
+              </button>
+              <div class="sd6_1__alarmDivider" data-figma-name="Lind Divider" data-node-id="3453:156842" aria-hidden="true"></div>
+              <button
+                type="button"
+                class="sd6_1__alarmOption"
+                data-alarm-value="1h"
+                data-node-id="3453:156843"
+                role="radio"
+                aria-checked="false"
+              >
+                <span class="sd6_1__alarmOptionText">1시간 전</span>
+                <img class="sd6_1__alarmCheck" alt="" width="20" height="20" data-icon="checkSmall" data-figma-name="Check" />
+              </button>
+              <div class="sd6_1__alarmDivider" aria-hidden="true" data-node-id="3453:156844"></div>
+              <button
+                type="button"
+                class="sd6_1__alarmOption"
+                data-alarm-value="2h"
+                data-node-id="3453:156845"
+                role="radio"
+                aria-checked="false"
+              >
+                <span class="sd6_1__alarmOptionText">2시간 전</span>
+                <img class="sd6_1__alarmCheck" alt="" width="20" height="20" data-icon="checkSmall" data-figma-name="Check" />
+              </button>
+              <div class="sd6_1__alarmDivider" aria-hidden="true" data-node-id="3453:156846"></div>
+              <button
+                type="button"
+                class="sd6_1__alarmOption"
+                data-alarm-value="12h"
+                data-node-id="3453:156847"
+                role="radio"
+                aria-checked="false"
+              >
+                <span class="sd6_1__alarmOptionText">12시간 전</span>
+                <img class="sd6_1__alarmCheck" alt="" width="20" height="20" data-icon="checkSmall" data-figma-name="Check" />
+              </button>
+              <div class="sd6_1__alarmDivider" aria-hidden="true" data-node-id="3453:156848"></div>
+              <button
+                type="button"
+                class="sd6_1__alarmOption"
+                data-alarm-value="1d"
+                data-node-id="3453:156849"
+                role="radio"
+                aria-checked="false"
+              >
+                <span class="sd6_1__alarmOptionText">1일 전</span>
+                <img class="sd6_1__alarmCheck" alt="" width="20" height="20" data-icon="checkSmall" data-figma-name="Check" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Figma 3453:156410 기본(최초) + 토글 On 시 Frame 87 / date-picker.png / 156615·156625 변형 -->
+      <div
+        class="sdBottomSheet"
+        id="sd6RepeatOverlay"
+        hidden
+        aria-hidden="true"
+        data-node-id="3453:156410"
+        data-figma-name="6-4. 반복 설정_설정 바텀 시트(최초 기본 설정된 화면)"
+      >
+        <div class="sdBottomSheet__dim" data-node-id="3453:156456" data-figma-name="Dim Bg" role="presentation"></div>
+        <div
+          class="sdBottomSheet__panel"
+          id="sd6RepeatSheet"
+          data-node-id="3453:156458"
+          data-figma-name="Bottom Seat"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="sd6RepeatSheetTitle"
+        >
+          <div class="sdBottomSheet__nav" data-node-id="3453:156459">
+            <button type="button" class="sdBottomSheet__navBack" id="sd6RepeatBackBtn" aria-label="뒤로">
+              <img alt="" width="24" height="24" data-icon="arrowLeftLarge" />
+            </button>
+            <h2 class="sdBottomSheet__navTitle" id="sd6RepeatSheetTitle" data-node-id="3453:156462">반복 설정</h2>
+            <button type="button" class="sdBottomSheet__navAction" id="sd6RepeatDoneBtn" data-node-id="1033:21505">완료</button>
+          </div>
+          <div class="sdBottomSheet__body">
+            <div
+              class="sd6_1__alarmCard sd6_1__repeatFreqCard"
+              id="sd6RepeatFreqCard"
+              data-node-id="3453:156463"
+              data-figma-name="List card"
+              role="radiogroup"
+              aria-label="반복 주기"
+            >
+              <button
+                type="button"
+                class="sd6_1__alarmOption sd6_1__alarmOption--selected"
+                data-repeat-freq="none"
+                data-node-id="3453:156464"
+                role="radio"
+                aria-checked="true"
+              >
+                <span class="sd6_1__alarmOptionText">반복 없음</span>
+                <img class="sd6_1__alarmCheck" alt="" width="20" height="20" data-icon="checkSmall" data-figma-name="Check" />
+              </button>
+              <div class="sd6_1__alarmDivider" data-figma-name="Lind Divider" data-node-id="3453:156467" aria-hidden="true"></div>
+              <button
+                type="button"
+                class="sd6_1__alarmOption"
+                data-repeat-freq="daily"
+                data-node-id="3453:156468"
+                role="radio"
+                aria-checked="false"
+              >
+                <span class="sd6_1__alarmOptionText">매일</span>
+                <img class="sd6_1__alarmCheck" alt="" width="20" height="20" data-icon="checkSmall" data-figma-name="Check" />
+              </button>
+              <div class="sd6_1__alarmDivider" aria-hidden="true" data-node-id="3453:156469"></div>
+              <button
+                type="button"
+                class="sd6_1__alarmOption"
+                data-repeat-freq="weekly"
+                data-node-id="3453:156470"
+                role="radio"
+                aria-checked="false"
+              >
+                <span class="sd6_1__alarmOptionText">매주</span>
+                <img class="sd6_1__alarmCheck" alt="" width="20" height="20" data-icon="checkSmall" data-figma-name="Check" />
+              </button>
+              <div class="sd6_1__alarmDivider" aria-hidden="true" data-node-id="3453:156471"></div>
+              <button
+                type="button"
+                class="sd6_1__alarmOption"
+                data-repeat-freq="monthly"
+                data-node-id="3453:156472"
+                role="radio"
+                aria-checked="false"
+              >
+                <span class="sd6_1__alarmOptionText">매월</span>
+                <img class="sd6_1__alarmCheck" alt="" width="20" height="20" data-icon="checkSmall" data-figma-name="Check" />
+              </button>
+              <div class="sd6_1__alarmDivider" aria-hidden="true" data-node-id="3453:156473"></div>
+              <button
+                type="button"
+                class="sd6_1__alarmOption"
+                data-repeat-freq="yearly"
+                data-node-id="3453:156474"
+                role="radio"
+                aria-checked="false"
+              >
+                <span class="sd6_1__alarmOptionText">매년</span>
+                <img class="sd6_1__alarmCheck" alt="" width="20" height="20" data-icon="checkSmall" data-figma-name="Check" />
+              </button>
+            </div>
+
+            <div
+              class="sd6_1__repeatEndCard"
+              id="sd6RepeatEndCard"
+              data-figma-default="3453:156475"
+              data-figma-variants="3453:156475,3453:156615,3453:156691"
+            >
+              <div class="sd6_1__repeatEndHeader" data-node-id="3453:156476">
+                <span class="sd6_1__repeatEndTitle" data-node-id="3453:156477">반복 종료일</span>
+                <button
+                  type="button"
+                  class="sdToggle"
+                  id="sd6RepeatEndToggle"
+                  aria-pressed="false"
+                  aria-label="반복 종료일 사용 끔"
+                  data-figma-name="Toggle"
+                  data-node-id="546:1764"
+                >
+                  <span class="sdToggle__thumb" data-node-id="202:593"></span>
+                </button>
+              </div>
+              <!-- 토글 On일 때만 표시(156410 기본: 숨김) — date-picker.png 대체 -->
+              <div
+                class="sd6_1__repeatEndFrame87"
+                id="sd6RepeatEndFrame87"
+                data-figma-name="Frame 87"
+                data-node-id="3453:156618"
+                hidden
+                aria-hidden="true"
+              >
+                <button
+                  type="button"
+                  class="sd6_1__repeatEndDateField"
+                  id="sd6RepeatEndDateField"
+                  aria-expanded="false"
+                  aria-label="종료일 날짜·날짜 피커 열기 또는 닫기"
+                  data-node-refs="3453:156618,3453:156694"
+                >
+                  <span class="sd6_1__repeatEndDateText" id="sd6RepeatEndDateText" data-node-id="3453:156620">2026년 10월 31일</span>
+                </button>
+                <div class="sd6_1__repeatEndWheelsOuter" id="sd6RepeatEndWheels" data-node-id="3453:156621" hidden>
+                  <div class="sd6_1__repeatEndWheelsFrame" data-node-id="3453:156622">
+                    <div class="sd6_1__repeatEndWheelsClip">
+                      <img
+                        class="sd6_1__repeatEndWheelsImg sd6_1__repeatEndDatePickerImg"
+                        src="assets/figma-screens/date-picker.png"
+                        alt=""
+                        width="1179"
+                        height="2556"
+                        decoding="async"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="sd6_1__repeatEndPickerRow" id="sd6RepeatEndPickerRow" hidden>
+                <button type="button" class="sd6_1__repeatEndPickerDone" id="sd6RepeatEndPickerDone" data-node-id="1033:21505">
+                  완료
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Figma 3453:156225 — 6-6. 색상 설정 바텀 시트(최초) / 3453:156176 변경 시 메인·Colro bar 연동 -->
+      <div
+        class="sdBottomSheet"
+        id="sd6ColorOverlay"
+        hidden
+        aria-hidden="true"
+        data-node-id="3453:156225"
+        data-figma-name="6-6. 색상 설정_설정 바텀 시트(최초 기본 설정된 화면)"
+      >
+        <div class="sdBottomSheet__dim" data-node-id="3453:156273" data-figma-name="Dim Bg" role="presentation"></div>
+        <div
+          class="sdBottomSheet__panel"
+          id="sd6ColorSheet"
+          data-node-id="3453:156275"
+          data-figma-name="Bottom Seat"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="sd6ColorSheetTitle"
+        >
+          <div class="sdBottomSheet__nav" data-node-id="3453:156276">
+            <button type="button" class="sdBottomSheet__navBack" id="sd6ColorBackBtn" aria-label="뒤로">
+              <img alt="" width="24" height="24" data-icon="arrowLeftLarge" />
+            </button>
+            <h2 class="sdBottomSheet__navTitle" id="sd6ColorSheetTitle" data-node-id="3453:156279">색상 설정</h2>
+            <button type="button" class="sdBottomSheet__navAction" id="sd6ColorDoneBtn" data-node-id="3453:156278">완료</button>
+          </div>
+          <div class="sdBottomSheet__body">
+            <div class="sd6_1__colorCard" id="sd6ColorCard" data-node-id="3453:156280" data-figma-name="Frame">
+              <p class="sd6_1__colorCardLabel" data-node-id="3453:156281">색상</p>
+              <div class="sd6_1__colorGrid" data-node-id="3453:156283" role="radiogroup" aria-label="일정 색상">
+                <button
+                  type="button"
+                  class="sd6_1__colorOption"
+                  data-node-id="3453:156284"
+                  data-schedule-color="red"
+                  role="radio"
+                  aria-checked="false"
+                >
+                  <span class="sd6_1__colorOptionFill"></span>
+                  <img class="sd6_1__colorCheck" width="20" height="20" data-icon="checkSmall" alt="" />
+                </button>
+                <button
+                  type="button"
+                  class="sd6_1__colorOption sd6_1__colorOption--selected"
+                  data-node-id="3453:156285"
+                  data-schedule-color="orange"
+                  role="radio"
+                  aria-checked="true"
+                >
+                  <span class="sd6_1__colorOptionFill"></span>
+                  <img class="sd6_1__colorCheck" width="20" height="20" data-icon="checkSmall" alt="" />
+                </button>
+                <button
+                  type="button"
+                  class="sd6_1__colorOption"
+                  data-node-id="3453:156286"
+                  data-schedule-color="yellow"
+                  role="radio"
+                  aria-checked="false"
+                >
+                  <span class="sd6_1__colorOptionFill"></span>
+                  <img class="sd6_1__colorCheck" width="20" height="20" data-icon="checkSmall" alt="" />
+                </button>
+                <button
+                  type="button"
+                  class="sd6_1__colorOption"
+                  data-node-id="3453:156287"
+                  data-schedule-color="green"
+                  role="radio"
+                  aria-checked="false"
+                >
+                  <span class="sd6_1__colorOptionFill"></span>
+                  <img class="sd6_1__colorCheck" width="20" height="20" data-icon="checkSmall" alt="" />
+                </button>
+                <button
+                  type="button"
+                  class="sd6_1__colorOption"
+                  data-node-id="3453:156288"
+                  data-schedule-color="blue"
+                  role="radio"
+                  aria-checked="false"
+                >
+                  <span class="sd6_1__colorOptionFill"></span>
+                  <img class="sd6_1__colorCheck" width="20" height="20" data-icon="checkSmall" alt="" />
+                </button>
+                <button
+                  type="button"
+                  class="sd6_1__colorOption"
+                  data-node-id="3453:156289"
+                  data-schedule-color="purple"
+                  role="radio"
+                  aria-checked="false"
+                >
+                  <span class="sd6_1__colorOptionFill"></span>
+                  <img class="sd6_1__colorCheck" width="20" height="20" data-icon="checkSmall" alt="" />
+                </button>
+                <button
+                  type="button"
+                  class="sd6_1__colorOption"
+                  data-node-id="3453:156290"
+                  data-schedule-color="pink"
+                  role="radio"
+                  aria-checked="false"
+                >
+                  <span class="sd6_1__colorOptionFill"></span>
+                  <img class="sd6_1__colorCheck" width="20" height="20" data-icon="checkSmall" alt="" />
+                </button>
+                <button
+                  type="button"
+                  class="sd6_1__colorOption"
+                  data-node-id="3453:156291"
+                  data-schedule-color="gray"
+                  role="radio"
+                  aria-checked="false"
+                >
+                  <span class="sd6_1__colorOptionFill"></span>
+                  <img class="sd6_1__colorCheck" width="20" height="20" data-icon="checkSmall" alt="" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { iconAssets } from "./tokens/icon.js";
+      import { initDragToScroll } from "./screens/schedule-record-6-1-drag.mjs";
+      import { initScheduleRecordPicker } from "./screens/schedule-record-6-1-picker.mjs";
+      import { initAlarmSheet } from "./screens/schedule-record-6-1-alarm-sheet.mjs";
+      import { initRepeatSheet } from "./screens/schedule-record-6-1-repeat-sheet.mjs";
+      import { initColorSheet } from "./screens/schedule-record-6-1-color-sheet.mjs";
+
+      function href(rel) {
+        return new URL(rel, import.meta.url).href;
+      }
+
+      const map = {
+        close: iconAssets.close,
+        calendar: iconAssets.calendar,
+        notification: iconAssets.notification,
+        repeat: iconAssets.repeat,
+        palette: iconAssets.palette,
+        article: iconAssets.article,
+        arrowRightLarge: iconAssets.arrowRightLarge,
+        arrowRightMedium: iconAssets.arrowRightMedium,
+        arrowLeftLarge: iconAssets.arrowLeftLarge,
+        checkSmall: iconAssets.checkSmall,
+      };
+
+      document.querySelectorAll("[data-icon]").forEach((el) => {
+        const key = el.getAttribute("data-icon");
+        if (map[key]) el.src = href(map[key]);
+      });
+
+      const ta = document.getElementById("sd6Memo");
+      const n = document.getElementById("sd6MemoN");
+      const memoField = document.getElementById("sd6MemoField");
+      const submitBtn = document.getElementById("sd6SubmitBtn");
+      const titleInput = document.getElementById("sd6TitleInput");
+      const nameWrap = document.querySelector(".sd6_1__nameRow .sdTextInputField");
+      /** 메모(공백 포함) 또는 일정명(앞뒤 공백 제외, 비공백 1자 이상) */
+      function syncSubmitButton() {
+        if (!submitBtn) return;
+        const hasMemo = Boolean(ta && ta.value.length > 0);
+        const hasTitle = Boolean(titleInput && titleInput.value.trim().length > 0);
+        const active = hasMemo || hasTitle;
+        submitBtn.disabled = !active;
+        submitBtn.classList.toggle("sdBtn--normal", !active);
+        submitBtn.classList.toggle("sdBtn--success", active);
+      }
+      const syncTitleField = () => {
+        if (!nameWrap || !titleInput) return;
+        const has = titleInput.value.trim().length > 0;
+        nameWrap.classList.toggle("sdTextInputField--pressed", has);
+        nameWrap.classList.toggle("sdTextInputField--default", !has);
+        syncSubmitButton();
+      };
+      if (titleInput) {
+        titleInput.addEventListener("input", syncTitleField);
+        syncTitleField();
+      }
+
+      if (ta) {
+        ta.addEventListener("input", () => {
+          if (n) n.textContent = String(ta.value.length);
+          if (memoField) {
+            const has = ta.value.length > 0;
+            memoField.classList.toggle("sdContentsField--pressed", has);
+            memoField.classList.toggle("sdContentsField--default", !has);
+          }
+          syncSubmitButton();
+        });
+      }
+      if (memoField && ta) {
+        const has = ta.value.length > 0;
+        memoField.classList.toggle("sdContentsField--pressed", has);
+        memoField.classList.toggle("sdContentsField--default", !has);
+      }
+      syncSubmitButton();
+
+      const scroller = document.querySelector(".sd6_1__scroll");
+      if (scroller) initDragToScroll(scroller);
+
+      const allDayBtn = document.getElementById("sd6AllDayToggle");
+      const dateTimeBlock = document.getElementById("sd6DateTimeBlock");
+      if (allDayBtn) {
+        const sync = () => {
+          const on = allDayBtn.getAttribute("aria-pressed") === "true";
+          allDayBtn.setAttribute("aria-label", on ? "하루 종일 켬" : "하루 종일 끔");
+          allDayBtn.classList.toggle("sdToggle--on", on);
+          /* .sd6_1__timeRow { display:flex }가 [hidden]보다 강해 래퍼로 강제 비표시 (Figma 6-3) */
+          if (dateTimeBlock) dateTimeBlock.hidden = on;
+        };
+        allDayBtn.addEventListener("click", () => {
+          const on = allDayBtn.getAttribute("aria-pressed") === "true";
+          allDayBtn.setAttribute("aria-pressed", on ? "false" : "true");
+          sync();
+        });
+        sync();
+      }
+
+      initScheduleRecordPicker({
+        startPoint: document.getElementById("sd6StartPoint"),
+        endPoint: document.getElementById("sd6EndPoint"),
+        startDate: document.getElementById("sd6StartDate"),
+        startDow: document.getElementById("sd6StartDow"),
+        startAmpm: document.getElementById("sd6StartAmpm"),
+        startClock: document.getElementById("sd6StartClock"),
+        endDate: document.getElementById("sd6EndDate"),
+        endDow: document.getElementById("sd6EndDow"),
+        endAmpm: document.getElementById("sd6EndAmpm"),
+        endClock: document.getElementById("sd6EndClock"),
+        pickerBlock: document.getElementById("sd6PickerBlock"),
+        completeBtn: document.getElementById("sd6PickerComplete"),
+        allDayBtn: allDayBtn,
+        dateTimeBlock,
+      });
+
+      const closeRepeatRef = { fn: () => {} };
+      const closeColorRef = { fn: () => {} };
+      const alarmSheet = initAlarmSheet({
+        overlay: document.getElementById("sd6AlarmOverlay"),
+        openBtn: document.getElementById("sd6AlarmOpenBtn"),
+        doneBtn: document.getElementById("sd6AlarmDoneBtn"),
+        valueEl: document.getElementById("sd6AlarmValue"),
+        optionButtons: document.querySelectorAll("#sd6AlarmCard .sd6_1__alarmOption[data-alarm-value]"),
+        onBeforeOpen: () => {
+          closeRepeatRef.fn();
+          closeColorRef.fn();
+        },
+      });
+      const repeatSheet = initRepeatSheet({
+        overlay: document.getElementById("sd6RepeatOverlay"),
+        openBtn: document.getElementById("sd6RepeatOpenBtn"),
+        doneBtn: document.getElementById("sd6RepeatDoneBtn"),
+        valueEl: document.getElementById("sd6RepeatValue"),
+        freqButtons: document.querySelectorAll("#sd6RepeatFreqCard [data-repeat-freq]"),
+        endCard: document.getElementById("sd6RepeatEndCard"),
+        endToggle: document.getElementById("sd6RepeatEndToggle"),
+        endFrame87: document.getElementById("sd6RepeatEndFrame87"),
+        endDateField: document.getElementById("sd6RepeatEndDateField"),
+        endDateText: document.getElementById("sd6RepeatEndDateText"),
+        endWheels: document.getElementById("sd6RepeatEndWheels"),
+        endPickerRow: document.getElementById("sd6RepeatEndPickerRow"),
+        endPickerDone: document.getElementById("sd6RepeatEndPickerDone"),
+        onBeforeOpen: () => {
+          alarmSheet?.close();
+          closeColorRef.fn();
+        },
+      });
+      const colorSheet = initColorSheet({
+        overlay: document.getElementById("sd6ColorOverlay"),
+        root: document.getElementById("sd6RecordRoot"),
+        openBtn: document.getElementById("sd6ColorOpenBtn"),
+        backBtn: document.getElementById("sd6ColorBackBtn"),
+        doneBtn: document.getElementById("sd6ColorDoneBtn"),
+        swatchButtons: document.querySelectorAll("#sd6ColorCard .sd6_1__colorOption[data-schedule-color]"),
+        onBeforeOpen: () => {
+          alarmSheet?.close();
+          closeRepeatRef.fn();
+        },
+      });
+      if (repeatSheet) closeRepeatRef.fn = repeatSheet.close;
+      if (colorSheet) closeColorRef.fn = colorSheet.close;
+    </script>
+  </body>
+</html>

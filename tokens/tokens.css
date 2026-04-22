@@ -40,6 +40,15 @@
   --color-surface-daily: #edf8ff;
   --color-surface-fitness: #eaf8f0;
   --color-surface-schedule: #fff5eb;
+  /* 일정 색상(6-6 색상 설정) — Figma 3453:156283 / 변경 완료 3453:156176(바·스와치 연동) */
+  --color-schedule-red: #e53935;
+  --color-schedule-orange: #ff9528;
+  --color-schedule-yellow: #fbc02d;
+  --color-schedule-green: #2dcb6f;
+  --color-schedule-blue: #1e6fe6;
+  --color-schedule-purple: #362c9b;
+  --color-schedule-pink: #e04b8a;
+  --color-schedule-gray: #bdbdbd;
   --color-surface-habit: #f3edff;
   --color-surface-mark: #e3f2fd;
 

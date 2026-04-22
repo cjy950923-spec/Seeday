@@ -4,9 +4,12 @@
   "description": "Seedday Design System Project",
   "main": "viewer.html",
   "scripts": {
-    "dev": "python3 -m http.server 8877",
-    "start": "python3 -m http.server 8877",
+    "dev": "bash ./scripts/serve.sh",
+    "start": "bash ./scripts/serve.sh",
+    "open": "./scripts/open.sh viewer",
     "open:viewer": "./scripts/open.sh viewer",
+    "open:schedule6": "./scripts/open.sh schedule6",
+    "open:6-1": "./scripts/open.sh schedule6",
     "open:tokens": "./scripts/open.sh tokens",
     "open:components": "npm run -s open:viewer",
     "icons:download": "node ./scripts/download-figma-icons.mjs"

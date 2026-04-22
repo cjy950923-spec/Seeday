@@ -1,0 +1,909 @@
+/**
+ * Figma 3453:155338 — 6-1. 일정 등록 기본 화면
+ * iOS 375×812, tokens only (씨드데이 디자인 시스템)
+ */
+
+/* 뷰어 페이지: 상·하 여백 + 가로 중앙, 뷰포트가 클 땐 세로도 중앙 */
+.sd6_1Page {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--color-gray-200);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 48px 16px 64px;
+}
+
+/* 기기 세로(812) + 패딩이 뷰포트보다 클 땐 상단 정렬 + 스크롤 */
+@media (max-height: 920px) {
+  .sd6_1Page {
+    justify-content: flex-start;
+    padding-top: 40px;
+  }
+}
+
+.sd6_1 {
+  --sd6-safe-top: 44px;
+  --sd6-header: 56px;
+  --sd6-footer: 76px;
+  --sd6-home: 34px;
+  /* 일정 색(156225 기본=주황) — 완료 시 JS가 `style`의 `--sd6-schedule-color`로 덮어씀 */
+  --sd6-schedule-color: var(--color-schedule-orange);
+
+  width: 375px;
+  height: 812px;
+  max-width: 100%;
+  margin: 0 auto;
+  background: var(--color-gray-white);
+  font-family: var(--font-family-sans);
+  color: var(--color-gray-900);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.sd6_1 *,
+.sd6_1 *::before,
+.sd6_1 *::after {
+  box-sizing: border-box;
+}
+
+/* Native / Status Bar */
+.sd6_1__status {
+  height: var(--sd6-safe-top);
+  flex-shrink: 0;
+  position: relative;
+  background: var(--color-gray-white);
+}
+
+.sd6_1__statusTime {
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  transform: translateY(calc(-50% + 2px));
+  font: var(--type-16-600);
+  /* Inter Bold 대체 — 뷰어에서 Pretendard 유지 */
+  letter-spacing: -0.2px;
+}
+
+.sd6_1__statusIcons {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: var(--type-12-500);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-gray-900);
+}
+
+/* Header */
+.sd6_1__header {
+  height: var(--sd6-header);
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-gray-white);
+}
+
+.sd6_1__headerTitle {
+  font: var(--type-18-600);
+  text-align: center;
+  margin: 0;
+}
+
+.sd6_1__headerClose {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.sd6_1__headerClose img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+/* Scroll: 드래그로 스크롤, 스크롤바는 비표시(트랙패드/휠은 그대로 동작) */
+.sd6_1__scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  touch-action: none;
+  cursor: grab;
+  padding: 0 0 16px;
+  /* 스크롤바 숨김 */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.sd6_1__scroll::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.sd6_1__scroll--grabbing {
+  cursor: grabbing;
+  user-select: none;
+}
+
+/* 입력·시맨틱 컨트롤은 터치/텍스트 기본 제스쳐 유지 */
+.sd6_1 .sdTextInputField__input,
+.sd6_1 .sdContentsField__textarea,
+.sd6_1__buttonCenter .sdBtn,
+.sd6_1 button.sdToggle,
+.sd6_1__headerClose,
+.sd6_1__pickerBlock .sd6_1__pickerComplete,
+.sd6_1__listRow--hit,
+.sd6_1__colorOption,
+.sd6_1__repeatEndDateField,
+.sd6_1__repeatEndWheelsOuter,
+.sd6_1__repeatEndPickerDone,
+.sd6_1__alarmSheet .sd6_1__alarmSheetBack,
+.sd6_1__alarmSheet .sd6_1__alarmSheetDone,
+.sd6_1__alarmOption {
+  touch-action: manipulation;
+}
+
+.sd6_1__section {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* Text Input Feild + Colro bar */
+.sd6_1__nameRow {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 0 16px;
+}
+
+.sd6_1__nameRow .sdTextInputField {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: auto;
+  max-width: 100%;
+}
+
+.sd6_1__colroBar {
+  width: 4px;
+  min-height: 52px;
+  border-radius: 100px;
+  background: var(--sd6-schedule-color, var(--color-schedule-orange));
+  flex-shrink: 0;
+  align-self: center;
+  height: 52px;
+}
+
+/* All day */
+.sd6_1__allDay {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.sd6_1__rowLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sd6_1__rowLabelText {
+  font: var(--type-16-600);
+  margin: 0;
+}
+
+.sd6_1__icon24 {
+  width: 24px;
+  height: 24px;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* 토글: components/button-section.css 의 .sdToggle / .sdToggle--on 재사용 */
+.sd6_1 button.sdToggle {
+  flex-shrink: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font: inherit;
+  display: block;
+}
+
+.sd6_1 button.sdToggle:focus-visible {
+  outline: 2px solid var(--color-primary-default);
+  outline-offset: 2px;
+}
+
+/* Start / End + 휠 — Figma 3453:158324(6-2 하루종일_On)에서는 이 래퍼 전체 없음. [hidden]은 flex 자식이 덮지 않게 !important */
+.sd6_1__dateTimeBlock[hidden] {
+  display: none !important;
+}
+
+/* Start / End Point */
+.sd6_1__timeRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.sd6_1 button.sd6_1__timeCard {
+  display: block;
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  text-align: inherit;
+  font: var(--type-16-600);
+  line-height: 1.5;
+  color: var(--color-gray-900);
+  background: var(--color-gray-100);
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  margin: 0;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.sd6_1 button.sd6_1__timeCard:focus-visible {
+  outline: 2px solid var(--color-primary-default);
+  outline-offset: 2px;
+}
+
+.sd6_1__timeCard--dim {
+  color: var(--color-gray-400);
+}
+
+.sd6_1__timeCard p {
+  margin: 0;
+}
+
+.sd6_1__timeCardLine {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.sd6_1__timeCardLine + .sd6_1__timeCardLine {
+  margin-top: 3px;
+}
+
+.sd6_1__arrowBetween {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.sd6_1__arrowBetween img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+/* 6-2 — Time wheels (Figma 3453:155598): 343×160, 내부 284×160 + PNG 크롭 / 완료는 휠 아래 1033:21505 */
+.sd6_1__pickerBlock[hidden] {
+  display: none !important;
+}
+
+.sd6_1__pickerBlock {
+  margin-top: 9px;
+}
+
+.sd6_1__timeWheelsOuter {
+  position: relative;
+  width: 100%;
+  max-width: 343px;
+  height: 160px;
+  margin: 0 auto;
+}
+
+.sd6_1__timeWheelsFrame {
+  position: absolute;
+  left: 50%;
+  top: 1px;
+  width: 284px;
+  height: 160px;
+  transform: translateX(-50%);
+  border-radius: 8px;
+  background: var(--color-gray-100);
+}
+
+.sd6_1__timeWheelsClip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.sd6_1__timeWheelsImg {
+  position: absolute;
+  width: 122.94%;
+  height: 460.61%;
+  max-width: none;
+  left: -11.47%;
+  top: -159.85%;
+  user-select: none;
+}
+
+/* Figma: 휠 하단(315+160=475) → 완료 top 485 → 간격 10px. left: calc(75% + 49.75px) 기준 343px 박스 */
+.sd6_1__pickerCompleteRow {
+  position: relative;
+  width: 100%;
+  max-width: 343px;
+  margin: 10px auto 0;
+  min-height: 24px;
+}
+
+.sd6_1__pickerComplete {
+  position: absolute;
+  left: calc(75% + 49.75px);
+  top: 0;
+  font: var(--type-16-600);
+  color: var(--color-gray-900);
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sd6_1__pickerComplete:focus-visible {
+  outline: 2px solid var(--color-primary-default);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.sd6_1__rowChevron {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sd6_1__rowValue {
+  font: var(--type-14-400);
+  color: var(--color-gray-600);
+  text-align: right;
+  margin: 0;
+  /* 20px 쉐브론과 동일 캡라인(반복/알림 행 수평·수직 정렬) */
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.sd6_1__iconChevron {
+  width: 20px;
+  height: 20px;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* Devinder_Width */
+.sd6_1__divider {
+  width: 100%;
+  height: 1px;
+  background: var(--color-gray-200);
+  margin: 16px 0 0;
+  border: none;
+}
+
+.sd6_1__rowsAfterDivider {
+  margin-top: 8px;
+}
+
+.sd6_1__listRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 40px;
+  margin-top: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sd6_1__listRow:first-child {
+  margin-top: 0;
+}
+
+/* 알림·반복·색상: 행 전체가 터치 영역 (HTML5: button 내 phrasing만 — label/chevron은 span) */
+button.sd6_1__listRow--hit {
+  appearance: none;
+  -webkit-appearance: none;
+  margin-left: 0;
+  margin-right: 0;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button.sd6_1__listRow--hit:focus-visible {
+  outline: 2px solid var(--color-primary-default);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.sd6_1__listRow--hit .sd6_1__rowLabel {
+  flex-shrink: 0;
+}
+
+.sd6_1__listRow--hit .sd6_1__rowChevron {
+  flex: 1 1 auto;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+/* Color row — 스와치·Colro bar 동일 토큰 (chevron 영역만이 아닌 행 전체 버튼) */
+
+.sd6_1__colorSwatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--sd6-schedule-color, var(--color-schedule-orange));
+  flex-shrink: 0;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 0.06) inset;
+  pointer-events: none;
+}
+
+/* 6-6 — 색상 설정 시트(3453:156280 카드, 156283 격자) */
+.sd6_1__colorCard {
+  width: 100%;
+  min-width: 0;
+  max-width: 343px;
+  margin: 0 auto 16px;
+  padding: 0 0 20px;
+  background: var(--color-gray-white);
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.sd6_1__colorCardLabel {
+  margin: 0;
+  padding: 16px 0 0 16px;
+  font: var(--type-16-600);
+  color: var(--color-gray-900);
+}
+
+.sd6_1__colorGrid {
+  /* 5×40 + 4×28 = 312px — Figma 156283. 그리드에 좌우 padding 두면(예: 16+16) 내부 280px만 되어 5개가 한 줄에 안 맞음 */
+  --sd6-color-chip: 40px;
+  --sd6-color-col-gap: 28px;
+  --sd6-color-row-gap: 30px;
+  display: grid;
+  box-sizing: content-box;
+  width: 312px;
+  max-width: min(312px, calc(100% - 16px));
+  grid-template-columns: repeat(5, var(--sd6-color-chip));
+  gap: var(--sd6-color-row-gap) var(--sd6-color-col-gap);
+  margin: 12px 0 0 16px;
+  padding: 0;
+  justify-content: start;
+}
+
+@media (max-width: 360px) {
+  .sd6_1__colorGrid {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: calc(100% - 16px);
+    min-width: 0;
+    grid-template-columns: repeat(auto-fill, var(--sd6-color-chip));
+  }
+}
+
+.sd6_1__colorOption {
+  position: relative;
+  display: block;
+  width: 40px;
+  height: 40px;
+  min-width: 0;
+  min-height: 40px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  background: none;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 0.04) inset;
+}
+
+.sd6_1__colorOptionFill {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.sd6_1__colorOption[data-schedule-color="red"] .sd6_1__colorOptionFill {
+  background: var(--color-schedule-red);
+}
+
+.sd6_1__colorOption[data-schedule-color="orange"] .sd6_1__colorOptionFill {
+  background: var(--color-schedule-orange);
+}
+
+.sd6_1__colorOption[data-schedule-color="yellow"] .sd6_1__colorOptionFill {
+  background: var(--color-schedule-yellow);
+}
+
+.sd6_1__colorOption[data-schedule-color="green"] .sd6_1__colorOptionFill {
+  background: var(--color-schedule-green);
+}
+
+.sd6_1__colorOption[data-schedule-color="blue"] .sd6_1__colorOptionFill {
+  background: var(--color-schedule-blue);
+}
+
+.sd6_1__colorOption[data-schedule-color="purple"] .sd6_1__colorOptionFill {
+  background: var(--color-schedule-purple);
+}
+
+.sd6_1__colorOption[data-schedule-color="pink"] .sd6_1__colorOptionFill {
+  background: var(--color-schedule-pink);
+}
+
+.sd6_1__colorOption[data-schedule-color="gray"] .sd6_1__colorOptionFill {
+  background: var(--color-schedule-gray);
+}
+
+.sd6_1__colorCheck {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  display: block;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+  filter: brightness(0) invert(1) drop-shadow(0 0.5px 0 rgb(0 0 0 / 0.2));
+}
+
+.sd6_1__colorOption--selected .sd6_1__colorCheck {
+  opacity: 1;
+}
+
+.sd6_1__colorOption:focus-visible {
+  outline: 2px solid var(--color-primary-default);
+  outline-offset: 2px;
+}
+
+/* Momo — 메모 */
+.sd6_1__momo {
+  margin-top: 20px;
+}
+
+.sd6_1__momoTitle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.sd6_1__momo .sdContentsField {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Button Center + Button */
+.sd6_1__buttonCenter {
+  flex-shrink: 0;
+  height: var(--sd6-footer);
+  background: var(--color-gray-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+}
+
+.sd6_1__buttonCenter .sdBtn {
+  width: 100%;
+  max-width: 343px;
+}
+
+.sd6_1__buttonCenter .sdBtn:disabled {
+  cursor: not-allowed;
+}
+
+/* Home Indicator */
+.sd6_1__homeInd {
+  flex-shrink: 0;
+  height: var(--sd6-home);
+  background: var(--color-gray-white);
+  position: relative;
+}
+
+.sd6_1__homeIndBar {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 144px;
+  height: 5px;
+  border-radius: 100px;
+  background: var(--color-gray-900);
+  opacity: 0.3;
+}
+
+/* 6-3 — 알림 목록 (Figma 3453:156838 List card: gap 10, p 16, r 8, w 343) */
+.sd6_1__alarmCard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 343px;
+  margin: 0 auto;
+  padding: 16px;
+  background: var(--color-gray-white);
+  border-radius: 8px;
+  gap: 10px;
+}
+
+.sd6_1__alarmOption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font: var(--type-16-400);
+  color: var(--color-gray-800);
+  text-align: left;
+}
+
+.sd6_1__alarmDivider {
+  display: block;
+  height: 0;
+  margin: 0;
+  border: none;
+  border-top: 1px solid var(--color-gray-200);
+}
+
+.sd6_1__alarmOption .sd6_1__alarmCheck {
+  flex-shrink: 0;
+  display: block;
+  width: 20px;
+  height: 20px;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+
+.sd6_1__alarmOption--selected .sd6_1__alarmCheck {
+  opacity: 1;
+}
+
+.sd6_1__alarmOptionText {
+  flex: 1;
+  min-width: 0;
+  line-height: 1.5;
+}
+
+.sd6_1__alarmOption:focus-visible {
+  outline: 2px solid var(--color-primary-default);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* 6-4 — 반복 설정 (Figma 3453:156410 기본: 토글 Off, Frame 87·date-picker·내부 완료 없음) */
+/* [hidden]은 UA display:none이나 .sd6_1 * { display: flex }가 덮어쓰는 경우가 있어 강제 */
+#sd6RepeatEndFrame87[hidden],
+#sd6RepeatEndPickerRow[hidden],
+#sd6RepeatEndWheels[hidden] {
+  display: none !important;
+}
+
+.sd6_1__repeatFreqCard {
+  margin-bottom: 0;
+}
+
+.sd6_1__repeatEndCard {
+  width: 100%;
+  max-width: 343px;
+  margin: 10px auto 0;
+  background: var(--color-gray-white);
+  border-radius: 8px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 56px;
+}
+
+.sd6_1__repeatEndCard--picker {
+  min-height: 325px;
+}
+
+.sd6_1__repeatEndHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  min-height: 56px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.sd6_1__repeatEndTitle {
+  font: var(--type-16-600);
+  color: var(--color-gray-900);
+  margin: 0;
+}
+
+.sd6_1__repeatEndCard--endOff .sd6_1__repeatEndHeader {
+  min-height: 56px;
+}
+
+.sd6_1__repeatEndFrame87 {
+  width: 100%;
+  max-width: 343px;
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+
+.sd6_1__repeatEndDateField {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 10px;
+  border: 1px solid var(--color-gray-100);
+  border-radius: 8px;
+  text-align: center;
+  background: var(--color-gray-white);
+  box-sizing: border-box;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sd6_1__repeatEndDateField:focus-visible {
+  outline: 2px solid var(--color-primary-default);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+.sd6_1__repeatEndDateText {
+  margin: 0;
+  font: var(--type-16-600);
+  color: var(--color-gray-900);
+  line-height: 1.5;
+}
+
+.sd6_1__repeatEndWheelsOuter {
+  position: relative;
+  width: 100%;
+  max-width: 311px;
+  margin: 0 auto;
+  height: 160px;
+  border-radius: 8px;
+  background: var(--color-gray-100);
+  box-sizing: border-box;
+  flex-shrink: 0;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.sd6_1__repeatEndWheelsFrame {
+  position: relative;
+  width: 284px;
+  max-width: 100%;
+  height: 160px;
+  margin: 0 auto;
+  border-radius: 8px;
+  background: var(--color-gray-100);
+}
+
+.sd6_1__repeatEndWheelsClip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.sd6_1__repeatEndWheelsImg {
+  position: absolute;
+  width: 122.94%;
+  height: 460.61%;
+  max-width: none;
+  left: -11.47%;
+  top: -159.85%;
+  user-select: none;
+}
+
+.sd6_1__repeatEndPickerRow {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 16px 16px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.sd6_1__repeatEndPickerDone {
+  font: var(--type-16-600);
+  color: var(--color-gray-900);
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sd6_1__repeatEndPickerDone:focus-visible {
+  outline: 2px solid var(--color-primary-default);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.sd6_1__repeatEndCard--summary {
+  min-height: 116px;
+}
+
+.sd6_1__repeatEndCard--summary .sd6_1__repeatEndFrame87 {
+  margin-bottom: 12px;
+}
+
+.sd6_1__repeatEndCard--picker .sd6_1__repeatEndDateField {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.sd6_1__repeatEndCard--picker .sd6_1__repeatEndWheelsOuter {
+  margin-top: 8px;
+}
+
+.sd6_1__repeatEndCard--picker .sd6_1__repeatEndPickerRow {
+  margin-top: auto;
+}

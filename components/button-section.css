@@ -179,6 +179,7 @@
   border-radius: 13px;
   position: relative;
   background: var(--color-gray-300);
+  transition: background 0.32s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .sdToggle--on {
@@ -193,11 +194,21 @@
   background: var(--color-gray-white);
   top: 2px;
   left: 2px;
+  transform: translateX(0);
   box-shadow: var(--shadow-02);
+  /* left 대신 transform — 부드럽고 레이어 승급에 유리 */
+  transition: transform 0.36s cubic-bezier(0.34, 1.1, 0.55, 1);
 }
 
 .sdToggle--on .sdToggle__thumb {
-  left: 22px;
+  transform: translateX(20px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sdToggle,
+  .sdToggle__thumb {
+    transition: none;
+  }
 }
 
 /* Figma 카카오 로그인 23:4070 · Apple 로그인 23:4069 */

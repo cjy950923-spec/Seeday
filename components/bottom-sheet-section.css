@@ -1,0 +1,188 @@
+/**
+ * Bottom Sheet (sdBottomSheet)
+ * Figma 3453:156778 — Dim(812×375) + Bottom Seat(3453:156837): top 48px, h=730, 하단 34은 프레임 밖(홈)
+ * 156837 패널 내부: 핸들 없음, Header(56) + 본문(gray-100)에서 리스트 카드 top=72(=56+16)
+ * 핸들이 있는 시안은 마크업에 .sdBottomSheet__handle 블록만 선택적으로 넣는다
+ */
+
+.sdBottomSheet[hidden] {
+  display: none !important;
+}
+
+.sdBottomSheet {
+  --sd-bottom-frame-h: 812;
+  --sd-bottom-dim-top: 48;
+  --sd-bottom-home: 34;
+  --sd-bottom-anim-duration: 0.5s;
+  /* 끝이 길게 감속되는 out 커브 — 올·내림 모두 덜 “튀”게 */
+  --sd-bottom-anim-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  /* 패널 높이 = 1 - (48+34)/812 */
+  --sd-bottom-panel-h: calc(
+    100% - 100% * (var(--sd-bottom-dim-top) + var(--sd-bottom-home)) / var(--sd-bottom-frame-h)
+  );
+  --sd-bottom-panel-top: calc(100% * var(--sd-bottom-dim-top) / var(--sd-bottom-frame-h));
+
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  display: block;
+}
+
+.sdBottomSheet:not([hidden]) {
+  pointer-events: auto;
+}
+
+.sdBottomSheet__dim {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: rgb(34 34 34 / 0.5);
+  display: block;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  transition: opacity var(--sd-bottom-anim-duration) var(--sd-bottom-anim-ease);
+}
+
+.sdBottomSheet--open .sdBottomSheet__dim {
+  opacity: 1;
+}
+
+.sdBottomSheet__panel {
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  top: var(--sd-bottom-panel-top);
+  height: var(--sd-bottom-panel-h);
+  max-height: var(--sd-bottom-panel-h);
+  background: var(--color-gray-100);
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: none;
+  transform: translate3d(0, 100%, 0);
+  transition: transform var(--sd-bottom-anim-duration) var(--sd-bottom-anim-ease);
+  will-change: transform;
+}
+
+.sdBottomSheet--open .sdBottomSheet__panel {
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sdBottomSheet {
+    --sd-bottom-anim-duration: 0.01ms;
+  }
+}
+
+/* 상단 핸들 (드래그 힌트) */
+.sdBottomSheet__handle {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0 4px;
+  background: var(--color-gray-100);
+}
+
+.sdBottomSheet__handleBar {
+  display: block;
+  width: 40px;
+  height: 4px;
+  border-radius: 100px;
+  background: var(--color-gray-300);
+}
+
+.sdBottomSheet__nav {
+  position: relative;
+  flex-shrink: 0;
+  height: 56px;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background: var(--color-gray-white);
+}
+
+.sdBottomSheet__navBack,
+.sdBottomSheet__navAction {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font: var(--type-16-600);
+  color: var(--color-gray-900);
+}
+
+.sdBottomSheet__navBack {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+}
+
+.sdBottomSheet__navBack img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.sdBottomSheet__navTitle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  margin: 0;
+  width: max-content;
+  max-width: calc(100% - 100px);
+  text-align: center;
+  font: var(--type-16-600);
+  color: var(--color-gray-900);
+  pointer-events: none;
+}
+
+.sdBottomSheet__body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  /* 156838 리스트: 패널 기준 y=72 = 헤더 56 + 16 */
+  padding: 16px 16px 24px;
+  background: var(--color-gray-100);
+}
+
+.sdBottomSheet__navBack:focus-visible,
+.sdBottomSheet__navAction:focus-visible {
+  outline: 2px solid var(--color-primary-default);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.sdBottomSheet__dim,
+.sdBottomSheet__navBack,
+.sdBottomSheet__navAction {
+  touch-action: manipulation;
+}
+
+/* 오버레이가 떠 있는 동안(not [hidden]): Home(34pt)는 딤 위, 패널과 톤 연결. 인디케이터 탭은 딤에 닿지 않아 닫히지 않음 */
+.sd6_1:has(.sdBottomSheet:not([hidden])) .sd6_1__homeInd {
+  z-index: 41;
+  position: relative;
+  pointer-events: auto;
+  background: var(--color-gray-100);
+}
+
+.sd6_1:has(.sdBottomSheet:not([hidden])) .sd6_1__homeIndBar {
+  background: var(--color-gray-900);
+  opacity: 1;
+}
