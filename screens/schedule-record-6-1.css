@@ -774,10 +774,48 @@ button.sd6_1__listRow--hit:focus-visible {
   margin-bottom: 0;
 }
 
+.sd6_1__repeatEndReveal {
+  --sd-repeat-reveal-ease: cubic-bezier(0.22, 0.8, 0.2, 1);
+  --sd-repeat-reveal-dur: 0.65s;
+  --sd-repeat-reveal-fade: 0.7s;
+  display: grid;
+  grid-template-rows: 0fr;
+  margin-top: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition:
+    grid-template-rows var(--sd-repeat-reveal-dur) var(--sd-repeat-reveal-ease),
+    opacity var(--sd-repeat-reveal-fade) cubic-bezier(0.25, 0.46, 0.2, 1),
+    margin-top var(--sd-repeat-reveal-dur) var(--sd-repeat-reveal-ease),
+    transform 0.72s var(--sd-repeat-reveal-ease);
+}
+
+.sd6_1__repeatEndReveal--open {
+  grid-template-rows: 1fr;
+  margin-top: 10px;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.sd6_1__repeatEndReveal__inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sd6_1__repeatEndReveal,
+  .sd6_1__repeatEndReveal--open {
+    transition: none;
+  }
+}
+
 .sd6_1__repeatEndCard {
   width: 100%;
   max-width: 343px;
-  margin: 10px auto 0;
+  margin: 0 auto;
   background: var(--color-gray-white);
   border-radius: 8px;
   box-sizing: border-box;

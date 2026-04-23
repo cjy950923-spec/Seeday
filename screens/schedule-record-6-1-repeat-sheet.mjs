@@ -21,6 +21,7 @@ const DEFAULT_END_DATE = "2026년 10월 31일";
  * @param {HTMLButtonElement} p.doneBtn
  * @param {HTMLElement} p.valueEl
  * @param {NodeListOf<HTMLButtonElement> | HTMLButtonElement[]} p.freqButtons
+ * @param {HTMLElement} [p.endReveal] — 반복 없음이면 감추는 래퍼(#sd6RepeatEndReveal)
  * @param {HTMLElement} p.endCard
  * @param {HTMLButtonElement} p.endToggle
  * @param {HTMLElement} p.endFrame87 — Figma Frame 87 (날짜 + date-picker.png, 토글 On일 때만)
@@ -38,6 +39,7 @@ export function initRepeatSheet(p) {
     doneBtn,
     valueEl,
     freqButtons,
+    endReveal,
     endCard,
     endToggle,
     endFrame87,
@@ -83,6 +85,20 @@ export function initRepeatSheet(p) {
       b.classList.toggle("sd6_1__alarmOption--selected", on);
       b.setAttribute("aria-checked", on ? "true" : "false");
     });
+  }
+
+  function syncRepeatEndReveal() {
+    if (!endReveal) {
+      return;
+    }
+    const show = pendingFreq !== "none";
+    endReveal.classList.toggle("sd6_1__repeatEndReveal--open", show);
+    endReveal.setAttribute("aria-hidden", show ? "false" : "true");
+    if (show) {
+      endReveal.removeAttribute("inert");
+    } else {
+      endReveal.setAttribute("inert", "");
+    }
   }
 
   function syncEndToggleUi() {
@@ -142,6 +158,7 @@ export function initRepeatSheet(p) {
     /* 저장된 세션: 종료일 On → 날짜만(156625). 첫 설정은 토글로 156549 */
     endPickerOpen = false;
     syncFreqUi();
+    syncRepeatEndReveal();
     syncEndToggleUi();
     syncEndCardLayout();
     sheet.open();
@@ -198,16 +215,14 @@ export function initRepeatSheet(p) {
       const v = btn.dataset.repeatFreq;
       if (v && v in FREQ_LABEL) {
         pendingFreq = /** @type {keyof typeof FREQ_LABEL} */ (v);
-        const toNone = v === "none";
-        if (toNone) {
+        if (v === "none") {
           pendingEndOn = false;
           endPickerOpen = false;
         }
         syncFreqUi();
-        if (toNone) {
-          syncEndToggleUi();
-          syncEndCardLayout();
-        }
+        syncRepeatEndReveal();
+        syncEndToggleUi();
+        syncEndCardLayout();
       }
     });
   });
@@ -242,6 +257,7 @@ export function initRepeatSheet(p) {
   }
   syncValueDisplay();
   syncFreqUi();
+  syncRepeatEndReveal();
   syncEndToggleUi();
   syncEndCardLayout();
 
