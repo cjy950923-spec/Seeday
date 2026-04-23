@@ -1,0 +1,212 @@
+/**
+ * Figma 1019:31395 — 4-1. 운동 선택 (375×1073)
+ */
+
+.sd4_1Page {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--color-gray-200);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 48px 16px 64px;
+}
+
+@media (max-height: 1120px) {
+  .sd4_1Page {
+    justify-content: flex-start;
+    padding-top: 40px;
+  }
+}
+
+.sd4_1 {
+  --sd4-safe-top: 44px;
+  --sd4-header: 56px;
+  --sd4-home: 34px;
+  --sd4-frame-h: 1073px;
+
+  width: 375px;
+  height: var(--sd4-frame-h);
+  max-width: 100%;
+  max-height: min(var(--sd4-frame-h), calc(100dvh - 96px));
+  margin: 0 auto;
+  background: var(--color-gray-white);
+  font-family: var(--font-family-sans);
+  color: var(--color-gray-900);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.sd4_1 *,
+.sd4_1 *::before,
+.sd4_1 *::after {
+  box-sizing: border-box;
+}
+
+.sd4_1__status {
+  height: var(--sd4-safe-top);
+  flex-shrink: 0;
+  position: relative;
+  background: var(--color-gray-white);
+}
+
+.sd4_1__statusTime {
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  transform: translateY(calc(-50% + 2px));
+  font: var(--type-16-600);
+  letter-spacing: -0.2px;
+}
+
+.sd4_1__statusIcons {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: var(--type-12-500);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-gray-900);
+}
+
+.sd4_1__header {
+  height: var(--sd4-header);
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-gray-white);
+}
+
+.sd4_1__headerTitle {
+  font: var(--type-18-600);
+  text-align: center;
+  margin: 0;
+}
+
+.sd4_1__headerClose {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.sd4_1__headerClose img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.sd4_1__scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.sd4_1__scroll::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.sd4_1__list {
+  list-style: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 10px 16px 0;
+  align-items: center;
+}
+
+.sd4_1__list > li {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.sd4_1 .sd1019FitnessListCard {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  border: none;
+  font: inherit;
+  margin: 0;
+  padding: 10px 16px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.sd4_1 .sd1019FitnessListCard:focus-visible {
+  outline: 2px solid var(--color-primary-default);
+  outline-offset: 2px;
+}
+
+.sd4_1__footer {
+  padding: 30px 16px 16px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.sd4_1__recordModeLink {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font: var(--type-14-500);
+  color: var(--color-gray-600);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.sd4_1__recordModeLink:focus-visible {
+  outline: 2px solid var(--color-primary-default);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.sd4_1__homeInd {
+  flex-shrink: 0;
+  height: var(--sd4-home);
+  background: var(--color-gray-white);
+  position: relative;
+}
+
+.sd4_1__homeIndBar {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 144px;
+  height: 5px;
+  border-radius: 100px;
+  background: var(--color-gray-900);
+  opacity: 0.3;
+}
