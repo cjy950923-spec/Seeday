@@ -43,7 +43,8 @@ printf '\n'
 printf '  Seeday — 브라우저 주소 (이 터미널이 서빙하는 주소: http://127.0.0.1:%s)\n' "$PORT"
 printf '\n'
 printf '    %s  %s\n' "components  " "http://127.0.0.1:${PORT}/viewer.html"
-printf '    %s  %s\n' "6-1 일정     " "http://127.0.0.1:${PORT}/viewer-schedule-record-6-1.html"
+printf '    %s  %s\n' "design      " "http://127.0.0.1:${PORT}/seeday-design.html"
+printf '    %s  %s\n' "flow 6-1    " "http://127.0.0.1:${PORT}/flow-schedule-record-6-1.html"
 printf '    %s  %s\n' "토큰        " "http://127.0.0.1:${PORT}/design-tokens-preview.html"
 printf '\n'
 printf '  (자동으로 브라우저: ./scripts/open.sh 또는 PORT=%s ./scripts/open.sh schedule6)\n' "$PORT"

@@ -138,6 +138,11 @@ export function initScheduleRecordPicker(els) {
       return;
     }
     if (dateTimeBlock && dateTimeBlock.hidden) return;
+    // toggle: clicking same target toggles picker open/close
+    if (target === next && pickerBlock.hidden === false) {
+      close();
+      return;
+    }
     target = next;
     pickerBlock.hidden = false;
     setDim();
@@ -146,8 +151,7 @@ export function initScheduleRecordPicker(els) {
   function close() {
     target = null;
     pickerBlock.hidden = true;
-    startPoint.classList.remove("sd6_1__timeCard--dim");
-    endPoint.classList.remove("sd6_1__timeCard--dim");
+    setDim();
   }
 
   function onComplete() {

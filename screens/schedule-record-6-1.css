@@ -249,10 +249,10 @@
 
 /* Start / End Point */
 .sd6_1__timeRow {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 24px minmax(0, 1fr);
+  column-gap: 12px;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
   margin-top: 12px;
 }
 
@@ -275,13 +275,22 @@
   -webkit-appearance: none;
 }
 
+/* In grid layout, don't rely on flex sizing */
+.sd6_1__timeRow > .sd6_1__timeCard {
+  width: 100%;
+}
+
 .sd6_1 button.sd6_1__timeCard:focus-visible {
   outline: 2px solid var(--color-primary-default);
   outline-offset: 2px;
 }
 
-.sd6_1__timeCard--dim {
+/* Dim state must override `.sd6_1 button.sd6_1__timeCard` specificity */
+.sd6_1 button.sd6_1__timeCard.sd6_1__timeCard--dim {
   color: var(--color-gray-400);
+  /* Figma 3453:155554: dim card uses px=10, py=14 */
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .sd6_1__timeCard p {
@@ -420,6 +429,28 @@
   background: var(--color-gray-200);
   margin: 16px 0 0;
   border: none;
+}
+
+.sd6_1__locationRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.sd6_1__locationRow .sd6_1__rowLabel {
+  flex: 0 0 auto;
+}
+
+.sd6_1__locationRow .sdTextInputField {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 276px;
+}
+
+.sd6_1__locationRow .sdTextInputField__input::placeholder {
+  color: var(--color-gray-400);
 }
 
 .sd6_1__rowsAfterDivider {

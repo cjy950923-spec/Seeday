@@ -29,8 +29,11 @@ function h(tag, className, text) {
 
 const CLOSE_CIRCLE_SRC = new URL(`../${iconAssets.fieldCloseCircle}`, import.meta.url).href;
 
-function textInputField({ state, value, placeholder, disabled }) {
-  const wrap = h("div", `sdTextInputField sdTextInputField--${state.toLowerCase()}`);
+function textInputField({ type = "Fill", state, value, placeholder, disabled }) {
+  const wrap = h(
+    "div",
+    `sdTextInputField sdTextInputField--${type.toLowerCase()} sdTextInputField--${state.toLowerCase()}`,
+  );
   const input = document.createElement("input");
   input.className = "sdTextInputField__input";
   input.type = "text";
@@ -42,7 +45,7 @@ function textInputField({ state, value, placeholder, disabled }) {
 
   wrap.appendChild(input);
 
-  const showClear = state === "Pressed" || state === "Failed";
+  const showClear = type === "Fill" && (state === "Pressed" || state === "Failed");
   if (showClear) {
     const btn = document.createElement("button");
     btn.type = "button";
@@ -230,140 +233,158 @@ export function mountFieldSection(container) {
   container.appendChild(h("h2", "figma-section__h2", "Field"));
 
   // Text Input Field (node 64:261) — 요청 레이아웃
-  // - 좌측: 2×2 grid로 4개 상태 고정 표시
-  // - 우측: 클릭으로 상태 순환 + 실제 타이핑 가능한 데모
+  // - 좌측: Fill 3개(Default/Pressed/Failed) 세로 스택
+  // - 중앙: Fill Completed 1개
+  // - 우측: Ghost 2개(Default/Completed) 세로 스택
   const textInputSub = h("div", "figma-subsection");
   textInputSub.appendChild(h("h3", "figma-subsection__title", "Text Input Field"));
 
   const layout = h("div", "sdFieldTextInputLayout");
-  const left = h("div", "sdFieldTextInputLeft");
-  const right = h("div", "sdFieldTextInputRight");
 
-  // Left 2×2 variants
-  const grid = h("div", "sdFieldTextInputGrid");
-  const variants = /** @type {const} */ ([
-    ["Default", { value: "", placeholder: "닉네임 혹은 이름을 입력해 주세요." }],
+  function createTextInputDemo(type) {
+    const demo = h("div", "figma-interactive");
+    demo.appendChild(h("div", "sdFieldTextInputDemoTitle", type === "Ghost" ? "Demo · Ghost" : "Demo · Fill"));
+
+    const stateEl = h("p", "figma-interactive__state", "");
+    const demoStage = h("div", "figma-interactive__stage");
+    demoStage.setAttribute("tabindex", "0");
+    const demoVp = h("div", "figma-interactive__viewport");
+    demoStage.appendChild(demoVp);
+    demo.appendChild(stateEl);
+    demo.appendChild(demoStage);
+
+    const hint =
+      type === "Ghost"
+        ? "Ghost: 빈값=Default, 1글자 이상=Completed (클리어 아이콘 없음)"
+        : "Fill: 입력 1글자 이상=Pressed, 특수문자 포함=Failed, 비활성+빈값=Default, 포커스+빈값=Completed";
+    demo.appendChild(h("p", "figma-interactive__hint", hint));
+
+    let active = false;
+    let draft = "";
+
+    const SPECIAL_RE = /[^0-9A-Za-z\u3131-\u318E\uAC00-\uD7A3\s]/; // 영문/숫자/한글/공백 외는 특수문자로 취급
+    const placeholderFill = "닉네임 혹은 이름을 입력해 주세요.";
+    const placeholderGhost = "Text area";
+
+    const computeState = () => {
+      if (type === "Ghost") return draft.length ? "Completed" : "Default";
+      if (SPECIAL_RE.test(draft)) return "Failed";
+      if (draft.length >= 1) return "Pressed";
+      return active ? "Completed" : "Default";
+    };
+
+    const field = textInputField({
+      type,
+      state: "Default",
+      value: "",
+      placeholder: type === "Ghost" ? placeholderGhost : placeholderFill,
+      disabled: false,
+    });
+    demoVp.appendChild(field.wrap);
+
+    const ensureClearButton = (show) => {
+      const existing = field.wrap.querySelector(".sdTextInputField__clear");
+      if (show) {
+        if (existing) return;
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "sdTextInputField__clear";
+        btn.setAttribute("aria-label", "Clear");
+        btn.innerHTML = `<img alt="" src="${CLOSE_CIRCLE_SRC}" class="sdTextInputField__clearImg" />`;
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          field.input.value = "";
+          draft = "";
+          field.input.focus();
+          sync();
+        });
+        field.wrap.appendChild(btn);
+      } else if (existing) {
+        existing.remove();
+      }
+    };
+
+    const sync = () => {
+      const state = computeState();
+      stateEl.textContent = `Type=${type} · State=${state}`;
+      field.wrap.className = `sdTextInputField sdTextInputField--${type.toLowerCase()} sdTextInputField--${state.toLowerCase()}`;
+      field.input.placeholder = draft.length ? "" : type === "Ghost" ? placeholderGhost : placeholderFill;
+      if (field.input.value !== draft) field.input.value = draft;
+      ensureClearButton(type === "Fill" && (state === "Pressed" || state === "Failed"));
+    };
+
+    field.input.addEventListener("focus", () => {
+      active = true;
+      sync();
+    });
+    field.input.addEventListener("blur", () => {
+      active = false;
+      sync();
+    });
+    field.input.addEventListener("input", () => {
+      draft = field.input.value;
+      sync();
+    });
+    field.input.addEventListener("compositionend", () => {
+      draft = field.input.value;
+      sync();
+    });
+
+    demoStage.addEventListener("click", () => field.input.focus());
+    demoStage.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        field.input.focus();
+      }
+    });
+
+    sync();
+    return demo;
+  }
+
+  // Row: Fill (static variants + demo)
+  const rowFill = h("div", "sdFieldTextInputRow");
+  const fillStatic = h("div", "sdFieldTextInputStatic sdFieldTextInputStatic--fill");
+  const fillDemoCol = h("div", "sdFieldTextInputDemoCol");
+
+  const placeholder = "닉네임 혹은 이름을 입력해 주세요.";
+  // Fill static: 2×2 grid (Default / Pressed / Failed / Completed)
+  [
+    ["Default", { value: "", placeholder }],
     ["Pressed", { value: "Text area", placeholder: "" }],
     ["Failed", { value: "Text area", placeholder: "" }],
     ["Completed", { value: "Text area", placeholder: "" }],
-  ]);
-
-  for (const [state, cfg] of variants) {
+  ].forEach(([state, cfg]) => {
     const cell = h("div", "sdFieldTextInputCell");
-    cell.appendChild(h("div", "sdFieldTextInputLabel", `State=${state}`));
-    const { wrap } = textInputField({ state, ...cfg, disabled: true });
-    cell.appendChild(wrap);
-    grid.appendChild(cell);
-  }
-  left.appendChild(grid);
+    cell.appendChild(h("div", "sdFieldTextInputLabel", `Type=Fill · State=${state}`));
+    cell.appendChild(textInputField({ type: "Fill", state, ...cfg, disabled: true }).wrap);
+    fillStatic.appendChild(cell);
+  });
+  fillDemoCol.appendChild(createTextInputDemo("Fill"));
+  rowFill.append(fillStatic, fillDemoCol);
 
-  // Right interactive demo
-  const demo = h("div", "figma-interactive");
-  const stateEl = h("p", "figma-interactive__state", "");
-  const demoStage = h("div", "figma-interactive__stage");
-  demoStage.setAttribute("tabindex", "0");
-  const demoVp = h("div", "figma-interactive__viewport");
-  demoStage.appendChild(demoVp);
-  demo.appendChild(stateEl);
-  demo.appendChild(demoStage);
-  demo.appendChild(
-    h(
-      "p",
-      "figma-interactive__hint",
-      "상태 규칙: (1) 입력 비활성+빈값=Default (2) 클릭으로 활성+빈값=Completed(커서) (3) 1글자 이상=Pressed (4) 특수문자 포함=Failed",
-    ),
-  );
-  right.appendChild(demo);
+  // Row: Ghost (static variants + demo)
+  const rowGhost = h("div", "sdFieldTextInputRow");
+  const ghostStatic = h("div", "sdFieldTextInputStatic sdFieldTextInputStatic--ghost");
+  const ghostDemoCol = h("div", "sdFieldTextInputDemoCol");
 
-  layout.appendChild(left);
-  layout.appendChild(right);
+  // Ghost static: 2×1 grid (Default / Completed)
+  [
+    ["Default", { value: "", placeholder: "Text area" }],
+    ["Completed", { value: "Text area", placeholder: "" }],
+  ].forEach(([state, cfg]) => {
+    const cell = h("div", "sdFieldTextInputCell");
+    cell.appendChild(h("div", "sdFieldTextInputLabel", `Type=Ghost · State=${state}`));
+    cell.appendChild(textInputField({ type: "Ghost", state, ...cfg, disabled: true }).wrap);
+    ghostStatic.appendChild(cell);
+  });
+  ghostDemoCol.appendChild(createTextInputDemo("Ghost"));
+  rowGhost.append(ghostStatic, ghostDemoCol);
+
+  layout.append(rowFill, rowGhost);
   textInputSub.appendChild(layout);
   container.appendChild(textInputSub);
-
-  let active = false;
-  let draft = "";
-
-  const SPECIAL_RE = /[^0-9A-Za-z\u3131-\u318E\uAC00-\uD7A3\s]/; // 영문/숫자/한글/공백 외는 특수문자로 취급
-
-  const computeState = () => {
-    if (SPECIAL_RE.test(draft)) return "Failed";
-    if (draft.length >= 1) return "Pressed";
-    // empty
-    return active ? "Completed" : "Default";
-  };
-
-  // Demo input은 DOM을 교체하지 않고(포커스/IME 유지), 상태만 갱신한다.
-  const placeholder = "닉네임 혹은 이름을 입력해 주세요.";
-  const demoField = textInputField({ state: "Default", value: "", placeholder, disabled: false });
-  demoVp.appendChild(demoField.wrap);
-
-  const ensureClearButton = (show) => {
-    const existing = demoField.wrap.querySelector(".sdTextInputField__clear");
-    if (show) {
-      if (existing) return;
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "sdTextInputField__clear";
-      btn.setAttribute("aria-label", "Clear");
-      btn.innerHTML = `<img alt=\"\" src=\"${CLOSE_CIRCLE_SRC}\" class=\"sdTextInputField__clearImg\" />`;
-      btn.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        demoField.input.value = "";
-        draft = "";
-        demoField.input.focus();
-        sync();
-      });
-      demoField.wrap.appendChild(btn);
-    } else if (existing) {
-      existing.remove();
-    }
-  };
-
-  const sync = () => {
-    const state = computeState();
-    stateEl.textContent = `State=${state}`;
-    demoField.wrap.className = `sdTextInputField sdTextInputField--${state.toLowerCase()}`;
-
-    // placeholder: empty일 때만 노출
-    demoField.input.placeholder = draft.length ? "" : placeholder;
-
-    // 입력값 동기화(불필요한 덮어쓰기 방지)
-    if (demoField.input.value !== draft) {
-      demoField.input.value = draft;
-    }
-
-    ensureClearButton(state === "Pressed" || state === "Failed");
-  };
-
-  demoField.input.addEventListener("focus", () => {
-    active = true;
-    sync();
-  });
-  demoField.input.addEventListener("blur", () => {
-    active = false;
-    sync();
-  });
-  demoField.input.addEventListener("input", () => {
-    draft = demoField.input.value;
-    sync();
-  });
-  demoField.input.addEventListener("compositionend", () => {
-    draft = demoField.input.value;
-    sync();
-  });
-
-  demoStage.addEventListener("click", () => {
-    demoField.input.focus();
-  });
-  demoStage.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      demoField.input.focus();
-    }
-  });
-
-  sync();
 
   // Contents Text Input Field (node 345:984)
   // 요청:

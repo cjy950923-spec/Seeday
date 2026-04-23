@@ -4,7 +4,8 @@
 # 사용:
 #   ./scripts/open.sh              # viewer.html (컴포넌트)
 #   ./scripts/open.sh viewer       # 동일
-#   ./scripts/open.sh schedule6    # 6-1 일정 등록 기본 viewer-schedule-record-6-1.html
+#   ./scripts/open.sh design       # 씨드데이 디자인 시안(통합) seeday-design.html
+#   ./scripts/open.sh schedule6    # 6-1 플로우(개별) flow-schedule-record-6-1.html
 #   ./scripts/open.sh tokens       # design-tokens-preview.html
 #
 #   PORT=9000 ./scripts/open.sh tokens
@@ -21,16 +22,20 @@ case "$arg" in
   viewer | v | "")
     PAGE="viewer.html"
     ;;
+  design | d | seeday-design)
+    PAGE="seeday-design.html"
+    ;;
   schedule6 | s6 | schedule-6-1)
-    PAGE="viewer-schedule-record-6-1.html"
+    PAGE="flow-schedule-record-6-1.html"
     ;;
   tokens | token | t)
     PAGE="design-tokens-preview.html"
     ;;
   -h | --help | help)
-    printf '사용: %s [viewer|schedule6|tokens]\n' "${0##*/}"
+    printf '사용: %s [viewer|design|schedule6|tokens]\n' "${0##*/}"
     printf '  viewer (기본)  컴포넌트 뷰어 — viewer.html\n'
-    printf '  schedule6        Figma 6-1 일정 등록 — viewer-schedule-record-6-1.html\n'
+    printf '  design          씨드데이 디자인 시안(통합) — seeday-design.html\n'
+    printf '  schedule6        6-1 플로우(개별) — flow-schedule-record-6-1.html\n'
     printf '  tokens          디자인 토큰 미리보기 — design-tokens-preview.html\n'
     printf '환경 변수: PORT (기본 %s)\n' "${PORT:-8877}"
     exit 0

@@ -188,6 +188,24 @@
 
           <hr class="sd6_1__divider" data-figma-name="Devinder_Width" data-node-id="3453:155383" />
 
+          <div class="sd6_1__locationRow" data-figma-name="Location" data-node-id="3563:146463">
+            <div class="sd6_1__rowLabel" data-figma-name="Title" data-node-id="3563:146464">
+              <img class="sd6_1__icon24" alt="" data-icon="compass" width="24" height="24" />
+              <p class="sd6_1__rowLabelText" data-node-id="3563:146466">위치</p>
+            </div>
+            <div class="sdTextInputField sdTextInputField--ghost sdTextInputField--default" data-figma-name="Text Input Feild" data-node-id="3563:146467">
+              <input
+                class="sdTextInputField__input"
+                id="sd6LocationInput"
+                type="text"
+                placeholder="위치를 입력해 주세요."
+                aria-label="위치"
+              />
+            </div>
+          </div>
+
+          <hr class="sd6_1__divider" data-figma-name="Devinder_Width" data-node-id="3563:146471" />
+
           <div class="sd6_1__rowsAfterDivider">
             <button
               type="button"
@@ -671,6 +689,7 @@
         calendar: iconAssets.calendar,
         notification: iconAssets.notification,
         repeat: iconAssets.repeat,
+        compass: iconAssets.compass,
         palette: iconAssets.palette,
         article: iconAssets.article,
         arrowRightLarge: iconAssets.arrowRightLarge,
@@ -690,12 +709,15 @@
       const submitBtn = document.getElementById("sd6SubmitBtn");
       const titleInput = document.getElementById("sd6TitleInput");
       const nameWrap = document.querySelector(".sd6_1__nameRow .sdTextInputField");
+      const locationInput = document.getElementById("sd6LocationInput");
+      const locationWrap = document.querySelector(".sd6_1__locationRow .sdTextInputField");
       /** 메모(공백 포함) 또는 일정명(앞뒤 공백 제외, 비공백 1자 이상) */
       function syncSubmitButton() {
         if (!submitBtn) return;
         const hasMemo = Boolean(ta && ta.value.length > 0);
         const hasTitle = Boolean(titleInput && titleInput.value.trim().length > 0);
-        const active = hasMemo || hasTitle;
+        const hasLocation = Boolean(locationInput && locationInput.value.trim().length > 0);
+        const active = hasMemo || hasTitle || hasLocation;
         submitBtn.disabled = !active;
         submitBtn.classList.toggle("sdBtn--normal", !active);
         submitBtn.classList.toggle("sdBtn--success", active);
@@ -710,6 +732,20 @@
       if (titleInput) {
         titleInput.addEventListener("input", syncTitleField);
         syncTitleField();
+      }
+
+      // Location field: Ghost(Default/Completed) — text 있으면 Completed(=Medium), 없으면 Default(=Regular)
+      const syncLocationField = () => {
+        if (!locationWrap || !locationInput) return;
+        const has = locationInput.value.trim().length > 0;
+        locationWrap.classList.toggle("sdTextInputField--completed", has);
+        locationWrap.classList.toggle("sdTextInputField--default", !has);
+        syncSubmitButton();
+      };
+      if (locationInput) {
+        locationInput.addEventListener("input", syncLocationField);
+        locationInput.addEventListener("compositionend", syncLocationField);
+        syncLocationField();
       }
 
       if (ta) {
