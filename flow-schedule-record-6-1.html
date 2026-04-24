@@ -51,98 +51,98 @@
           <div class="sd6_1__allDay" data-figma-name="All day" data-node-id="3453:155345">
             <div class="sd6_1__rowLabel" data-figma-name="Title" data-node-id="3453:155346">
               <img class="sd6_1__icon24" alt="" data-icon="calendar" width="24" height="24" />
-              <p class="sd6_1__rowLabelText" data-node-id="3453:155348">하루 종일</p>
+              <p class="sd6_1__rowLabelText" data-node-id="3453:155348">날짜</p>
             </div>
-            <button
-              type="button"
-              class="sdToggle"
-              id="sd6AllDayToggle"
-              aria-pressed="false"
-              aria-label="하루 종일 끔"
-              data-figma-name="Toggle"
-              data-node-id="546:1764"
-            >
-              <span class="sdToggle__thumb" data-node-id="202:593"></span>
-            </button>
           </div>
 
-          <!-- Figma 3453:158324(6-2. 하루종일_On): on 시 Start/End+휠 없음. off 시에만 이 블록 표시 -->
+          <!-- Date Point -->
           <div
-            class="sd6_1__dateTimeBlock"
-            id="sd6DateTimeBlock"
-            data-figma-name="날짜·시간 (하루 종일 off 시만)"
-            data-figma-all-day-on-ref="3453:158324"
-          >
-          <div
-            class="sd6_1__timeRow"
+            class="sd6_1__datePoint"
             id="sd6TimeRow"
-            data-figma-name="Start Point — Arrow — End Point"
+            data-figma-name="Date Point"
+            data-node-id="3576:136765"
           >
             <button
               type="button"
-              class="sd6_1__timeCard"
+              class="sd6_1__datePointCard"
               data-figma-name="Start Point"
-              data-node-id="3453:155350"
+              data-node-id="3576:136766"
               id="sd6StartPoint"
+              aria-label="시작일시 2026.04.01 (수) 오전 10:00"
             >
-              <div class="sd6_1__timeCardLine" data-node-id="3453:155352">
-                <p data-node-id="3453:155353" id="sd6StartDate">2026. 4. 22</p>
-                <p data-node-id="3453:155354" id="sd6StartDow">(수)</p>
-              </div>
-              <div class="sd6_1__timeCardLine" data-node-id="3453:155355">
-                <span data-node-id="3453:155356" id="sd6StartAmpm">오전</span>
-                <span data-node-id="3453:155357" id="sd6StartClock">10:00</span>
-              </div>
+              <span class="sd6_1__datePointLine" data-node-id="3576:136768">
+                <span
+                  data-node-id="3576:136769"
+                  id="sd6StartDate"
+                  class="sd6_1__datePointDate"
+                  contenteditable="true"
+                  role="textbox"
+                  aria-label="시작 날짜 텍스트 (직접 수정 가능)"
+                  spellcheck="false"
+                >2026.04.01</span>
+                <span data-node-id="3576:136770" id="sd6StartDow">(수)</span>
+              </span>
             </button>
-            <div class="sd6_1__arrowBetween" data-figma-name="ArrowRight" data-node-id="3453:155358">
+            <div class="sd6_1__arrowBetween" data-figma-name="Arrow_Right" data-node-id="3576:136771">
               <img alt="" data-icon="arrowRightLarge" width="24" height="24" />
             </div>
             <button
               type="button"
-              class="sd6_1__timeCard"
+              class="sd6_1__datePointCard"
               data-figma-name="End Point"
-              data-node-id="3453:155359"
+              data-node-id="3576:136772"
               id="sd6EndPoint"
+              aria-label="종료일시 2026.04.22 (수) 오후 10:00"
             >
-              <div class="sd6_1__timeCardLine" data-node-id="3453:155361">
-                <p data-node-id="3453:155362" id="sd6EndDate">2026. 4. 22</p>
-                <p data-node-id="3453:155363" id="sd6EndDow">(수)</p>
-              </div>
-              <div class="sd6_1__timeCardLine" data-node-id="3453:155364">
-                <span data-node-id="3453:155365" id="sd6EndAmpm">오후</span>
-                <span data-node-id="3453:155366" id="sd6EndClock">22:00</span>
-              </div>
+              <span class="sd6_1__datePointLine" data-node-id="3576:136774">
+                <span
+                  data-node-id="3576:136775"
+                  id="sd6EndDate"
+                  class="sd6_1__datePointDate"
+                  contenteditable="true"
+                  role="textbox"
+                  aria-label="종료 날짜 텍스트 (직접 수정 가능)"
+                  spellcheck="false"
+                >2026.04.22</span>
+                <span data-node-id="3576:136776" id="sd6EndDow">(수)</span>
+              </span>
             </button>
           </div>
 
+          <!-- Date wheels (prototype) -->
           <div
-            class="sd6_1__pickerBlock"
-            id="sd6PickerBlock"
-            hidden
+            class="sd6_1__dateTimeBlock"
+            id="sd6DateTimeBlock"
             data-figma-name="Time Wheels Area"
-            data-node-id="3453:155598"
+            data-node-id="3576:136734"
           >
-            <!-- Figma: 휠(315~475) → 아래 완료(top 485). 동일 PNG 정적 표시 -->
-            <div class="sd6_1__timeWheelsOuter">
-              <div class="sd6_1__timeWheelsFrame" data-node-id="3453:155599">
-                <div class="sd6_1__timeWheelsClip">
-                  <img
-                    class="sd6_1__timeWheelsImg"
-                    src="assets/figma-screens/schedule-6-2-time-wheels.png"
-                    alt=""
-                    width="1179"
-                    height="2556"
-                    decoding="async"
-                  />
+            <div
+              class="sd6_1__pickerBlock"
+              id="sd6PickerBlock"
+              hidden
+              data-figma-name="Wheel picker"
+              data-node-id="3576:136735"
+            >
+              <div class="sd6_1__timeWheelsOuter">
+                <div class="sd6_1__timeWheelsFrame">
+                  <div class="sd6_1__timeWheelsClip">
+                    <img
+                      class="sd6_1__timeWheelsImg"
+                      src="assets/figma-screens/schedule-6-2-time-wheels.png"
+                      alt=""
+                      width="1200"
+                      height="2133"
+                      decoding="async"
+                    />
+                  </div>
                 </div>
               </div>
+              <div class="sd6_1__pickerCompleteRow">
+                <button type="button" class="sd6_1__pickerComplete" data-node-id="1033:21505" id="sd6PickerComplete">
+                  완료
+                </button>
+              </div>
             </div>
-            <div class="sd6_1__pickerCompleteRow">
-              <button type="button" class="sd6_1__pickerComplete" data-node-id="1033:21505" id="sd6PickerComplete">
-                완료
-              </button>
-            </div>
-          </div>
           </div>
 
           <button
@@ -534,10 +534,10 @@
                     <div class="sd6_1__repeatEndWheelsClip">
                       <img
                         class="sd6_1__repeatEndWheelsImg sd6_1__repeatEndDatePickerImg"
-                        src="assets/figma-screens/date-picker.png"
+                        src="assets/figma-screens/schedule-6-4-repeat-end-wheels.png"
                         alt=""
-                        width="1179"
-                        height="2556"
+                        width="1200"
+                        height="2133"
                         decoding="async"
                       />
                     </div>
@@ -712,6 +712,21 @@
         if (map[key]) el.src = href(map[key]);
       });
 
+      // Date Point: 날짜(년.월.일) 텍스트를 직접 수정 가능하게.
+      // 편집 클릭이 카드 버튼 클릭으로 전파되면 피커가 열리므로 차단.
+      document.querySelectorAll(".sd6_1__datePointDate[contenteditable]").forEach((el) => {
+        ["mousedown", "touchstart", "click"].forEach((type) => {
+          el.addEventListener(type, (e) => e.stopPropagation());
+        });
+        el.addEventListener("keydown", (e) => {
+          // Enter는 줄바꿈 대신 편집 종료 느낌으로 blur
+          if (e.key === "Enter") {
+            e.preventDefault();
+            el.blur();
+          }
+        });
+      });
+
       const ta = document.getElementById("sd6Memo");
       const n = document.getElementById("sd6MemoN");
       const memoField = document.getElementById("sd6MemoField");
@@ -778,38 +793,17 @@
       const scroller = document.querySelector(".sd6_1__scroll");
       if (scroller) initDragToScroll(scroller);
 
-      const allDayBtn = document.getElementById("sd6AllDayToggle");
       const dateTimeBlock = document.getElementById("sd6DateTimeBlock");
-      if (allDayBtn) {
-        const sync = () => {
-          const on = allDayBtn.getAttribute("aria-pressed") === "true";
-          allDayBtn.setAttribute("aria-label", on ? "하루 종일 켬" : "하루 종일 끔");
-          allDayBtn.classList.toggle("sdToggle--on", on);
-          /* .sd6_1__timeRow { display:flex }가 [hidden]보다 강해 래퍼로 강제 비표시 (Figma 6-3) */
-          if (dateTimeBlock) dateTimeBlock.hidden = on;
-        };
-        allDayBtn.addEventListener("click", () => {
-          const on = allDayBtn.getAttribute("aria-pressed") === "true";
-          allDayBtn.setAttribute("aria-pressed", on ? "false" : "true");
-          sync();
-        });
-        sync();
-      }
 
-      initScheduleRecordPicker({
+      const schedulePicker = initScheduleRecordPicker({
         startPoint: document.getElementById("sd6StartPoint"),
         endPoint: document.getElementById("sd6EndPoint"),
         startDate: document.getElementById("sd6StartDate"),
         startDow: document.getElementById("sd6StartDow"),
-        startAmpm: document.getElementById("sd6StartAmpm"),
-        startClock: document.getElementById("sd6StartClock"),
         endDate: document.getElementById("sd6EndDate"),
         endDow: document.getElementById("sd6EndDow"),
-        endAmpm: document.getElementById("sd6EndAmpm"),
-        endClock: document.getElementById("sd6EndClock"),
         pickerBlock: document.getElementById("sd6PickerBlock"),
         completeBtn: document.getElementById("sd6PickerComplete"),
-        allDayBtn: allDayBtn,
         dateTimeBlock,
       });
 

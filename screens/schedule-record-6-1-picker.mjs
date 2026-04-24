@@ -1,5 +1,5 @@
 /**
- * 6-2: Start/End 클릭 → 동일 정적 PNG(타임 휠) + 완료로 날짜·시간 반영
+ * 6-2: Start/End 클릭 → 정적 PNG(날짜 휠, Figma 3576:136734) + 완료로 날짜·시간 반영
  * PNG는 스크롤 없음 — 반영 시 고정 r(0.5)로 시·일 매핑
  */
 
@@ -35,7 +35,8 @@ function formatKoreanTimePartsForCard(totalMin) {
  * @param {Date} d
  */
 function formatDateLine1(d) {
-  return `${d.getFullYear()}. ${d.getMonth() + 1}. ${d.getDate()}`;
+  // Prototype: YYYY.MM.DD (month/day are 2-digit)
+  return `${d.getFullYear()}.${pad2(d.getMonth() + 1)}.${pad2(d.getDate())}`;
 }
 
 /**
@@ -61,9 +62,9 @@ function stateFromScrollRatio(r) {
 }
 
 /**
+ * 카드에는 날짜·요일만 표시(Figma 3576:136872 Date Point). 시각은 aria-label에 반영.
  * @param {object} els
- * @param {HTMLElement} [els.allDayBtn]
- * @param {HTMLElement} [els.dateTimeBlock] 하루 종일 on(Figma 3453:158324)이면 숨겨짐
+ * @param {HTMLElement} [els.dateTimeBlock]
  */
 export function initScheduleRecordPicker(els) {
   const {
@@ -71,72 +72,69 @@ export function initScheduleRecordPicker(els) {
     endPoint,
     startDate: sd,
     startDow: sDow,
-    startAmpm: sAp,
-    startClock: sClk,
     endDate: ed,
     endDow: eDow,
-    endAmpm: eAp,
-    endClock: eClk,
     pickerBlock,
     completeBtn,
-    allDayBtn,
     dateTimeBlock,
   } = els;
 
-  if (
-    !startPoint ||
-    !endPoint ||
-    !pickerBlock ||
-    !completeBtn ||
-    !sd ||
-    !sDow ||
-    !sAp ||
-    !sClk ||
-    !ed ||
-    !eDow ||
-    !eAp ||
-    !eClk
-  ) {
-    return;
+  if (!startPoint || !endPoint || !pickerBlock || !completeBtn || !sd || !sDow || !ed || !eDow) {
+    return null;
   }
 
   /** @type {'start' | 'end' | null} */
   let target = null;
 
-  function setDim() {
-    if (target === "start") {
-      startPoint.classList.remove("sd6_1__timeCard--dim");
-      endPoint.classList.add("sd6_1__timeCard--dim");
-    } else if (target === "end") {
-      startPoint.classList.add("sd6_1__timeCard--dim");
-      endPoint.classList.remove("sd6_1__timeCard--dim");
-    } else {
-      startPoint.classList.remove("sd6_1__timeCard--dim");
-      endPoint.classList.remove("sd6_1__timeCard--dim");
-    }
-  }
+  let savedStartAria = startPoint.getAttribute("aria-label") || "";
+  let savedEndDate = ed.textContent;
+  let savedEndDow = eDow.textContent;
+  let savedEndAria = endPoint.getAttribute("aria-label") || "";
 
-  function applyDomFromState(d, tMin) {
+  function ariaDateTime(prefix, d, tMin) {
     const line1 = formatDateLine1(d);
     const line2 = formatDow(d);
     const { ap, clock } = formatKoreanTimePartsForCard(tMin);
+    return `${prefix} ${line1} ${line2} ${ap} ${clock}`;
+  }
+
+  function setDim() {
     if (target === "start") {
+      startPoint.classList.remove("sd6_1__datePointCard--dim");
+      endPoint.classList.add("sd6_1__datePointCard--dim");
+    } else if (target === "end") {
+      startPoint.classList.add("sd6_1__datePointCard--dim");
+      endPoint.classList.remove("sd6_1__datePointCard--dim");
+    } else {
+      startPoint.classList.remove("sd6_1__datePointCard--dim");
+      endPoint.classList.remove("sd6_1__datePointCard--dim");
+    }
+  }
+
+  /**
+   * @param {'start' | 'end'} point
+   * @param {Date} d
+   * @param {number} tMin
+   */
+  function applyDomFromState(point, d, tMin) {
+    const line1 = formatDateLine1(d);
+    const line2 = formatDow(d);
+    if (point === "start") {
       sd.textContent = line1;
       sDow.textContent = line2;
-      sAp.textContent = ap;
-      sClk.textContent = clock;
-    } else if (target === "end") {
+      startPoint.setAttribute("aria-label", ariaDateTime("시작일시", d, tMin));
+      savedStartAria = startPoint.getAttribute("aria-label") || savedStartAria;
+    } else {
       ed.textContent = line1;
       eDow.textContent = line2;
-      eAp.textContent = ap;
-      eClk.textContent = clock;
+      endPoint.setAttribute("aria-label", ariaDateTime("종료일시", d, tMin));
+      savedEndDate = ed.textContent;
+      savedEndDow = eDow.textContent;
+      savedEndAria = endPoint.getAttribute("aria-label") || savedEndAria;
     }
   }
 
   function open(next) {
-    if (allDayBtn && allDayBtn.getAttribute("aria-pressed") === "true") {
-      return;
-    }
     if (dateTimeBlock && dateTimeBlock.hidden) return;
     // toggle: clicking same target toggles picker open/close
     if (target === next && pickerBlock.hidden === false) {
@@ -157,7 +155,7 @@ export function initScheduleRecordPicker(els) {
   function onComplete() {
     if (target == null) return;
     const { d, tMin } = stateFromScrollRatio(PICKER_RATIO);
-    applyDomFromState(d, tMin);
+    applyDomFromState(target, d, tMin);
     close();
   }
 
@@ -171,11 +169,5 @@ export function initScheduleRecordPicker(els) {
   });
   completeBtn.addEventListener("click", onComplete);
 
-  if (allDayBtn) {
-    allDayBtn.addEventListener("click", () => {
-      queueMicrotask(() => {
-        if (allDayBtn.getAttribute("aria-pressed") === "true") close();
-      });
-    });
-  }
+  return { close };
 }

@@ -157,6 +157,7 @@
 .sd6_1__headerClose,
 .sd6_1__pickerBlock .sd6_1__pickerComplete,
 .sd6_1__listRow--hit,
+.sd6_1__datePointDate,
 .sd6_1__colorOption,
 .sd6_1__repeatEndDateField,
 .sd6_1__repeatEndWheelsOuter,
@@ -202,8 +203,9 @@
 .sd6_1__allDay {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-top: 16px;
+  min-height: 24px; /* Figma: 24 */
 }
 
 .sd6_1__rowLabel {
@@ -242,72 +244,72 @@
   outline-offset: 2px;
 }
 
-/* Start / End + 휠 — Figma 3453:158324(6-2 하루종일_On)에서는 이 래퍼 전체 없음. [hidden]은 flex 자식이 덮지 않게 !important */
+/* 휠 래퍼만 숨김 — Date Point는 래퍼 밖(Figma 3565:136764). [hidden]은 flex 덮어쓰기 방지 */
 .sd6_1__dateTimeBlock[hidden] {
   display: none !important;
 }
 
-/* Start / End Point */
-.sd6_1__timeRow {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 24px minmax(0, 1fr);
-  column-gap: 12px;
+/* Date Point — Figma 3576:136872 (Start/End: 날짜·요일 한 줄, 휠로 시각 반영은 기존과 동일) */
+.sd6_1__datePoint {
+  display: flex;
   align-items: center;
-  margin-top: 12px;
+  gap: 12px;
+  margin-top: 16px;
+  width: 100%;
+  min-width: 0;
 }
 
-.sd6_1 button.sd6_1__timeCard {
-  display: block;
-  flex: 1;
+.sd6_1 button.sd6_1__datePointCard {
+  flex: 1 1 0;
   min-width: 0;
   width: 100%;
-  text-align: inherit;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   font: var(--type-16-600);
   line-height: 1.5;
   color: var(--color-gray-900);
   background: var(--color-gray-100);
   border: none;
   border-radius: 8px;
-  padding: 14px;
+  padding: 8px 14px;
   margin: 0;
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
 }
 
-/* In grid layout, don't rely on flex sizing */
-.sd6_1__timeRow > .sd6_1__timeCard {
-  width: 100%;
-}
-
-.sd6_1 button.sd6_1__timeCard:focus-visible {
+.sd6_1 button.sd6_1__datePointCard:focus-visible {
   outline: 2px solid var(--color-primary-default);
   outline-offset: 2px;
 }
 
-/* Dim state must override `.sd6_1 button.sd6_1__timeCard` specificity */
-.sd6_1 button.sd6_1__timeCard.sd6_1__timeCard--dim {
+.sd6_1 button.sd6_1__datePointCard.sd6_1__datePointCard--dim {
   color: var(--color-gray-400);
-  /* Figma 3453:155554: dim card uses px=10, py=14 */
-  padding-left: 10px;
-  padding-right: 10px;
 }
 
-.sd6_1__timeCard p {
-  margin: 0;
-}
-
-.sd6_1__timeCardLine {
+.sd6_1__datePointLine {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 4px;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  white-space: nowrap;
+  min-width: 0;
 }
 
-.sd6_1__timeCardLine + .sd6_1__timeCardLine {
-  margin-top: 3px;
+.sd6_1__datePointLine span {
+  font: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+.sd6_1__datePointDate[contenteditable="true"]:focus-visible {
+  outline: 2px solid var(--color-primary-default);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 .sd6_1__arrowBetween {
@@ -322,7 +324,7 @@
   display: block;
 }
 
-/* 6-2 — Time wheels (Figma 3453:155598): 343×160, 내부 284×160 + PNG 크롭 / 완료는 휠 아래 1033:21505 */
+/* 6-2 — Date wheels (Figma 3576:136734): 343×160, 내부 284×160 + PNG 크롭 / 완료는 휠 아래 1033:21505 */
 .sd6_1__pickerBlock[hidden] {
   display: none !important;
 }
@@ -360,11 +362,12 @@
 
 .sd6_1__timeWheelsImg {
   position: absolute;
-  width: 122.94%;
-  height: 460.61%;
+  /* Figma 3576:136735 Wheel picker — 1200×2133 PNG */
+  width: 136.45%;
+  height: 397.02%;
   max-width: none;
-  left: -11.47%;
-  top: -159.85%;
+  left: -18.23%;
+  top: -152.38%;
   user-select: none;
 }
 
@@ -427,8 +430,19 @@
   width: 100%;
   height: 1px;
   background: var(--color-gray-200);
-  margin: 16px 0 0;
+  /* Figma: 위 간격만으로 위치 결정 (아래는 각 행의 margin-top으로 제어) */
+  margin: 24px 0 0;
   border: none;
+}
+
+/* 예외: 위치 행 아래 디바이더는 10px */
+.sd6_1__locationRow + .sd6_1__divider {
+  margin-top: 10px;
+}
+
+/* 예외: 위치 행 위 디바이더 ↔ 위치 = 10px */
+.sd6_1__divider + .sd6_1__locationRow {
+  margin-top: 10px;
 }
 
 .sd6_1__locationRow {
@@ -436,7 +450,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  margin-top: 10px;
+  margin-top: 0;
+  min-height: 52px; /* Figma: 52 */
 }
 
 .sd6_1__locationRow .sd6_1__rowLabel {
@@ -447,6 +462,14 @@
   flex: 1 1 auto;
   min-width: 0;
   width: 276px;
+  /* 안정적으로 52px 고정 (padding/line-box 차이로 흔들림 방지) */
+  height: 52px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.sd6_1__locationRow .sdTextInputField__input {
+  line-height: 24px; /* 16 * 1.5 */
 }
 
 .sd6_1__locationRow .sdTextInputField__input::placeholder {
@@ -454,21 +477,28 @@
 }
 
 .sd6_1__rowsAfterDivider {
-  margin-top: 8px;
+  /* divider ↔ color row: 24px */
+  margin-top: 24px;
 }
 
 .sd6_1__listRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 40px;
-  margin-top: 8px;
+  height: 24px; /* Figma: 24 */
+  margin-top: 0;
   width: 100%;
   box-sizing: border-box;
 }
 
-.sd6_1__listRow:first-child {
-  margin-top: 0;
+/* Date Point ↔ 알림 행 간격: 16px */
+.sd6_1__dateTimeBlock + .sd6_1__listRow {
+  margin-top: 16px;
+}
+
+/* 알림 ↔ 반복 행 간격: 16px */
+#sd6RepeatOpenBtn {
+  margin-top: 16px;
 }
 
 /* 알림·반복·색상: 행 전체가 터치 영역 (HTML5: button 내 phrasing만 — label/chevron은 span) */
@@ -645,7 +675,8 @@ button.sd6_1__listRow--hit:focus-visible {
 
 /* Momo — 메모 */
 .sd6_1__momo {
-  margin-top: 20px;
+  /* 색상 행 ↔ 메모 영역 간격: 16px */
+  margin-top: 16px;
 }
 
 .sd6_1__momoTitle {
@@ -896,7 +927,7 @@ button.sd6_1__listRow--hit:focus-visible {
   margin: 0 auto;
   height: 160px;
   border-radius: 8px;
-  background: var(--color-gray-100);
+  background: var(--color-gray-white);
   box-sizing: border-box;
   flex-shrink: 0;
   cursor: pointer;
@@ -910,7 +941,7 @@ button.sd6_1__listRow--hit:focus-visible {
   height: 160px;
   margin: 0 auto;
   border-radius: 8px;
-  background: var(--color-gray-100);
+  background: var(--color-gray-white);
 }
 
 .sd6_1__repeatEndWheelsClip {
@@ -923,11 +954,12 @@ button.sd6_1__listRow--hit:focus-visible {
 
 .sd6_1__repeatEndWheelsImg {
   position: absolute;
-  width: 122.94%;
-  height: 460.61%;
+  /* Figma 3453:156621 — updated wheels (1200×2133) */
+  width: 136.45%;
+  height: 397.02%;
   max-width: none;
-  left: -11.47%;
-  top: -159.85%;
+  left: -18.23%;
+  top: -152.38%;
   user-select: none;
 }
 
